@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — Lead Follow-Up Tracker</title>
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0f0f13;
+      color: #f5f0e8;
+      font-family: 'Georgia', serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+        .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrap input {
+      padding-right: 44px;
+    }
+
+    .eye-btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 42px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8a8a9a;
+      transition: color 0.2s;
+    }
+
+    .eye-btn:hover { color: #f5f0e8; }
+
+    .wrapper {
+      width: 100%;
+      max-width: 420px;
+      padding: 0 1rem;
+    }
+
+    .logo-area {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background-color: #e8c547;
+      border-radius: 10px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-area h1 {
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      color: #f5f0e8;
+      margin-bottom: 6px;
+    }
+
+    .logo-area p {
+      font-size: 14px;
+      color: #8a8a9a;
+      font-family: sans-serif;
+    }
+
+    .card {
+      background-color: #1a1a22;
+      border: 0.5px solid #2e2e3a;
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      color: #8a8a9a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      font-family: sans-serif;
+    }
+
+    .form-group input {
+      width: 100%;
+      background-color: #0f0f13;
+      border: 0.5px solid #2e2e3a;
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #f5f0e8;
+      font-size: 14px;
+      font-family: sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: #e8c547;
+    }
+
+    /*
+      TWO COLUMNS SIDE BY SIDE
+      We use a grid here — it splits the row into two equal columns.
+      grid-template-columns: 1fr 1fr means: two columns, each takes equal space.
+    */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem; /* space between the two columns */
+      margin-bottom: 1.25rem;
+    }
+
+    /*
+      Inside .form-row, each .form-group has no bottom margin
+      because the row itself handles spacing.
+    */
+    .form-row .form-group {
+      margin-bottom: 0;
+    }
+
+    /* Password strength bar — the thin strip below the password input */
+    .strength-bar-wrap {
+      margin-top: 8px;
+      height: 4px;
+      background-color: #2e2e3a;
+      border-radius: 4px;
+      overflow: hidden; /* hides the colored fill that goes beyond the bar */
+    }
+
+    .strength-bar-fill {
+      height: 100%;
+      width: 0%;               /* starts at 0, JavaScript sets this */
+      border-radius: 4px;
+      transition: width 0.3s, background-color 0.3s; /* smooth animation */
+    }
+
+    .strength-label {
+      font-size: 11px;
+      color: #8a8a9a;
+      font-family: sans-serif;
+      margin-top: 4px;
+    }
+
+    /* Error and success message boxes */
+    .error-msg {
+      background-color: #2a1a1a;
+      border: 0.5px solid #7a2e2e;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #f09595;
+      font-family: sans-serif;
+      margin-bottom: 1.25rem;
+      display: none;
+    }
+
+    .success-msg {
+      background-color: #1a2a1a;
+      border: 0.5px solid #2e7a2e;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #97c459;
+      font-family: sans-serif;
+      margin-bottom: 1.25rem;
+      display: none;
+      text-align: center;
+    }
+
+    .btn-primary {
+      width: 100%;
+      background-color: #e8c547;
+      color: #0f0f13;
+      border: none;
+      border-radius: 8px;
+      padding: 11px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: sans-serif;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.85;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .card-footer {
+      text-align: center;
+      margin-top: 1.25rem;
+      font-size: 13px;
+      color: #8a8a9a;
+      font-family: sans-serif;
+    }
+
+    .card-footer a {
+      color: #e8c547;
+      text-decoration: none;
+    }
+
+    .page-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 12px;
+      color: #4a4a5a;
+      font-family: sans-serif;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+
+    <div class="logo-area">
+      <div class="logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f0f13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <h1>Lead Follow-Up Tracker</h1>
+      <p>Create your workspace</p>
+    </div>
+
+    <div class="card">
+
+      <!-- Error box — hidden until something goes wrong -->
+      <div class="error-msg" id="error-msg"></div>
+
+      <!-- Success box — shown after successful registration -->
+      <div class="success-msg" id="success-msg"></div>
+
+      <!--
+        First name and last name sit side by side using .form-row
+        This is a CSS Grid with two columns.
+      -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" placeholder="Haneef" />
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" placeholder="Bello" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@company.com" />
+      </div>
+
+      <!--
+        Company name — this is important for your multi-tenant backend.
+        Each account belongs to a company/tenant.
+      -->
+      <div class="form-group">
+        <label for="company">Company Name</label>
+        <input type="text" id="company" placeholder="Acme Real Estate" />
+      </div>
+
+      
+        
+        <!--
+          Password strength bar.
+          oninput fires every time the user types a character.
+          It calls checkStrength() in JavaScript with the current value.
+        -->
+        
+              <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <input type="password" id="password" placeholder="min. 8 characters" oninput="checkStrength(this.value)" />
+          <button class="eye-btn" type="button" onclick="togglePw('password', this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+        <div class="strength-bar-wrap">
+          <div class="strength-bar-fill" id="strength-fill"></div>
+        </div>
+        <p class="strength-label" id="strength-label">Enter a password</p>
+      </div>
+
+                <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <div class="input-wrap">
+              <input type="password" id="confirm-password" placeholder="••••••••" />
+              <button class="eye-btn" type="button" onclick="togglePw('confirm-password', this)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+      <button class="btn-primary" id="register-btn" onclick="handleRegister()">
+        Create Account
+      </button>
+
+      <p class="card-footer">
+        Already have an account? <a href="login.html">Sign in</a>
+      </p>
+
+    </div>
+
+    <p class="page-footer">Secured with JWT authentication</p>
+
+  </div>
+
+
+  <script>
+
+    const API_BASE = 'https://client-followup-backend-production.up.railway.app';
+
+    // ===== HELPERS =====
+
+    function showError(message) {
+      const box = document.getElementById('error-msg');
+      box.textContent = message;
+      box.style.display = 'block';
+      document.getElementById('success-msg').style.display = 'none';
+    }
+
+    function showSuccess(message) {
+      const box = document.getElementById('success-msg');
+      box.textContent = message;
+      box.style.display = 'block';
+      document.getElementById('error-msg').style.display = 'none';
+    }
+
+    function hideMessages() {
+      document.getElementById('error-msg').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'none';
+    }
+
+
+    // ===== PASSWORD STRENGTH CHECKER =====
+    /*
+      This runs every time the user types in the password field.
+      It scores the password and updates the coloured bar + label.
+    */
+    function checkStrength(password) {
+      const fill  = document.getElementById('strength-fill');
+      const label = document.getElementById('strength-label');
+
+      let score = 0;
+
+      // Each rule that passes adds 1 point
+      if (password.length >= 8)            score++; // long enough
+      if (/[A-Z]/.test(password))          score++; // has uppercase
+      if (/[0-9]/.test(password))          score++; // has number
+      if (/[^A-Za-z0-9]/.test(password))  score++; // has special char
+
+      // Map score to visual feedback
+      const levels = [
+        { width: '0%',   color: '#2e2e3a', text: 'Enter a password' },
+        { width: '25%',  color: '#e24b4a', text: 'Weak' },
+        { width: '50%',  color: '#ef9f27', text: 'Fair' },
+        { width: '75%',  color: '#e8c547', text: 'Good' },
+        { width: '100%', color: '#639922', text: 'Strong' },
+      ];
+
+      // If password is empty, show nothing
+      const level = password.length === 0 ? levels[0] : levels[score];
+
+      fill.style.width           = level.width;
+      fill.style.backgroundColor = level.color;
+      label.textContent          = level.text;
+    }
+
+
+    // ===== MAIN: Handle registration =====
+    async function handleRegister() {
+      hideMessages();
+
+      // Read all field values
+      const firstName       = document.getElementById('first-name').value.trim();
+      const lastName        = document.getElementById('last-name').value.trim();
+      const email           = document.getElementById('email').value.trim();
+      const company         = document.getElementById('company').value.trim();
+      const password        = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+
+      // --- Frontend validation (before even touching the API) ---
+      if (!firstName || !lastName) {
+        showError('Please enter your first and last name.');
+        return;
+      }
+
+      if (!email) {
+        showError('Please enter your email address.');
+        return;
+      }
+
+      if (!company) {
+        showError('Please enter your company name.');
+        return;
+      }
+
+      if (password.length < 8) {
+        showError('Password must be at least 8 characters.');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showError('Passwords do not match.');
+        return;
+      }
+
+      // --- Disable button ---
+      const btn = document.getElementById('register-btn');
+      btn.disabled = true;
+      btn.textContent = 'Creating account...';
+
+      try {
+        /*
+          Send JSON to your FastAPI register endpoint.
+          Adjust the field names to match exactly what your backend expects.
+          Common field names: first_name, last_name, email, password, company_name
+        */
+        const response = await fetch(`${API_BASE}/users/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',  // we're sending JSON this time
+          },
+          body: JSON.stringify({
+            first_name:   firstName,
+            last_name:    lastName,
+            email:        email,
+            company_name: company,
+            password:     password,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          // Backend returned an error (e.g. email already exists)
+          showError(data.detail || 'Registration failed. Please try again.');
+          return;
+        }
+
+        // --- SUCCESS ---
+        showSuccess('Account created! Redirecting to login...');
+
+        /*
+          Wait 2 seconds so the user can read the success message,
+          then redirect to login page.
+          setTimeout(function, milliseconds)
+        */
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 2000);
+
+      } catch (err) {
+        showError('Cannot reach the server. Make sure the backend is running.');
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Create Account';
+      }
+  }
+  function togglePw(inputId, btn) {
+  const input    = document.getElementById(inputId);
+  const isHidden = input.type === 'password';
+  input.type     = isHidden ? 'text' : 'password';
+  btn.querySelector('svg').innerHTML = isHidden
+    ? `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+      <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+      <line x1="1" y1="1" x2="23" y2="23"/>`
+    : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+      <circle cx="12" cy="12" r="3"/>`;
+  }
+
+    // ===== Allow Enter key to submit =====
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        handleRegister();
+      }
+    });
+
+
+    // ===== Auto-redirect if already logged in =====
+    if (localStorage.getItem('access_token')) {
+      window.location.href = 'dashboard.html';
+    }
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Client Follow-Up Tracker</title>
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0f0f13;
+      color: #f5f0e8;
+      font-family: 'Georgia', serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 420px;
+      padding: 0 1rem;
+    }
+
+    .logo-area {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background-color: #e8c547;
+      border-radius: 10px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-area h1 {
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      color: #f5f0e8;
+      margin-bottom: 6px;
+    }
+
+    .logo-area p {
+      font-size: 14px;
+      color: #8a8a9a;
+      font-family: sans-serif;
+    }
+
+    .card {
+      background-color: #1a1a22;
+      border: 0.5px solid #2e2e3a;
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      color: #8a8a9a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      font-family: sans-serif;
+    }
+
+    .form-group input {
+      width: 100%;
+      background-color: #0f0f13;
+      border: 0.5px solid #2e2e3a;
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #f5f0e8;
+      font-size: 14px;
+      font-family: sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: #e8c547;
+    }
+
+    /* Password field wrapper */
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrap input {
+      padding-right: 44px; /* make room for the eye button */
+    }
+
+    /* Eye toggle button */
+    .eye-btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 42px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8a8a9a;
+      transition: color 0.2s;
+    }
+
+    .eye-btn:hover {
+      color: #f5f0e8;
+    }
+
+    .error-msg {
+      background-color: #2a1a1a;
+      border: 0.5px solid #7a2e2e;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #f09595;
+      font-family: sans-serif;
+      margin-bottom: 1.25rem;
+      display: none;
+    }
+
+    .btn-primary {
+      width: 100%;
+      background-color: #e8c547;
+      color: #0f0f13;
+      border: none;
+      border-radius: 8px;
+      padding: 11px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: sans-serif;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover    { opacity: 0.85; }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .card-footer {
+      text-align: center;
+      margin-top: 1.25rem;
+      font-size: 13px;
+      color: #8a8a9a;
+      font-family: sans-serif;
+    }
+
+    .card-footer a {
+      color: #e8c547;
+      text-decoration: none;
+    }
+
+    .page-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 12px;
+      color: #4a4a5a;
+      font-family: sans-serif;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+
+    <div class="logo-area">
+      <div class="logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f0f13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <h1>Client Follow-Up Tracker</h1>
+      <p>Sign in to your workspace</p>
+    </div>
+
+    <div class="card">
+
+      <div class="error-msg" id="error-msg"></div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@company.com" />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <input type="password" id="password" placeholder="••••••••" />
+          <button class="eye-btn" type="button" onclick="togglePassword()">
+            <!-- EYE OPEN icon — shown by default (password is hidden) -->
+            <svg id="eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="login-btn" onclick="handleLogin()">
+        Sign In
+      </button>
+
+      <p class="card-footer">
+        No account? <a href="register.html">Create one</a>
+      </p>
+
+    </div>
+
+    <p class="page-footer">Secured with JWT authentication</p>
+
+  </div>
+
+
+  <script>
+
+    const API_BASE = 'https://client-followup-backend-production.up.railway.app';
+
+    // ===== TOGGLE PASSWORD VISIBILITY =====
+    function togglePassword() {
+      const input = document.getElementById('password');
+      const icon  = document.getElementById('eye-icon');
+      const isHidden = input.type === 'password';
+
+      // Switch input type
+      input.type = isHidden ? 'text' : 'password';
+
+      // Swap SVG icon
+      if (isHidden) {
+        // Show EYE-OFF (password now visible)
+        icon.innerHTML = `
+          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+          <line x1="1" y1="1" x2="23" y2="23"/>
+        `;
+      } else {
+        // Show EYE (password now hidden)
+        icon.innerHTML = `
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        `;
+      }
+    }
+
+    // ===== SHOW / HIDE ERROR =====
+    function showError(message) {
+      const box = document.getElementById('error-msg');
+      box.textContent  = message;
+      box.style.display = 'block';
+    }
+
+    function hideError() {
+      document.getElementById('error-msg').style.display = 'none';
+    }
+
+    // ===== HANDLE LOGIN =====
+    async function handleLogin() {
+      hideError();
+
+      const email    = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!email || !password) {
+        showError('Please enter your email and password.');
+        return;
+      }
+
+      const btn = document.getElementById('login-btn');
+      btn.disabled    = true;
+      btn.textContent = 'Signing in...';
+
+      try {
+        const response = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ username: email, password: password }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          showError(data.detail || 'Login failed. Please check your credentials.');
+          return;
+        }
+
+        localStorage.setItem('access_token', data.access_token);
+        window.location.href = 'dashboard.html';
+
+      } catch (err) {
+        showError('Cannot reach the server. Make sure the backend is running.');
+        console.error(err);
+      } finally {
+        btn.disabled    = false;
+        btn.textContent = 'Sign In';
+      }
+    }
+
+    // ===== ENTER KEY =====
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') handleLogin();
+    });
+
+    // ===== AUTO-REDIRECT IF ALREADY LOGGED IN =====
+    if (localStorage.getItem('access_token')) {
+      window.location.href = 'dashboard.html';
+    }
+
+  </script>
+
+</body>
+</html>

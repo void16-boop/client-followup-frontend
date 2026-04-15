@@ -744,7 +744,7 @@
           <table id="leads-table" style="display:none;">
             <thead>
               <tr>
-                <th>Name</th><th>Status</th><th>Follow-Up Date</th><th>Notes</th><th>Actions</th>
+               <th>Name</th><th>Status</th><th>Follow-Up Date</th><th>WhatsApp</th><th>Notes</th><th>Actions</th>
               </tr>
             </thead>
             <tbody id="leads-tbody"></tbody>
@@ -773,8 +773,14 @@
           <div class="alert alert-success" id="form-success"></div>
 
           <div class="form-group">
-            <label for="lead-name">Name <span style="color:#e24b4a;">*</span></label>
-            <input type="text" id="lead-name" placeholder="e.g.John Doe " />
+            <label for="lead-whatsapp">WhatsApp Number</label>
+            <input type="tel" id="lead-whatsapp" placeholder="+2348012345678" />
+            <p class="form-hint">Optional. Used to open WhatsApp directly.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="lead-notes">Notes</label>
+            <textarea id="lead-notes" rows="4" placeholder="Any context about this lead..."></textarea>
           </div>
 
           <div class="form-group">
@@ -1076,6 +1082,14 @@
       };
       return map[status] || `<span class="badge badge-yellow">${status || '—'}</span>`;
     }
+    function waLink(number) {
+      if (!number) return '<span style="color:#4a4a5a;">—</span>';
+      const clean = number.replace('+', '');
+      return `<a href="https://wa.me/${clean}" target="_blank"
+        style="color:#25d366; text-decoration:none; font-size:13px;">
+        ${number}
+      </a>`;
+    }
 
     function formatDate(str) {
       if (!str) return '—';
@@ -1259,6 +1273,7 @@
           <td>${lead.name || '—'}</td>
           <td>${statusBadge(lead.status)}</td>
           <td class="${over ? 'date-overdue' : 'td-muted'}">${formatDate(lead.follow_up_date)}</td>
+          <td>${waLink(lead.whatsapp_number)}</td>
           <td class="td-muted">${lead.notes || '—'}</td>
           <td>
             <button onclick='startEdit(${lead.id}, ${JSON.stringify(lead)})'
@@ -1344,6 +1359,7 @@
       document.getElementById('lead-name').value          = '';
       document.getElementById('lead-status').value        = 'new';
       document.getElementById('lead-date').value          = '';
+      document.getElementById('lead-whatsapp').value      = '';
       document.getElementById('lead-notes').value         = '';
       document.getElementById('form-error').style.display   = 'none';
       document.getElementById('form-success').style.display = 'none';
@@ -1356,7 +1372,8 @@
       document.getElementById('lead-name').value          = lead.name           || '';
       document.getElementById('lead-status').value        = lead.status         || 'new';
       document.getElementById('lead-date').value          = lead.follow_up_date || '';
-      document.getElementById('lead-notes').value         = lead.notes          || '';
+     document.getElementById('lead-whatsapp').value      = lead.whatsapp_number || '';
+     document.getElementById('lead-notes').value         = lead.notes           || '';
       document.getElementById('form-error').style.display   = 'none';
       document.getElementById('form-success').style.display = 'none';
 
@@ -1384,10 +1401,11 @@
       const btn = document.getElementById('form-btn');
       btn.disabled = true; btn.textContent = 'Saving...';
 
+      const whatsapp = document.getElementById('lead-whatsapp').value.trim() || null;
       const body = { name, status };
-      if (date)  body.follow_up_date = date;
-      if (notes) body.notes          = notes;
-
+      if (date)     body.follow_up_date  = date;
+      if (notes)    body.notes           = notes;
+      if (whatsapp) body.whatsapp_number = whatsapp;
       try {
         const res = editingId
           ? await apiFetch(`/leads/${editingId}`, { method:'PATCH', body:JSON.stringify(body) })

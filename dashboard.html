@@ -713,8 +713,9 @@
         </div>
 
       </div>
+      
 
-
+      <!-- PAGE: LEADS -->
       <!-- PAGE: LEADS -->
       <div class="page-view" id="page-leads">
 
@@ -723,13 +724,14 @@
           <button class="btn-small" onclick="showPage('add-lead')">+ Add Lead</button>
         </div>
 
+        <!-- Search + filter row -->
         <div class="toolbar">
           <div class="search-wrap">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
             <input class="search-input" id="leads-search" type="text"
-              placeholder="Search by name or notes..." oninput="renderLeadsTable()" />
+              placeholder="Search by name or notes..." oninput="loadLeads(1)" />
           </div>
           <button class="filter-btn selected" data-filter="all"       onclick="setFilter('all')">All</button>
           <button class="filter-btn"          data-filter="new"       onclick="setFilter('new')">New</button>
@@ -739,12 +741,45 @@
           <button class="filter-btn"          data-filter="overdue"   onclick="setFilter('overdue')">Overdue</button>
         </div>
 
+        <!-- Date range + sort row -->
+        <div class="toolbar" style="margin-top:-0.25rem;">
+          <input type="date" id="date-from" title="From date" color-scheme="dark"
+            style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#f5f0e8; font-size:13px; font-family:sans-serif; outline:none; color-scheme:dark;"
+            onchange="dateFrom=this.value; loadLeads(1);" />
+          <span style="color:#4a4a5a; font-size:13px;">to</span>
+          <input type="date" id="date-to" title="To date"
+            style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#f5f0e8; font-size:13px; font-family:sans-serif; outline:none; color-scheme:dark;"
+            onchange="dateTo=this.value; loadLeads(1);" />
+
+          <!-- Sort controls -->
+          <select id="sort-by"
+            style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px; font-family:sans-serif; outline:none; cursor:pointer; color-scheme:dark;"
+            onchange="sortBy=this.value; loadLeads(1);">
+            <option value="created_at">Sort: Date Added</option>
+            <option value="name">Sort: Name</option>
+            <option value="follow_up_date">Sort: Follow-Up Date</option>
+            <option value="status">Sort: Status</option>
+          </select>
+
+          <button onclick="sortOrder = sortOrder==='asc' ? 'desc' : 'asc'; loadLeads(1);"
+            id="sort-order-btn"
+            style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px; font-family:sans-serif; cursor:pointer; transition:color 0.2s;"
+            title="Toggle sort direction">
+            ↕ Order
+          </button>
+
+          <button onclick="dateFrom=''; dateTo=''; document.getElementById('date-from').value=''; document.getElementById('date-to').value=''; loadLeads(1);"
+            style="background:none; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px; font-family:sans-serif; cursor:pointer;">
+            Clear
+          </button>
+        </div>
+
         <div class="table-wrap">
           <div class="spinner" id="leads-loading">Loading...</div>
           <table id="leads-table" style="display:none;">
             <thead>
               <tr>
-               <th>Name</th><th>Status</th><th>Follow-Up Date</th><th>WhatsApp</th><th>Notes</th><th>Actions</th>
+                <th>Name</th><th>Status</th><th>Follow-Up Date</th><th>WhatsApp</th><th>Notes</th><th>Actions</th>
               </tr>
             </thead>
             <tbody id="leads-tbody"></tbody>
@@ -756,9 +791,24 @@
           </div>
         </div>
 
-      </div>
+        <!-- Pagination controls -->
+        <div id="leads-pagination" style="display:none; align-items:center; justify-content:space-between; margin-top:-1rem; margin-bottom:2rem;">
+          <span id="page-info" style="font-size:13px; color:#8a8a9a;"></span>
+          <div style="display:flex; gap:0.5rem;">
+            <button id="btn-prev" onclick="loadLeads(leadsPage - 1)"
+              style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:7px; padding:7px 14px; color:#f5f0e8; font-size:13px; font-family:sans-serif; cursor:pointer; transition:opacity 0.2s;"
+              onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+              ← Prev
+            </button>
+            <button id="btn-next" onclick="loadLeads(leadsPage + 1)"
+              style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:7px; padding:7px 14px; color:#f5f0e8; font-size:13px; font-family:sans-serif; cursor:pointer; transition:opacity 0.2s;"
+              onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+              Next →
+            </button>
+          </div>
+        </div>
 
-
+</div>
       <!-- PAGE: ADD / EDIT LEAD -->
       <div class="page-view" id="page-add-lead">
 
@@ -1082,13 +1132,15 @@
       };
       return map[status] || `<span class="badge badge-yellow">${status || '—'}</span>`;
     }
-    function waLink(number) {
-      if (!number) return '<span style="color:#4a4a5a;">—</span>';
-      const clean = number.replace('+', '');
-      return `<a href="https://wa.me/${clean}" target="_blank"
-        style="color:#25d366; text-decoration:none; font-size:13px;">
-        ${number}
-      </a>`;
+    function renderPagination() {
+      const wrap = document.getElementById('leads-pagination');
+      if (leadsTotalPages <= 1) { wrap.style.display = 'none'; return; }
+
+      wrap.style.display = 'flex';
+      document.getElementById('page-info').textContent =
+        `Page ${leadsPage} of ${leadsTotalPages} — ${leadsTotal} leads`;
+      document.getElementById('btn-prev').disabled = leadsPage <= 1;
+      document.getElementById('btn-next').disabled = leadsPage >= leadsTotalPages;
     }
 
     function formatDate(str) {
@@ -1199,12 +1251,12 @@
     }
 
     // ===== LEADS =====
-    function setFilter(filter) {
+      function setFilter(filter) {
       currentFilter = filter;
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.toggle('selected', btn.dataset.filter === filter);
       });
-      renderLeadsTable();
+      loadLeads(1);
     }
 
     function getFilteredLeads() {
@@ -1226,22 +1278,64 @@
       return leads;
     }
 
-    async function loadLeads() {
+    // Pagination + filter state
+    let leadsPage      = 1;
+    let leadsTotalPages = 1;
+    let leadsTotal     = 0;
+    let dateFrom       = '';
+    let dateTo         = '';
+    let sortBy         = 'created_at';
+    let sortOrder      = 'desc';
+
+    async function loadLeads(page = 1) {
+      leadsPage = page;
+
       document.getElementById('leads-loading').style.display = 'block';
       document.getElementById('leads-table').style.display   = 'none';
       document.getElementById('leads-empty').style.display   = 'none';
+      document.getElementById('leads-pagination').style.display = 'none';
+
+      // Build query string from all active filters
+      const query  = (document.getElementById('leads-search')?.value || '').trim();
+      const params = new URLSearchParams();
+
+      if (currentFilter !== 'all' && currentFilter !== 'overdue') params.set('status', currentFilter);
+      if (query)    params.set('search',     query);
+      if (dateFrom) params.set('date_from',  dateFrom);
+      if (dateTo)   params.set('date_to',    dateTo);
+      params.set('sort_by',    sortBy);
+      params.set('sort_order', sortOrder);
+      params.set('page',       page);
+      params.set('page_size',  10);
 
       try {
-        const res = await apiFetch('/leads');
+        const res = await apiFetch(`/leads?${params.toString()}`);
         if (!res || !res.ok) return;
         const data = await res.json();
-        allLeads   = data.data || data;
+
+        // New response shape: data.data.leads, data.data.total etc.
+        const payload     = data.data || data;
+        allLeads          = payload.leads        || payload;
+        leadsTotal        = payload.total        || allLeads.length;
+        leadsTotalPages   = payload.total_pages  || 1;
+        leadsPage         = payload.page         || 1;
 
         document.getElementById('leads-loading').style.display = 'none';
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-          btn.classList.toggle('selected', btn.dataset.filter === currentFilter);
-        });
-        renderLeadsTable();
+
+        // Handle overdue client-side since backend doesn't have that filter
+        let leads = currentFilter === 'overdue'
+          ? allLeads.filter(l => isOverdue(l.follow_up_date))
+          : allLeads;
+
+        if (leads.length === 0) {
+          document.getElementById('leads-empty').style.display = 'block';
+          document.getElementById('leads-empty-text').textContent =
+            currentFilter === 'overdue' ? 'No overdue leads.' : 'No leads match your search.';
+          return;
+        }
+
+        renderLeadsTable(leads);
+        renderPagination();
 
       } catch (e) {
         console.error(e);
@@ -1249,18 +1343,9 @@
       }
     }
 
-    function renderLeadsTable() {
-      const leads = getFilteredLeads();
+  function renderLeadsTable(leads) {
       const tbody = document.getElementById('leads-tbody');
       tbody.innerHTML = '';
-
-      if (leads.length === 0) {
-        document.getElementById('leads-table').style.display = 'none';
-        document.getElementById('leads-empty').style.display = 'block';
-        document.getElementById('leads-empty-text').textContent =
-          currentFilter === 'overdue' ? 'No overdue leads.' : 'No leads match your search.';
-        return;
-      }
 
       document.getElementById('leads-table').style.display = 'table';
       document.getElementById('leads-empty').style.display = 'none';

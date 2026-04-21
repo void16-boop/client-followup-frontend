@@ -713,7 +713,7 @@
         </div>
 
       </div>
-      
+
 
       <!-- PAGE: LEADS -->
       <!-- PAGE: LEADS -->
@@ -1287,151 +1287,151 @@
     let sortBy         = 'created_at';
     let sortOrder      = 'desc';
 
-    async function loadLeads(page = 1) {
-      leadsPage = page;
+      async function loadLeads(page = 1) {
+        leadsPage = page;
 
-      document.getElementById('leads-loading').style.display = 'block';
-      document.getElementById('leads-table').style.display   = 'none';
-      document.getElementById('leads-empty').style.display   = 'none';
-      document.getElementById('leads-pagination').style.display = 'none';
+        document.getElementById('leads-loading').style.display = 'block';
+        document.getElementById('leads-table').style.display   = 'none';
+        document.getElementById('leads-empty').style.display   = 'none';
+        document.getElementById('leads-pagination').style.display = 'none';
 
-      // Build query string from all active filters
-      const query  = (document.getElementById('leads-search')?.value || '').trim();
-      const params = new URLSearchParams();
+        // Build query string from all active filters
+        const query  = (document.getElementById('leads-search')?.value || '').trim();
+        const params = new URLSearchParams();
 
-      if (currentFilter !== 'all' && currentFilter !== 'overdue') params.set('status', currentFilter);
-      if (query)    params.set('search',     query);
-      if (dateFrom) params.set('date_from',  dateFrom);
-      if (dateTo)   params.set('date_to',    dateTo);
-      params.set('sort_by',    sortBy);
-      params.set('sort_order', sortOrder);
-      params.set('page',       page);
-      params.set('page_size',  10);
+        if (currentFilter !== 'all' && currentFilter !== 'overdue') params.set('status', currentFilter);
+        if (query)    params.set('search',     query);
+        if (dateFrom) params.set('date_from',  dateFrom);
+        if (dateTo)   params.set('date_to',    dateTo);
+        params.set('sort_by',    sortBy);
+        params.set('sort_order', sortOrder);
+        params.set('page',       page);
+        params.set('page_size',  10);
 
-      try {
-        const res = await apiFetch(`/leads?${params.toString()}`);
-        if (!res || !res.ok) return;
-        const data = await res.json();
+        try {
+          const res = await apiFetch(`/leads?${params.toString()}`);
+          if (!res || !res.ok) return;
+          const data = await res.json();
 
-        // New response shape: data.data.leads, data.data.total etc.
-        const payload     = data.data || data;
-        allLeads          = payload.leads        || payload;
-        leadsTotal        = payload.total        || allLeads.length;
-        leadsTotalPages   = payload.total_pages  || 1;
-        leadsPage         = payload.page         || 1;
+          // New response shape: data.data.leads, data.data.total etc.
+          const payload     = data.data || data;
+          allLeads          = payload.leads        || payload;
+          leadsTotal        = payload.total        || allLeads.length;
+          leadsTotalPages   = payload.total_pages  || 1;
+          leadsPage         = payload.page         || 1;
 
-        document.getElementById('leads-loading').style.display = 'none';
+          document.getElementById('leads-loading').style.display = 'none';
 
-        // Handle overdue client-side since backend doesn't have that filter
-        let leads = currentFilter === 'overdue'
-          ? allLeads.filter(l => isOverdue(l.follow_up_date))
-          : allLeads;
+          // Handle overdue client-side since backend doesn't have that filter
+          let leads = currentFilter === 'overdue'
+            ? allLeads.filter(l => isOverdue(l.follow_up_date))
+            : allLeads;
 
-        if (leads.length === 0) {
-          document.getElementById('leads-empty').style.display = 'block';
-          document.getElementById('leads-empty-text').textContent =
-            currentFilter === 'overdue' ? 'No overdue leads.' : 'No leads match your search.';
-          return;
+          if (leads.length === 0) {
+            document.getElementById('leads-empty').style.display = 'block';
+            document.getElementById('leads-empty-text').textContent =
+              currentFilter === 'overdue' ? 'No overdue leads.' : 'No leads match your search.';
+            return;
+          }
+
+          renderLeadsTable(leads);
+          renderPagination();
+
+        } catch (e) {
+          console.error(e);
+          document.getElementById('leads-loading').textContent = 'Failed to load leads.';
         }
-
-        renderLeadsTable(leads);
-        renderPagination();
-
-      } catch (e) {
-        console.error(e);
-        document.getElementById('leads-loading').textContent = 'Failed to load leads.';
       }
-    }
 
-  function renderLeadsTable(leads) {
-      const tbody = document.getElementById('leads-tbody');
-      tbody.innerHTML = '';
-
-      document.getElementById('leads-table').style.display = 'table';
-      document.getElementById('leads-empty').style.display = 'none';
-
-      leads.forEach(lead => {
-        const over = isOverdue(lead.follow_up_date);
-        const tr   = document.createElement('tr');
-        if (over) tr.classList.add('overdue-row');
-        tr.innerHTML = `
-          <td>${lead.name || '—'}</td>
-          <td>${statusBadge(lead.status)}</td>
-          <td class="${over ? 'date-overdue' : 'td-muted'}">${formatDate(lead.follow_up_date)}</td>
-          <td>${waLink(lead.whatsapp_number)}</td>
-          <td class="td-muted">${lead.notes || '—'}</td>
-          <td>
-            <button onclick='startEdit(${lead.id}, ${JSON.stringify(lead)})'
-              style="background:none;border:none;color:#e8c547;cursor:pointer;font-size:13px;margin-right:12px;">
-              Edit
-            </button>
-            <button onclick="deleteLead(${lead.id})"
-              style="background:none;border:none;color:#f09595;cursor:pointer;font-size:13px;">
-              Delete
-            </button>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    // ===== FOLLOW-UPS =====
-    async function loadFollowups() {
-      document.getElementById('followups-loading').style.display = 'block';
-      document.getElementById('followups-table').style.display   = 'none';
-      document.getElementById('followups-empty').style.display   = 'none';
-
-      try {
-        const res = await apiFetch('/leads');
-        if (!res || !res.ok) return;
-        const data  = await res.json();
-        const leads = data.data || data;
-
-        document.getElementById('followups-loading').style.display = 'none';
-
-        const scheduled = leads
-          .filter(l => l.follow_up_date)
-          .sort((a, b) => {
-            const aOver = isOverdue(a.follow_up_date);
-            const bOver = isOverdue(b.follow_up_date);
-            if (aOver !== bOver) return aOver ? -1 : 1;
-            return new Date(a.follow_up_date) - new Date(b.follow_up_date);
-          });
-
-        if (scheduled.length === 0) {
-          document.getElementById('followups-empty').style.display = 'block';
-          return;
-        }
-
-        const tbody = document.getElementById('followups-tbody');
+    function renderLeadsTable(leads) {
+        const tbody = document.getElementById('leads-tbody');
         tbody.innerHTML = '';
-        scheduled.forEach(lead => {
+
+        document.getElementById('leads-table').style.display = 'table';
+        document.getElementById('leads-empty').style.display = 'none';
+
+        leads.forEach(lead => {
           const over = isOverdue(lead.follow_up_date);
           const tr   = document.createElement('tr');
           if (over) tr.classList.add('overdue-row');
           tr.innerHTML = `
             <td>${lead.name || '—'}</td>
-            <td>
-              <span class="${over ? 'date-overdue' : ''}">${formatDate(lead.follow_up_date)}</span>
-              ${over ? '<span class="badge badge-red" style="margin-left:8px;">Overdue</span>' : ''}
-            </td>
             <td>${statusBadge(lead.status)}</td>
+            <td class="${over ? 'date-overdue' : 'td-muted'}">${formatDate(lead.follow_up_date)}</td>
+            <td>${waLink(lead.whatsapp_number)}</td>
             <td class="td-muted">${lead.notes || '—'}</td>
             <td>
               <button onclick='startEdit(${lead.id}, ${JSON.stringify(lead)})'
-                style="background:none;border:none;color:#e8c547;cursor:pointer;font-size:13px;">
-                Update
+                style="background:none;border:none;color:#e8c547;cursor:pointer;font-size:13px;margin-right:12px;">
+                Edit
+              </button>
+              <button onclick="deleteLead(${lead.id})"
+                style="background:none;border:none;color:#f09595;cursor:pointer;font-size:13px;">
+                Delete
               </button>
             </td>
           `;
           tbody.appendChild(tr);
         });
-        document.getElementById('followups-table').style.display = 'table';
-
-      } catch (e) {
-        console.error(e);
-        document.getElementById('followups-loading').textContent = 'Failed to load follow-ups.';
       }
+
+      // ===== FOLLOW-UPS =====
+      async function loadFollowups() {
+        document.getElementById('followups-loading').style.display = 'block';
+        document.getElementById('followups-table').style.display   = 'none';
+        document.getElementById('followups-empty').style.display   = 'none';
+
+        try {
+          const res = await apiFetch('/leads');
+          if (!res || !res.ok) return;
+          const data  = await res.json();
+          const leads = data.data || data;
+
+          document.getElementById('followups-loading').style.display = 'none';
+
+          const scheduled = leads
+            .filter(l => l.follow_up_date)
+            .sort((a, b) => {
+              const aOver = isOverdue(a.follow_up_date);
+              const bOver = isOverdue(b.follow_up_date);
+              if (aOver !== bOver) return aOver ? -1 : 1;
+              return new Date(a.follow_up_date) - new Date(b.follow_up_date);
+            });
+
+          if (scheduled.length === 0) {
+            document.getElementById('followups-empty').style.display = 'block';
+            return;
+          }
+
+          const tbody = document.getElementById('followups-tbody');
+          tbody.innerHTML = '';
+          scheduled.forEach(lead => {
+            const over = isOverdue(lead.follow_up_date);
+            const tr   = document.createElement('tr');
+            if (over) tr.classList.add('overdue-row');
+            tr.innerHTML = `
+              <td>${lead.name || '—'}</td>
+              <td>
+                <span class="${over ? 'date-overdue' : ''}">${formatDate(lead.follow_up_date)}</span>
+                ${over ? '<span class="badge badge-red" style="margin-left:8px;">Overdue</span>' : ''}
+              </td>
+              <td>${statusBadge(lead.status)}</td>
+              <td class="td-muted">${lead.notes || '—'}</td>
+              <td>
+                <button onclick='startEdit(${lead.id}, ${JSON.stringify(lead)})'
+                  style="background:none;border:none;color:#e8c547;cursor:pointer;font-size:13px;">
+                  Update
+                </button>
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+          document.getElementById('followups-table').style.display = 'table';
+
+        } catch (e) {
+          console.error(e);
+          document.getElementById('followups-loading').textContent = 'Failed to load follow-ups.';
+        }
     }
 
     // ===== ADD / EDIT LEAD =====

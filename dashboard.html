@@ -1201,8 +1201,9 @@
       try {
         const res = await apiFetch('/leads');
         if (!res || !res.ok) return;
-        const data = await res.json();
-        allLeads   = data.data || data;
+        const data    = await res.json();
+        const payload = data.data || data;
+        allLeads      = payload.leads || payload;
 
         document.getElementById('overview-loading').style.display = 'none';
 

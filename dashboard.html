@@ -291,56 +291,79 @@
     });
   }
 
-  async function loadFollowups() {
-    document.getElementById('followups-loading').style.display = 'block';
-    document.getElementById('followups-table').style.display = 'none';
-    document.getElementById('followups-empty').style.display = 'none';
-    try {
-      const res = await apiFetch('/leads');
-      if (!res || !res.ok) return;
-      const data = await res.json();
-      const leads = data.data || data;
-      document.getElementById('followups-loading').style.display = 'none';
-      const scheduled = leads.filter(l => l.follow_up_date).sort((a, b) => { const aOver = isOverdue(a.follow_up_date), bOver = isOverdue(b.follow_up_date); if (aOver !== bOver) return aOver ? -1 : 1; return new Date(a.follow_up_date) - new Date(b.follow_up_date); });
-      if (scheduled.length === 0) { document.getElementById('followups-empty').style.display = 'block'; return; }
-      const tbody = document.getElementById('followups-tbody');
-      tbody.innerHTML = '';
-      scheduled.forEach(lead => {
-        const over = isOverdue(lead.follow_up_date);
-        const tr = document.createElement('tr');
-        if (over) tr.classList.add('overdue-row');
+ async function loadFollowups() {
+  document.getElementById('followups-loading').style.display = 'block';
+  document.getElementById('followups-table').style.display = 'none';
+  document.getElementById('followups-empty').style.display = 'none';
 
-        const nameCell = document.createElement('td');
-        nameCell.textContent = lead.name || '—';
-        tr.appendChild(nameCell);
+  try {
+    const res = await apiFetch('/leads');
+    if (!res || !res.ok) return;
+    const data = await res.json();
 
-        const dateCell = document.createElement('td');
-        dateCell.innerHTML = `<span class="${over ? 'date-overdue' : ''}">${formatDate(lead.follow_up_date)}</span>${over ? '<span class="badge badge-red" style="margin-left:8px;">Overdue</span>' : ''}`;
-        tr.appendChild(dateCell);
+    // ✅ CORRECT: extract the leads array from the paginated response
+    const leadsArray = data.data?.leads || data.data || data;
+    // If leadsArray is still not an array, try to handle gracefully
+    const leads = Array.isArray(leadsArray) ? leadsArray : [];
 
-        const statusCell = document.createElement('td');
-        statusCell.innerHTML = statusBadge(lead.status);
-        tr.appendChild(statusCell);
+    document.getElementById('followups-loading').style.display = 'none';
 
-        const notesCell = document.createElement('td');
-        notesCell.className = 'td-muted';
-        notesCell.textContent = lead.notes || '—';
-        tr.appendChild(notesCell);
+    // Filter leads that have a follow_up_date (non‑null, non‑empty)
+    const scheduled = leads.filter(l => l.follow_up_date && l.follow_up_date.trim() !== '');
 
-        const actionsCell = document.createElement('td');
-        const updateBtn = document.createElement('button');
-        updateBtn.textContent = 'Update';
-        updateBtn.style.cssText = 'background:none;border:none;color:#e8c547;cursor:pointer;';
-        updateBtn.addEventListener('click', () => startEdit(lead.id, lead));
-        actionsCell.appendChild(updateBtn);
-        tr.appendChild(actionsCell);
+    if (scheduled.length === 0) {
+      document.getElementById('followups-empty').style.display = 'block';
+      return;
+    }
 
-        tbody.appendChild(tr);
-      });
-      document.getElementById('followups-table').style.display = 'table';
-    } catch (e) { console.error(e); document.getElementById('followups-loading').textContent = 'Failed to load follow-ups.'; }
+    const tbody = document.getElementById('followups-tbody');
+    tbody.innerHTML = '';
+
+    scheduled.forEach(lead => {
+      const over = isOverdue(lead.follow_up_date);
+      const tr = document.createElement('tr');
+      if (over) tr.classList.add('overdue-row');
+
+      // Name cell (safe)
+      const nameCell = document.createElement('td');
+      nameCell.textContent = lead.name || '—';
+      tr.appendChild(nameCell);
+
+      // Date cell (with overdue badge)
+      const dateCell = document.createElement('td');
+      dateCell.innerHTML = `<span class="${over ? 'date-overdue' : ''}">${formatDate(lead.follow_up_date)}</span>${over ? '<span class="badge badge-red" style="margin-left:8px;">Overdue</span>' : ''}`;
+      tr.appendChild(dateCell);
+
+      // Status cell
+      const statusCell = document.createElement('td');
+      statusCell.innerHTML = statusBadge(lead.status);
+      tr.appendChild(statusCell);
+
+      // Notes cell (safe)
+      const notesCell = document.createElement('td');
+      notesCell.className = 'td-muted';
+      notesCell.textContent = lead.notes || '—';
+      tr.appendChild(notesCell);
+
+      // Action button
+      const actionsCell = document.createElement('td');
+      const updateBtn = document.createElement('button');
+      updateBtn.textContent = 'Update';
+      updateBtn.style.cssText = 'background:none;border:none;color:#e8c547;cursor:pointer;';
+      updateBtn.addEventListener('click', () => startEdit(lead.id, lead));
+      actionsCell.appendChild(updateBtn);
+      tr.appendChild(actionsCell);
+
+      tbody.appendChild(tr);
+    });
+
+    // Show the table
+    document.getElementById('followups-table').style.display = 'table';
+  } catch (e) {
+    console.error(e);
+    document.getElementById('followups-loading').textContent = 'Failed to load follow-ups.';
   }
-
+}
   let editingId = null;
   function resetForm() {
     editingId = null;

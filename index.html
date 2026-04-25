@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>FollowHQ – Never Miss a Client Follow‑Up</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0a0a0f;
+      color: #ecedee;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.5;
+    }
+
+    /* Smooth scroll for anchor links */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header / Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #e8c547, #f5e6a3);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #a1a1aa;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #e8c547;
+    }
+
+    .btn-outline {
+      border: 1px solid #e8c547;
+      background: transparent;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      color: #e8c547;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: #e8c54720;
+    }
+
+    .btn-primary {
+      background: #e8c547;
+      color: #0a0a0f;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: scale(0.98);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 3rem 0 4rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff, #e8c547);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      max-width: 800px;
+      margin: 0 auto 1rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #a1a1aa;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 4rem 0;
+      border-top: 1px solid #1f1f2a;
+      border-bottom: 1px solid #1f1f2a;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      color: #f5f0e8;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: #14141c;
+      border: 1px solid #2a2a35;
+      border-radius: 20px;
+      padding: 1.8rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: #e8c547;
+    }
+
+    .feature-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+      color: #a1a1aa;
+      font-size: 0.95rem;
+    }
+
+    /* Pricing Section */
+    .pricing {
+      padding: 4rem 0;
+    }
+
+    .pricing-card {
+      max-width: 450px;
+      margin: 0 auto;
+      background: #14141c;
+      border: 1px solid #e8c547;
+      border-radius: 28px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .plan-name {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .price {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin: 1rem 0;
+    }
+
+    .price small {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #a1a1aa;
+    }
+
+    .price-sub {
+      color: #e8c547;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin: 1.5rem 0;
+    }
+
+    .pricing-features li {
+      margin: 0.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pricing-features li::before {
+      content: "✓";
+      color: #e8c547;
+      font-weight: bold;
+    }
+
+    .payment-note {
+      font-size: 0.8rem;
+      color: #6b6b7a;
+      margin-top: 1rem;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid #1f1f2a;
+      padding: 2rem 0;
+      text-align: center;
+      color: #6b6b7a;
+      font-size: 0.85rem;
+    }
+
+    .footer a {
+      color: #e8c547;
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .navbar {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">FollowHQ</div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="login.html">Log in</a>
+      <a href="register.html" class="btn-outline">Sign up free</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Never miss a client follow‑up again</h1>
+    <p>Track leads, set reminders, and close more deals – from any device. Built for freelancers, agents, and small teams.</p>
+    <div class="hero-buttons">
+      <a href="register.html" class="btn-primary">Start free trial →</a>
+      <a href="#features" class="btn-outline" style="border-color:#a1a1aa; color:#a1a1aa;">See how it works</a>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="features" id="features">
+    <h2 class="section-title">Everything you need to stay on top of leads</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Centralised client list</h3>
+        <p>All your leads in one place – name, status, notes, and follow-up date.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⏰</div>
+        <h3>Smart follow-up reminders</h3>
+        <p>Set a date and never forget to call or message again. Overdue alerts keep you accountable.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Mobile‑friendly dashboard</h3>
+        <p>Responsive design that works on your phone. Swipe tables, tap WhatsApp links – perfect for field work.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Secure & isolated</h3>
+        <p>Your data is private – each account sees only its own leads. XSS protection and JWT auth built in.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>WhatsApp integration</h3>
+        <p>One‑click chat with leads via WhatsApp link. Saves time and keeps conversations flowing.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Filter, sort & search</h3>
+        <p>Find leads by status, date range, or name. Pagination keeps it fast even with hundreds of clients.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing -->
+  <div class="pricing" id="pricing">
+    <h2 class="section-title">Simple, transparent pricing</h2>
+    <div class="pricing-card">
+      <div class="plan-name">Pro Plan</div>
+      <div class="price">
+        $8 <small>/month</small>
+      </div>
+      <div class="price-sub">or ₦4,000/month for Nigerian customers</div>
+      <ul class="pricing-features">
+        <li>Unlimited leads</li>
+        <li>Follow-up reminders & overdue alerts</li>
+        <li>WhatsApp integration</li>
+        <li>Mobile responsive dashboard</li>
+        <li>Data export & priority support</li>
+      </ul>
+      <a href="#" class="btn-primary" id="payNowBtn" style="display: inline-block;">Get started →</a>
+      <p class="payment-note">Secure payment via Selar – accepts international cards, PayPal, and bank transfer.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+    <p>© 2025 FollowHQ – Built for freelancers and small teams.</p>
+  </div>
+</div>
+
+<script>
+  // Replace this with your actual Selar payment link when ready
+  const SELAR_PRODUCT_URL = "YOUR_SELAR_LINK";
+
+  document.getElementById('payNowBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    if (SELAR_PRODUCT_URL === "YOUR_SELAR_LINK") {
+      alert("Payment link will be added soon. For now, please contact us directly.");
+    } else {
+      window.open(SELAR_PRODUCT_URL, '_blank');
+    }
+  });
+</script>
+
+</body>
+</html>

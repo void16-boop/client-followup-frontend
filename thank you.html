@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Received – FollowHQ</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #0a0a0f;
+      color: #ecedee;
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .card {
+      background: #14141c;
+      border: 1px solid #2a2a35;
+      border-radius: 28px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.5);
+    }
+    .checkmark {
+      font-size: 4rem;
+      background: #1a2a1a;
+      width: 80px;
+      height: 80px;
+      line-height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      color: #97c459;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .sub {
+      color: #a1a1aa;
+      margin-bottom: 1.5rem;
+    }
+    .info-box {
+      background: #1f1f2a;
+      border-radius: 16px;
+      padding: 1.2rem;
+      margin: 1.5rem 0;
+      text-align: left;
+    }
+    .info-box p {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+    .info-box strong {
+      color: #e8c547;
+    }
+    .btn {
+      background: #e8c547;
+      color: #0a0a0f;
+      border: none;
+      padding: 0.75rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 0.5rem;
+      transition: opacity 0.2s;
+    }
+    .btn:hover {
+      opacity: 0.85;
+    }
+    .footer-note {
+      font-size: 0.8rem;
+      color: #6b6b7a;
+      margin-top: 1.5rem;
+    }
+    .footer-note a {
+      color: #e8c547;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="checkmark">✓</div>
+    <h1>Payment received</h1>
+    <p class="sub">Thank you for subscribing to FollowHQ</p>
+
+    <div class="info-box">
+      <p><strong>What happens next?</strong></p>
+      <p>Your account will be <strong>manually activated</strong> within <strong>24 hours</strong>.</p>
+      <p>We will send an email to the address you used on Selar once your subscription is active.</p>
+      <p>If you need faster access, please contact us below.</p>
+    </div>
+
+    <a href="login.html" class="btn">Go to login</a>
+
+    <div class="footer-note">
+      Questions? <a href="mailto:support@followhq.com">support@followhq.com</a>
+    </div>
+  </div>
+</body>
+</html>

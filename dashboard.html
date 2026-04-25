@@ -6,7 +6,6 @@
   <title>Dashboard — FollowHQ</title>
 
   <style>
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -18,10 +17,7 @@
       grid-template-columns: 240px 1fr;
     }
 
-    /* =============================================
-       SIDEBAR
-    ============================================= */
-
+    /* ========== SIDEBAR ========== */
     .sidebar {
       background-color: #1a1a22;
       border-right: 0.5px solid #2e2e3a;
@@ -33,7 +29,6 @@
       display: flex;
       flex-direction: column;
     }
-
     .sidebar-brand {
       padding: 0 1.25rem 1.5rem;
       border-bottom: 0.5px solid #2e2e3a;
@@ -42,7 +37,6 @@
       align-items: center;
       gap: 10px;
     }
-
     .sidebar-brand .logo-icon {
       width: 32px;
       height: 32px;
@@ -53,14 +47,12 @@
       justify-content: center;
       flex-shrink: 0;
     }
-
     .sidebar-brand span {
       font-size: 14px;
       font-weight: 600;
       color: #f5f0e8;
       line-height: 1.3;
     }
-
     .nav-label {
       font-size: 10px;
       text-transform: uppercase;
@@ -69,7 +61,6 @@
       padding: 0 1.25rem;
       margin-bottom: 0.5rem;
     }
-
     .nav-item {
       display: flex;
       align-items: center;
@@ -83,24 +74,19 @@
       cursor: pointer;
       user-select: none;
     }
-
     .nav-item:hover { color: #f5f0e8; background-color: #222230; }
-
     .nav-item.active {
       color: #e8c547;
       background-color: #222230;
       border-left-color: #e8c547;
     }
-
     .nav-item svg { flex-shrink: 0; opacity: 0.7; }
     .nav-item.active svg { opacity: 1; }
-
     .sidebar-footer {
       margin-top: auto;
       padding: 1rem 1.25rem;
       border-top: 0.5px solid #2e2e3a;
     }
-
     .sidebar-user {
       display: flex;
       align-items: center;
@@ -109,7 +95,6 @@
       padding-bottom: 0.75rem;
       border-bottom: 0.5px solid #2e2e3a;
     }
-
     .sidebar-user .mini-avatar {
       width: 30px;
       height: 30px;
@@ -123,9 +108,7 @@
       color: #0f0f13;
       flex-shrink: 0;
     }
-
     .sidebar-user .user-info { overflow: hidden; }
-
     .sidebar-user .user-info .u-name {
       font-size: 13px;
       color: #f5f0e8;
@@ -134,12 +117,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
-    .sidebar-user .user-info .u-role {
-      font-size: 11px;
-      color: #4a4a5a;
-    }
-
     .logout-btn {
       display: flex;
       align-items: center;
@@ -154,15 +131,10 @@
       text-align: left;
       transition: color 0.2s;
     }
-
     .logout-btn:hover { color: #f09595; }
 
-    /* =============================================
-       MAIN
-    ============================================= */
-
+    /* ========== MAIN ========== */
     .main { display: flex; flex-direction: column; min-height: 100vh; }
-
     .topbar {
       background-color: #1a1a22;
       border-bottom: 0.5px solid #2e2e3a;
@@ -175,12 +147,9 @@
       top: 0;
       z-index: 10;
     }
-
     .topbar-left h2 { font-size: 16px; font-weight: 500; color: #f5f0e8; }
     .topbar-left p  { font-size: 12px; color: #8a8a9a; margin-top: 1px; }
-
     .topbar-right { display: flex; align-items: center; gap: 1rem; }
-
     .avatar {
       width: 34px;
       height: 34px;
@@ -193,9 +162,7 @@
       font-weight: 700;
       color: #0f0f13;
     }
-
     .user-name { font-size: 14px; color: #f5f0e8; }
-
     .overdue-pill {
       background-color: #2a1a1a;
       border: 0.5px solid #7a2e2e;
@@ -205,20 +172,15 @@
       border-radius: 20px;
       display: none;
     }
-
     .content { padding: 2rem; flex: 1; }
 
-    /* =============================================
-       STAT CARDS
-    ============================================= */
-
+    /* ========== STAT CARDS ========== */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
       margin-bottom: 2rem;
     }
-
     .stat-card {
       background-color: #1a1a22;
       border: 0.5px solid #2e2e3a;
@@ -227,22 +189,16 @@
       cursor: pointer;
       transition: background-color 0.2s;
     }
-
     .stat-card:hover { background-color: #222230; }
-
     .stat-label { font-size: 12px; color: #8a8a9a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
     .stat-value { font-size: 28px; font-weight: 600; color: #f5f0e8; line-height: 1; margin-bottom: 4px; }
     .stat-sub   { font-size: 12px; color: #8a8a9a; }
-
     .stat-card.gold  { border-left: 3px solid #e8c547; }
     .stat-card.green { border-left: 3px solid #639922; }
     .stat-card.blue  { border-left: 3px solid #378add; }
     .stat-card.red   { border-left: 3px solid #e24b4a; }
 
-    /* =============================================
-       TOOLBAR
-    ============================================= */
-
+    /* ========== TOOLBAR ========== */
     .toolbar {
       display: flex;
       align-items: center;
@@ -250,9 +206,7 @@
       margin-bottom: 1rem;
       flex-wrap: wrap;
     }
-
     .search-wrap { position: relative; flex: 1; min-width: 200px; }
-
     .search-wrap svg {
       position: absolute;
       left: 12px;
@@ -261,7 +215,6 @@
       opacity: 0.4;
       pointer-events: none;
     }
-
     .search-input {
       width: 100%;
       background-color: #1a1a22;
@@ -274,10 +227,8 @@
       outline: none;
       transition: border-color 0.2s;
     }
-
     .search-input:focus { border-color: #e8c547; }
     .search-input::placeholder { color: #4a4a5a; }
-
     .filter-btn {
       background-color: #1a1a22;
       border: 0.5px solid #2e2e3a;
@@ -290,23 +241,17 @@
       transition: color 0.2s, border-color 0.2s;
       white-space: nowrap;
     }
-
     .filter-btn:hover    { color: #f5f0e8; border-color: #4a4a5a; }
     .filter-btn.selected { color: #e8c547; border-color: #e8c547; background-color: #222230; }
 
-    /* =============================================
-       SECTION HEADER
-    ============================================= */
-
+    /* ========== SECTION HEADER ========== */
     .section-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 1rem;
     }
-
     .section-header h3 { font-size: 15px; font-weight: 500; color: #f5f0e8; }
-
     .btn-small {
       background-color: #e8c547;
       color: #0f0f13;
@@ -318,13 +263,9 @@
       cursor: pointer;
       transition: opacity 0.2s;
     }
-
     .btn-small:hover { opacity: 0.85; }
 
-    /* =============================================
-       TABLE
-    ============================================= */
-
+    /* ========== TABLE ========== */
     .table-wrap {
       background-color: #1a1a22;
       border: 0.5px solid #2e2e3a;
@@ -332,9 +273,7 @@
       overflow: hidden;
       margin-bottom: 2rem;
     }
-
     table { width: 100%; border-collapse: collapse; }
-
     thead th {
       background-color: #16161e;
       font-size: 11px;
@@ -345,36 +284,24 @@
       text-align: left;
       font-weight: 500;
     }
-
     tbody tr { border-top: 0.5px solid #2e2e3a; transition: background-color 0.15s; }
     tbody tr:hover { background-color: #222230; }
     tbody tr.overdue-row { background-color: #1e1214; }
     tbody tr.overdue-row:hover { background-color: #261618; }
-
     tbody td { padding: 12px 1.25rem; font-size: 14px; color: #f5f0e8; }
-
     .td-muted { color: #8a8a9a; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .date-overdue { color: #f09595; font-weight: 500; }
-
     .badge { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
     .badge-yellow { background-color:#2a2510; color:#e8c547; border:0.5px solid #7a6a10; }
     .badge-blue   { background-color:#1a2030; color:#85b7eb; border:0.5px solid #2e5a8a; }
     .badge-green  { background-color:#1a2a1a; color:#97c459; border:0.5px solid #2e7a2e; }
     .badge-red    { background-color:#2a1a1a; color:#f09595; border:0.5px solid #7a2e2e; }
-
     .empty-state { text-align: center; padding: 3rem 1rem; color: #4a4a5a; font-size: 14px; }
     .empty-state .empty-icon { font-size: 32px; margin-bottom: 0.75rem; opacity: 0.4; }
-    .empty-state p { margin-top: 0.25rem; }
-    .empty-state strong { color: #8a8a9a; }
-
     .spinner { text-align: center; padding: 2rem; color: #8a8a9a; font-size: 13px; }
 
-    /* =============================================
-       FORM ELEMENTS
-    ============================================= */
-
+    /* ========== FORMS ========== */
     .form-group { margin-bottom: 1.25rem; }
-
     .form-group label {
       display: block;
       font-size: 12px;
@@ -383,7 +310,6 @@
       letter-spacing: 0.5px;
       margin-bottom: 6px;
     }
-
     .form-group input,
     .form-group select,
     .form-group textarea {
@@ -398,26 +324,18 @@
       outline: none;
       transition: border-color 0.2s;
     }
-
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus { border-color: #e8c547; }
-
     .form-group textarea   { resize: vertical; }
     .form-group select     { cursor: pointer; color-scheme: dark; }
     .form-group input[type="date"] { color-scheme: dark; }
-
-    /* Password input wrapper — same pattern as login.html */
     .input-wrap {
       position: relative;
       display: flex;
       align-items: center;
     }
-
-    .input-wrap input {
-      padding-right: 44px;
-    }
-
+    .input-wrap input { padding-right: 44px; }
     .eye-btn {
       position: absolute;
       right: 0;
@@ -433,11 +351,8 @@
       color: #8a8a9a;
       transition: color 0.2s;
     }
-
     .eye-btn:hover { color: #f5f0e8; }
-
     .form-hint { font-size: 12px; color: #4a4a5a; margin-top: 5px; }
-
     .btn-primary {
       background-color: #e8c547;
       color: #0f0f13;
@@ -450,11 +365,9 @@
       cursor: pointer;
       transition: opacity 0.2s;
     }
-
     .btn-primary:hover    { opacity: 0.85; }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-primary.full     { width: 100%; padding: 11px; }
-
     .btn-danger {
       background-color: transparent;
       color: #f09595;
@@ -466,31 +379,24 @@
       cursor: pointer;
       transition: background-color 0.2s;
     }
-
     .btn-danger:hover { background-color: #2a1a1a; }
-
     .alert { border-radius: 8px; padding: 10px 14px; font-size: 13px; margin-bottom: 1.25rem; display: none; }
     .alert-error   { background:#2a1a1a; border:0.5px solid #7a2e2e; color:#f09595; }
     .alert-success { background:#1a2a1a; border:0.5px solid #2e7a2e; color:#97c459; }
 
-    /* =============================================
-       SETTINGS
-    ============================================= */
-
+    /* ========== SETTINGS ========== */
     .settings-grid {
       display: grid;
       grid-template-columns: 200px 1fr;
       gap: 1.5rem;
       align-items: start;
     }
-
     .settings-tabs {
       background-color: #1a1a22;
       border: 0.5px solid #2e2e3a;
       border-radius: 10px;
       overflow: hidden;
     }
-
     .settings-tab {
       display: block;
       padding: 11px 1.25rem;
@@ -502,14 +408,11 @@
       border-bottom: 0.5px solid #2e2e3a;
       user-select: none;
     }
-
     .settings-tab:last-child { border-bottom: none; }
     .settings-tab:hover { color: #f5f0e8; background-color: #222230; }
     .settings-tab.active { color: #e8c547; background-color: #222230; border-left-color: #e8c547; }
-
     .settings-panel { display: none; }
     .settings-panel.active { display: block; }
-
     .settings-card {
       background-color: #1a1a22;
       border: 0.5px solid #2e2e3a;
@@ -518,9 +421,7 @@
       margin-bottom: 1.25rem;
       max-width: 520px;
     }
-
-    .settings-card h4 { font-size: 15px; font-weight: 500; color: #f5f0e8; margin-bottom: 4px; }
-
+    .settings-card h4 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
     .settings-card .card-desc {
       font-size: 13px;
       color: #8a8a9a;
@@ -528,7 +429,6 @@
       padding-bottom: 1.25rem;
       border-bottom: 0.5px solid #2e2e3a;
     }
-
     .profile-avatar-lg {
       width: 64px;
       height: 64px;
@@ -542,7 +442,6 @@
       color: #0f0f13;
       margin-bottom: 1.25rem;
     }
-
     .danger-card {
       background-color: #1a1010;
       border: 0.5px solid #7a2e2e;
@@ -550,1128 +449,534 @@
       padding: 1.25rem 1.75rem;
       max-width: 520px;
     }
-
     .danger-card h4 { font-size: 14px; font-weight: 500; color: #f09595; margin-bottom: 4px; }
     .danger-card p  { font-size: 13px; color: #8a8a9a; margin-bottom: 1rem; }
-
-    /* =============================================
-       PAGE VIEWS
-    ============================================= */
-
     .page-view { display: none; }
     .page-view.active { display: block; }
-
   </style>
 </head>
-
 <body>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-
-    <div class="sidebar-brand">
-      <div class="logo-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f0f13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-          <path d="M2 17l10 5 10-5"/>
-          <path d="M2 12l10 5 10-5"/>
-        </svg>
-      </div>
-      <span>Follow<br>HQ</span>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="logo-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f0f13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+        <path d="M2 17l10 5 10-5"/>
+        <path d="M2 12l10 5 10-5"/>
+      </svg>
     </div>
-
-    <p class="nav-label">Main Menu</p>
-
-    <a class="nav-item active" onclick="showPage('overview')" data-page="overview">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-        <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-      </svg>
-      Overview
-    </a>
-
-    <a class="nav-item" onclick="showPage('leads')" data-page="leads">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-      </svg>
-      Leads
-    </a>
-
-    <a class="nav-item" onclick="showPage('followups')" data-page="followups">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-        <line x1="16" y1="2" x2="16" y2="6"/>
-        <line x1="8" y1="2" x2="8" y2="6"/>
-        <line x1="3" y1="10" x2="21" y2="10"/>
-      </svg>
-      Follow-Ups
-    </a>
-
-    <p class="nav-label" style="margin-top:1.5rem;">Account</p>
-
-    <a class="nav-item" onclick="showPage('settings')" data-page="settings">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-      </svg>
-      Settings
-    </a>
-
-    <div class="sidebar-footer">
-      <div class="sidebar-user">
-        <div class="mini-avatar" id="sidebar-avatar">?</div>
-        <div class="user-info">
-          <p class="u-name" id="sidebar-name">Loading...</p>
-          <p class="u-role">Account Owner</p>
-        </div>
+    <span>Follow<br>HQ</span>
+  </div>
+  <p class="nav-label">Main Menu</p>
+  <a class="nav-item active" onclick="showPage('overview')" data-page="overview">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    Overview
+  </a>
+  <a class="nav-item" onclick="showPage('leads')" data-page="leads">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    Leads
+  </a>
+  <a class="nav-item" onclick="showPage('followups')" data-page="followups">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Follow-Ups
+  </a>
+  <p class="nav-label" style="margin-top:1.5rem;">Account</p>
+  <a class="nav-item" onclick="showPage('settings')" data-page="settings">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    Settings
+  </a>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="mini-avatar" id="sidebar-avatar">?</div>
+      <div class="user-info">
+        <p class="u-name" id="sidebar-name">Loading...</p>
+        <p class="u-role">Account Owner</p>
       </div>
-      <button class="logout-btn" onclick="handleLogout()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-          <polyline points="16 17 21 12 16 7"/>
-          <line x1="21" y1="12" x2="9" y2="12"/>
-        </svg>
-        Sign Out
-      </button>
     </div>
+    <button class="logout-btn" onclick="handleLogout()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Sign Out
+    </button>
+  </div>
+</aside>
 
-  </aside>
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <h2 id="page-title">Overview</h2>
+      <p id="page-subtitle">Your dashboard summary</p>
+    </div>
+    <div class="topbar-right">
+      <span class="overdue-pill" id="overdue-pill"></span>
+      <span class="user-name" id="user-name-display">Loading...</span>
+      <div class="avatar" id="user-avatar">?</div>
+    </div>
+  </div>
 
+  <div class="content">
 
-  <!-- MAIN -->
-  <div class="main">
-
-    <div class="topbar">
-      <div class="topbar-left">
-        <h2 id="page-title">Overview</h2>
-        <p  id="page-subtitle">Your dashboard summary</p>
+    <!-- PAGE: OVERVIEW -->
+    <div class="page-view active" id="page-overview">
+      <div class="stats-grid">
+        <div class="stat-card gold"  onclick="showPage('leads')"><p class="stat-label">Total Leads</p><p class="stat-value" id="stat-total">—</p><p class="stat-sub">click to view all</p></div>
+        <div class="stat-card green" onclick="filterAndGo('new')"><p class="stat-label">New</p><p class="stat-value" id="stat-new">—</p><p class="stat-sub">not yet contacted</p></div>
+        <div class="stat-card blue"  onclick="filterAndGo('contacted')"><p class="stat-label">Contacted</p><p class="stat-value" id="stat-contacted">—</p><p class="stat-sub">awaiting response</p></div>
+        <div class="stat-card red"   onclick="filterAndGo('closed')"><p class="stat-label">Closed</p><p class="stat-value" id="stat-closed">—</p><p class="stat-sub">won or lost</p></div>
       </div>
-      <div class="topbar-right">
-        <span class="overdue-pill" id="overdue-pill"></span>
-        <span class="user-name" id="user-name-display">Loading...</span>
-        <div class="avatar" id="user-avatar">?</div>
+      <div id="overdue-banner" style="display:none; background:#1e1214; border:0.5px solid #7a2e2e; border-radius:10px; padding:12px 1.25rem; margin-bottom:1.5rem; align-items:center; justify-content:space-between;">
+        <span style="font-size:13px; color:#f09595;" id="overdue-banner-text"></span>
+        <button class="btn-small" onclick="filterAndGo('overdue')" style="background:#e24b4a; font-size:12px; padding:5px 12px;">View Overdue</button>
+      </div>
+      <div class="section-header"><h3>Recent Leads</h3><button class="btn-small" onclick="showPage('leads')">View All</button></div>
+      <div class="table-wrap">
+        <div class="spinner" id="overview-loading">Loading...</div>
+        <table id="overview-table" style="display:none;"><thead><tr><th>Name</th><th>Status</th><th>Follow-Up Date</th><th>Notes</th></tr></thead><tbody id="overview-tbody"></tbody></table>
+        <div class="empty-state" id="overview-empty" style="display:none;"><div class="empty-icon">📋</div><p>No leads yet.</p><p>Click <strong>Leads</strong> in the sidebar to add your first one.</p></div>
       </div>
     </div>
 
-    <div class="content">
-
-
-      <!-- PAGE: OVERVIEW -->
-      <div class="page-view active" id="page-overview">
-
-        <div class="stats-grid">
-          <div class="stat-card gold"  onclick="showPage('leads')">
-            <p class="stat-label">Total Leads</p>
-            <p class="stat-value" id="stat-total">—</p>
-            <p class="stat-sub">click to view all</p>
-          </div>
-          <div class="stat-card green" onclick="filterAndGo('new')">
-            <p class="stat-label">New</p>
-            <p class="stat-value" id="stat-new">—</p>
-            <p class="stat-sub">not yet contacted</p>
-          </div>
-          <div class="stat-card blue"  onclick="filterAndGo('contacted')">
-            <p class="stat-label">Contacted</p>
-            <p class="stat-value" id="stat-contacted">—</p>
-            <p class="stat-sub">awaiting response</p>
-          </div>
-          <div class="stat-card red"   onclick="filterAndGo('closed')">
-            <p class="stat-label">Closed</p>
-            <p class="stat-value" id="stat-closed">—</p>
-            <p class="stat-sub">won or lost</p>
-          </div>
-        </div>
-
-        <div id="overdue-banner" style="display:none; background:#1e1214; border:0.5px solid #7a2e2e; border-radius:10px; padding:12px 1.25rem; margin-bottom:1.5rem; align-items:center; justify-content:space-between;">
-          <span style="font-size:13px; color:#f09595;" id="overdue-banner-text"></span>
-          <button class="btn-small" onclick="filterAndGo('overdue')" style="background:#e24b4a; font-size:12px; padding:5px 12px;">View Overdue</button>
-        </div>
-
-        <div class="section-header">
-          <h3>Recent Leads</h3>
-          <button class="btn-small" onclick="showPage('leads')">View All</button>
-        </div>
-
-        <div class="table-wrap">
-          <div class="spinner" id="overview-loading">Loading...</div>
-          <table id="overview-table" style="display:none;">
-            <thead>
-              <tr>
-                <th>Name</th><th>Status</th><th>Follow-Up Date</th><th>Notes</th>
-              </tr>
-            </thead>
-            <tbody id="overview-tbody"></tbody>
-          </table>
-          <div class="empty-state" id="overview-empty" style="display:none;">
-            <div class="empty-icon">📋</div>
-            <p>No leads yet.</p>
-            <p>Click <strong>Leads</strong> in the sidebar to add your first one.</p>
-          </div>
-        </div>
-
+    <!-- PAGE: LEADS -->
+    <div class="page-view" id="page-leads">
+      <div class="section-header"><h3>All Leads</h3><button class="btn-small" onclick="showPage('add-lead')">+ Add Lead</button></div>
+      <div class="toolbar">
+        <div class="search-wrap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input class="search-input" id="leads-search" type="text" placeholder="Search by name or notes..." oninput="loadLeads(1)" /></div>
+        <button class="filter-btn selected" data-filter="all" onclick="setFilter('all')">All</button>
+        <button class="filter-btn" data-filter="new" onclick="setFilter('new')">New</button>
+        <button class="filter-btn" data-filter="contacted" onclick="setFilter('contacted')">Contacted</button>
+        <button class="filter-btn" data-filter="qualified" onclick="setFilter('qualified')">Qualified</button>
+        <button class="filter-btn" data-filter="closed" onclick="setFilter('closed')">Closed</button>
+        <button class="filter-btn" data-filter="overdue" onclick="setFilter('overdue')">Overdue</button>
       </div>
+      <div class="toolbar" style="margin-top:-0.25rem;">
+        <input type="date" id="date-from" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#f5f0e8; font-size:13px; color-scheme:dark;" onchange="dateFrom=this.value; loadLeads(1);" />
+        <span style="color:#4a4a5a; font-size:13px;">to</span>
+        <input type="date" id="date-to" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#f5f0e8; font-size:13px; color-scheme:dark;" onchange="dateTo=this.value; loadLeads(1);" />
+        <select id="sort-by" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px;" onchange="sortBy=this.value; loadLeads(1);"><option value="created_at">Sort: Date Added</option><option value="name">Sort: Name</option><option value="follow_up_date">Sort: Follow-Up Date</option><option value="status">Sort: Status</option></select>
+        <button onclick="sortOrder = sortOrder==='asc' ? 'desc' : 'asc'; loadLeads(1);" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px; cursor:pointer;">↕ Order</button>
+        <button onclick="dateFrom=''; dateTo=''; document.getElementById('date-from').value=''; document.getElementById('date-to').value=''; loadLeads(1);" style="background:none; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px; cursor:pointer;">Clear</button>
+      </div>
+      <div class="table-wrap">
+        <div class="spinner" id="leads-loading">Loading...</div>
+        <table id="leads-table" style="display:none;"><thead><tr><th>Name</th><th>Status</th><th>Follow-Up Date</th><th>WhatsApp</th><th>Notes</th><th>Actions</th></tr></thead><tbody id="leads-tbody"></tbody></table>
+        <div class="empty-state" id="leads-empty" style="display:none;"><div class="empty-icon">🔍</div><p id="leads-empty-text">No leads found.</p><p>Try a different search or filter.</p></div>
+      </div>
+      <div id="leads-pagination" style="display:none; align-items:center; justify-content:space-between; margin-top:-1rem; margin-bottom:2rem;">
+        <span id="page-info" style="font-size:13px; color:#8a8a9a;"></span>
+        <div style="display:flex; gap:0.5rem;"><button id="btn-prev" onclick="loadLeads(leadsPage - 1)" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:7px; padding:7px 14px; color:#f5f0e8; font-size:13px; cursor:pointer;">← Prev</button><button id="btn-next" onclick="loadLeads(leadsPage + 1)" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:7px; padding:7px 14px; color:#f5f0e8; font-size:13px; cursor:pointer;">Next →</button></div>
+      </div>
+    </div>
 
+    <!-- PAGE: ADD / EDIT LEAD -->
+    <div class="page-view" id="page-add-lead">
+      <div class="section-header"><h3 id="form-heading">Add New Lead</h3><button class="btn-small" onclick="showPage('leads')">← Back</button></div>
+      <div class="table-wrap" style="padding:1.75rem; max-width:560px;">
+        <div class="alert alert-error" id="form-error"></div>
+        <div class="alert alert-success" id="form-success"></div>
+        <div class="form-group"><label for="lead-name">Lead Name *</label><input type="text" id="lead-name" placeholder="e.g., John Doe" /></div>
+        <div class="form-group"><label for="lead-status">Status</label><select id="lead-status"><option value="new">New</option><option value="contacted">Contacted</option><option value="qualified">Qualified</option><option value="closed">Closed</option></select></div>
+        <div class="form-group"><label for="lead-date">Follow-Up Date</label><input type="date" id="lead-date" /><p class="form-hint">Leave blank if no follow-up is scheduled.</p></div>
+        <div class="form-group"><label for="lead-whatsapp">WhatsApp Number</label><input type="tel" id="lead-whatsapp" placeholder="+2348012345678" /><p class="form-hint">Optional. Used to open WhatsApp directly.</p></div>
+        <div class="form-group"><label for="lead-notes">Notes</label><textarea id="lead-notes" rows="4" placeholder="Any context about this lead..."></textarea></div>
+        <button class="btn-primary full" id="form-btn" onclick="handleLeadSubmit()">Save Lead</button>
+      </div>
+    </div>
 
-      <!-- PAGE: LEADS -->
-      <!-- PAGE: LEADS -->
-      <div class="page-view" id="page-leads">
+    <!-- PAGE: FOLLOW-UPS -->
+    <div class="page-view" id="page-followups">
+      <div class="section-header"><h3>Follow-Ups</h3><button class="btn-small" onclick="showPage('add-lead')">+ Add Lead</button></div>
+      <div class="table-wrap">
+        <div class="spinner" id="followups-loading">Loading...</div>
+        <table id="followups-table" style="display:none;"><thead><tr><th>Lead Name</th><th>Follow-Up Date</th><th>Status</th><th>Notes</th><th>Action</th></tr></thead><tbody id="followups-tbody"></tbody></table>
+        <div class="empty-state" id="followups-empty" style="display:none;"><div class="empty-icon">📅</div><p>No follow-ups scheduled.</p><p>Add a <strong>Follow-Up Date</strong> when creating a lead.</p></div>
+      </div>
+    </div>
 
-        <div class="section-header">
-          <h3>All Leads</h3>
-          <button class="btn-small" onclick="showPage('add-lead')">+ Add Lead</button>
-        </div>
-
-        <!-- Search + filter row -->
-        <div class="toolbar">
-          <div class="search-wrap">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-            </svg>
-            <input class="search-input" id="leads-search" type="text"
-              placeholder="Search by name or notes..." oninput="loadLeads(1)" />
+    <!-- PAGE: SETTINGS -->
+    <div class="page-view" id="page-settings">
+      <div class="settings-grid">
+        <div class="settings-tabs"><div class="settings-tab active" onclick="showSettingsTab('profile', this)">Profile</div><div class="settings-tab" onclick="showSettingsTab('security', this)">Security</div><div class="settings-tab" onclick="showSettingsTab('account', this)">Account</div></div>
+        <div>
+          <div class="settings-panel active" id="tab-profile">
+            <div class="settings-card"><h4>Your Profile</h4><p class="card-desc">Your name and email address on this account.</p><div class="profile-avatar-lg" id="settings-avatar">?</div>
+            <div class="form-group"><label>Full Name</label><input type="text" id="settings-name-display" readonly style="opacity:0.5; cursor:default;" /><p class="form-hint">Name cannot be changed from the dashboard.</p></div>
+            <div class="alert alert-error" id="email-error"></div><div class="alert alert-success" id="email-success"></div>
+            <div class="form-group"><label for="settings-email">Email Address</label><input type="email" id="settings-email" placeholder="you@company.com" /></div>
+            <button class="btn-primary" id="email-btn" onclick="handleEmailUpdate()">Update Email</button></div>
           </div>
-          <button class="filter-btn selected" data-filter="all"       onclick="setFilter('all')">All</button>
-          <button class="filter-btn"          data-filter="new"       onclick="setFilter('new')">New</button>
-          <button class="filter-btn"          data-filter="contacted" onclick="setFilter('contacted')">Contacted</button>
-          <button class="filter-btn"          data-filter="qualified" onclick="setFilter('qualified')">Qualified</button>
-          <button class="filter-btn"          data-filter="closed"    onclick="setFilter('closed')">Closed</button>
-          <button class="filter-btn"          data-filter="overdue"   onclick="setFilter('overdue')">Overdue</button>
-        </div>
-
-        <!-- Date range + sort row -->
-        <div class="toolbar" style="margin-top:-0.25rem;">
-          <input type="date" id="date-from" title="From date" color-scheme="dark"
-            style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#f5f0e8; font-size:13px; font-family:sans-serif; outline:none; color-scheme:dark;"
-            onchange="dateFrom=this.value; loadLeads(1);" />
-          <span style="color:#4a4a5a; font-size:13px;">to</span>
-          <input type="date" id="date-to" title="To date"
-            style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#f5f0e8; font-size:13px; font-family:sans-serif; outline:none; color-scheme:dark;"
-            onchange="dateTo=this.value; loadLeads(1);" />
-
-          <!-- Sort controls -->
-          <select id="sort-by"
-            style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px; font-family:sans-serif; outline:none; cursor:pointer; color-scheme:dark;"
-            onchange="sortBy=this.value; loadLeads(1);">
-            <option value="created_at">Sort: Date Added</option>
-            <option value="name">Sort: Name</option>
-            <option value="follow_up_date">Sort: Follow-Up Date</option>
-            <option value="status">Sort: Status</option>
-          </select>
-
-          <button onclick="sortOrder = sortOrder==='asc' ? 'desc' : 'asc'; loadLeads(1);"
-            id="sort-order-btn"
-            style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px; font-family:sans-serif; cursor:pointer; transition:color 0.2s;"
-            title="Toggle sort direction">
-            ↕ Order
-          </button>
-
-          <button onclick="dateFrom=''; dateTo=''; document.getElementById('date-from').value=''; document.getElementById('date-to').value=''; loadLeads(1);"
-            style="background:none; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px; font-family:sans-serif; cursor:pointer;">
-            Clear
-          </button>
-        </div>
-
-        <div class="table-wrap">
-          <div class="spinner" id="leads-loading">Loading...</div>
-          <table id="leads-table" style="display:none;">
-            <thead>
-              <tr>
-                <th>Name</th><th>Status</th><th>Follow-Up Date</th><th>WhatsApp</th><th>Notes</th><th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="leads-tbody"></tbody>
-          </table>
-          <div class="empty-state" id="leads-empty" style="display:none;">
-            <div class="empty-icon">🔍</div>
-            <p id="leads-empty-text">No leads found.</p>
-            <p>Try a different search or filter.</p>
+          <div class="settings-panel" id="tab-security">
+            <div class="settings-card"><h4>Change Password</h4><p class="card-desc">Choose a strong password. You'll be logged out after changing it.</p>
+            <div class="alert alert-error" id="pw-error"></div><div class="alert alert-success" id="pw-success"></div>
+            <div class="form-group"><label for="pw-current">Current Password</label><div class="input-wrap"><input type="password" id="pw-current" placeholder="Your current password" /><button class="eye-btn" type="button" onclick="togglePw('pw-current', this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
+            <div class="form-group"><label for="pw-new">New Password</label><div class="input-wrap"><input type="password" id="pw-new" placeholder="Min. 8 characters" oninput="checkPwStrength(this.value)" /><button class="eye-btn" type="button" onclick="togglePw('pw-new', this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div><div style="margin-top:8px; height:4px; background:#2e2e3a; border-radius:4px; overflow:hidden;"><div id="pw-strength-fill" style="height:100%; width:0%; border-radius:4px;"></div></div><p class="form-hint" id="pw-strength-label">Enter a new password</p></div>
+            <div class="form-group"><label for="pw-confirm">Confirm New Password</label><div class="input-wrap"><input type="password" id="pw-confirm" placeholder="Repeat new password" /><button class="eye-btn" type="button" onclick="togglePw('pw-confirm', this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
+            <button class="btn-primary" id="pw-btn" onclick="handlePasswordChange()">Change Password</button></div>
+          </div>
+          <div class="settings-panel" id="tab-account">
+            <div class="settings-card"><h4>Account Information</h4><p class="card-desc">Details about your current plan and usage.</p><table style="width:100%; font-size:14px;"><tr><td style="color:#8a8a9a; padding:8px 0; width:40%;">Account type</td><td style="color:#f5f0e8;">Standard</td></tr><tr><td style="color:#8a8a9a; padding:8px 0;">Email</td><td style="color:#f5f0e8;" id="account-email-display">—</td></tr><tr><td style="color:#8a8a9a; padding:8px 0;">Member since</td><td style="color:#f5f0e8;" id="account-joined">—</td></tr><tr><td style="color:#8a8a9a; padding:8px 0;">Total leads</td><td style="color:#f5f0e8;" id="account-leads-count">—</td></tr></table></div>
+            <div class="danger-card"><h4>Sign Out Everywhere</h4><p>This will remove your session token from this browser. You'll need to log in again.</p><button class="btn-danger" onclick="handleLogout()">Sign Out</button></div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- Pagination controls -->
-        <div id="leads-pagination" style="display:none; align-items:center; justify-content:space-between; margin-top:-1rem; margin-bottom:2rem;">
-          <span id="page-info" style="font-size:13px; color:#8a8a9a;"></span>
-          <div style="display:flex; gap:0.5rem;">
-            <button id="btn-prev" onclick="loadLeads(leadsPage - 1)"
-              style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:7px; padding:7px 14px; color:#f5f0e8; font-size:13px; font-family:sans-serif; cursor:pointer; transition:opacity 0.2s;"
-              onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-              ← Prev
-            </button>
-            <button id="btn-next" onclick="loadLeads(leadsPage + 1)"
-              style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:7px; padding:7px 14px; color:#f5f0e8; font-size:13px; font-family:sans-serif; cursor:pointer; transition:opacity 0.2s;"
-              onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-              Next →
-            </button>
-          </div>
-        </div>
-
+  </div>
 </div>
-      <!-- PAGE: ADD / EDIT LEAD -->
-      <div class="page-view" id="page-add-lead">
 
-        <div class="section-header">
-          <h3 id="form-heading">Add New Lead</h3>
-          <button class="btn-small" onclick="showPage('leads')">← Back</button>
-        </div>
-
-        <div class="table-wrap" style="padding:1.75rem; max-width:560px;">
-
-          <div class="alert alert-error"   id="form-error"></div>
-          <div class="alert alert-success" id="form-success"></div>
-
-          <div class="form-group">
-            <label for="lead-whatsapp">WhatsApp Number</label>
-            <input type="tel" id="lead-whatsapp" placeholder="+2348012345678" />
-            <p class="form-hint">Optional. Used to open WhatsApp directly.</p>
-          </div>
-
-          <div class="form-group">
-            <label for="lead-notes">Notes</label>
-            <textarea id="lead-notes" rows="4" placeholder="Any context about this lead..."></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="lead-status">Status</label>
-            <select id="lead-status">
-              <option value="new">New</option>
-              <option value="contacted">Contacted</option>
-              <option value="qualified">Qualified</option>
-              <option value="closed">Closed</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="lead-date">Follow-Up Date</label>
-            <input type="date" id="lead-date" />
-            <p class="form-hint">Leave blank if no follow-up is scheduled.</p>
-          </div>
-
-          <div class="form-group">
-            <label for="lead-notes">Notes</label>
-            <textarea id="lead-notes" rows="4" placeholder="Any context about this lead..."></textarea>
-          </div>
-
-          <button class="btn-primary full" id="form-btn" onclick="handleLeadSubmit()">Save Lead</button>
-
-        </div>
-      </div>
-
-
-      <!-- PAGE: FOLLOW-UPS -->
-      <div class="page-view" id="page-followups">
-
-        <div class="section-header">
-          <h3>Follow-Ups</h3>
-          <button class="btn-small" onclick="showPage('add-lead')">+ Add Lead</button>
-        </div>
-
-        <div class="table-wrap">
-          <div class="spinner" id="followups-loading">Loading...</div>
-          <table id="followups-table" style="display:none;">
-            <thead>
-              <tr>
-                <th>Lead Name</th><th>Follow-Up Date</th><th>Status</th><th>Notes</th><th>Action</th>
-              </tr>
-            </thead>
-            <tbody id="followups-tbody"></tbody>
-          </table>
-          <div class="empty-state" id="followups-empty" style="display:none;">
-            <div class="empty-icon">📅</div>
-            <p>No follow-ups scheduled.</p>
-            <p>Add a <strong>Follow-Up Date</strong> when creating a lead.</p>
-          </div>
-        </div>
-
-      </div>
-
-
-      <!-- PAGE: SETTINGS -->
-      <div class="page-view" id="page-settings">
-
-        <div class="settings-grid">
-
-          <div class="settings-tabs">
-            <div class="settings-tab active" onclick="showSettingsTab('profile',  this)">Profile</div>
-            <div class="settings-tab"        onclick="showSettingsTab('security', this)">Security</div>
-            <div class="settings-tab"        onclick="showSettingsTab('account',  this)">Account</div>
-          </div>
-
-          <div>
-
-            <!-- PROFILE -->
-            <div class="settings-panel active" id="tab-profile">
-              <div class="settings-card">
-                <h4>Your Profile</h4>
-                <p class="card-desc">Your name and email address on this account.</p>
-
-                <div class="profile-avatar-lg" id="settings-avatar">?</div>
-
-                <div class="form-group">
-                  <label>Full Name</label>
-                  <input type="text" id="settings-name-display" readonly style="opacity:0.5; cursor:default;" />
-                  <p class="form-hint">Name cannot be changed from the dashboard.</p>
-                </div>
-
-                <div class="alert alert-error"   id="email-error"></div>
-                <div class="alert alert-success" id="email-success"></div>
-
-                <div class="form-group">
-                  <label for="settings-email">Email Address</label>
-                  <input type="email" id="settings-email" placeholder="you@company.com" />
-                </div>
-
-                <button class="btn-primary" id="email-btn" onclick="handleEmailUpdate()">
-                  Update Email
-                </button>
-              </div>
-            </div>
-
-
-            <!-- SECURITY -->
-            <div class="settings-panel" id="tab-security">
-              <div class="settings-card">
-                <h4>Change Password</h4>
-                <p class="card-desc">Choose a strong password. You'll be logged out after changing it.</p>
-
-                <div class="alert alert-error"   id="pw-error"></div>
-                <div class="alert alert-success" id="pw-success"></div>
-
-                <!-- Current password with eye toggle -->
-                <div class="form-group">
-                  <label for="pw-current">Current Password</label>
-                  <div class="input-wrap">
-                    <input type="password" id="pw-current" placeholder="Your current password" />
-                    <button class="eye-btn" type="button" onclick="togglePw('pw-current', this)">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- New password with eye toggle + strength bar -->
-                <div class="form-group">
-                  <label for="pw-new">New Password</label>
-                  <div class="input-wrap">
-                    <input type="password" id="pw-new" placeholder="Min. 8 characters"
-                      oninput="checkPwStrength(this.value)" />
-                    <button class="eye-btn" type="button" onclick="togglePw('pw-new', this)">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                    </button>
-                  </div>
-                  <div style="margin-top:8px; height:4px; background:#2e2e3a; border-radius:4px; overflow:hidden;">
-                    <div id="pw-strength-fill" style="height:100%; width:0%; border-radius:4px; transition:width 0.3s, background-color 0.3s;"></div>
-                  </div>
-                  <p class="form-hint" id="pw-strength-label">Enter a new password</p>
-                </div>
-
-                <!-- Confirm password with eye toggle -->
-                <div class="form-group">
-                  <label for="pw-confirm">Confirm New Password</label>
-                  <div class="input-wrap">
-                    <input type="password" id="pw-confirm" placeholder="Repeat new password" />
-                    <button class="eye-btn" type="button" onclick="togglePw('pw-confirm', this)">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <button class="btn-primary" id="pw-btn" onclick="handlePasswordChange()">
-                  Change Password
-                </button>
-
-              </div>
-            </div>
-
-
-            <!-- ACCOUNT -->
-            <div class="settings-panel" id="tab-account">
-              <div class="settings-card">
-                <h4>Account Information</h4>
-                <p class="card-desc">Details about your current plan and usage.</p>
-                <table style="width:100%; font-size:14px;">
-                  <tr>
-                    <td style="color:#8a8a9a; padding:8px 0; width:40%;">Account type</td>
-                    <td style="color:#f5f0e8;">Standard</td>
-                  </tr>
-                  <tr>
-                    <td style="color:#8a8a9a; padding:8px 0;">Email</td>
-                    <td style="color:#f5f0e8;" id="account-email-display">—</td>
-                  </tr>
-                  <tr>
-                    <td style="color:#8a8a9a; padding:8px 0;">Member since</td>
-                    <td style="color:#f5f0e8;" id="account-joined">—</td>
-                  </tr>
-                  <tr>
-                    <td style="color:#8a8a9a; padding:8px 0;">Total leads</td>
-                    <td style="color:#f5f0e8;" id="account-leads-count">—</td>
-                  </tr>
-                </table>
-              </div>
-
-              <div class="danger-card">
-                <h4>Sign Out Everywhere</h4>
-                <p>This will remove your session token from this browser. You'll need to log in again.</p>
-                <button class="btn-danger" onclick="handleLogout()">Sign Out</button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-
-    </div><!-- end .content -->
-  </div><!-- end .main -->
-
-
-  <script>
-
-    const API_BASE = 'https://client-followup-backend-production.up.railway.app';
-
-    const token = localStorage.getItem('access_token');
-    if (!token) window.location.href = 'login.html';
-
-    // ===== AUTHENTICATED FETCH =====
-    async function apiFetch(path, options = {}) {
-      const res = await fetch(`${API_BASE}${path}`, {
-        ...options,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-          ...(options.headers || {}),
-        },
-      });
-      if (res.status === 401) { handleLogout(); return null; }
-      return res;
-    }
-
-    // ===== GLOBAL STATE =====
-    let allLeads      = [];
-    let currentFilter = 'all';
-    let currentUser   = null;
-
-    // ===== PASSWORD TOGGLE =====
-    // Each eye button calls this with the id of its input and a reference to itself
-    function togglePw(inputId, btn) {
-      const input    = document.getElementById(inputId);
-      const isHidden = input.type === 'password';
-      input.type     = isHidden ? 'text' : 'password';
-
-      // Swap the SVG icon inside the button
-      btn.querySelector('svg').innerHTML = isHidden
-        // Eye-OFF (password now visible — click to hide)
-        ? `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
-           <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
-           <line x1="1" y1="1" x2="23" y2="23"/>`
-        // Eye-ON (password now hidden — click to show)
-        : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-           <circle cx="12" cy="12" r="3"/>`;
-    }
-
-    // ===== PAGE NAVIGATION =====
-    const pageMeta = {
-      'overview':  { title: 'Overview',   subtitle: 'Your dashboard summary' },
-      'leads':     { title: 'Leads',      subtitle: 'Manage your leads' },
-      'add-lead':  { title: 'Add Lead',   subtitle: 'Create a new lead record' },
-      'followups': { title: 'Follow-Ups', subtitle: 'Leads with scheduled follow-ups' },
-      'settings':  { title: 'Settings',  subtitle: 'Manage your account and security' },
-    };
-
-    function showPage(name) {
-      document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
-      const target = document.getElementById(`page-${name}`);
-      if (target) target.classList.add('active');
-
-      const meta = pageMeta[name] || { title: name, subtitle: '' };
-      document.getElementById('page-title').textContent    = meta.title;
-      document.getElementById('page-subtitle').textContent = meta.subtitle;
-
-      document.querySelectorAll('.nav-item').forEach(el => {
-        el.classList.toggle('active', el.dataset.page === name);
-      });
-
-      if (name === 'overview')  loadOverview();
-      if (name === 'leads')     loadLeads();
-      if (name === 'followups') loadFollowups();
-      if (name === 'add-lead')  resetForm();
-      if (name === 'settings')  loadSettings();
-    }
-
-    function filterAndGo(filter) {
-      currentFilter = filter;
-      showPage('leads');
-    }
-
-    // ===== SETTINGS TABS =====
-    function showSettingsTab(name, clickedTab) {
-      document.querySelectorAll('.settings-tab').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.settings-panel').forEach(el => el.classList.remove('active'));
-      clickedTab.classList.add('active');
-      document.getElementById(`tab-${name}`).classList.add('active');
-    }
-
-    // ===== HELPERS =====
-
-    function statusBadge(status) {
-      const map = {
-        new:       '<span class="badge badge-yellow">New</span>',
-        contacted: '<span class="badge badge-blue">Contacted</span>',
-        qualified: '<span class="badge badge-green">Qualified</span>',
-        closed:    '<span class="badge badge-red">Closed</span>',
-      };
-      return map[status] || `<span class="badge badge-yellow">${status || '—'}</span>`;
-    }
-    function renderPagination() {
-      const wrap = document.getElementById('leads-pagination');
-      if (leadsTotalPages <= 1) { wrap.style.display = 'none'; return; }
-
-      wrap.style.display = 'flex';
-      document.getElementById('page-info').textContent =
-        `Page ${leadsPage} of ${leadsTotalPages} — ${leadsTotal} leads`;
-      document.getElementById('btn-prev').disabled = leadsPage <= 1;
-      document.getElementById('btn-next').disabled = leadsPage >= leadsTotalPages;
-    }
-
-    function formatDate(str) {
-      if (!str) return '—';
-      const d = new Date(str + 'T00:00:00');
-      return d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
-    }
-
-    function isOverdue(dateStr) {
-      if (!dateStr) return false;
-      const today = new Date(); today.setHours(0,0,0,0);
-      return new Date(dateStr + 'T00:00:00') < today;
-    }
-
-    function setInitials(name) {
-      const parts    = (name || '').trim().split(' ');
-      const initials = parts.length >= 2
-        ? (parts[0][0] + parts[1][0]).toUpperCase()
-        : (name[0] || '?').toUpperCase();
-      ['user-avatar', 'sidebar-avatar', 'settings-avatar'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = initials;
-      });
-    }
-
-    // ===== LOAD USER =====
-    async function loadUserInfo() {
-      try {
-        const res = await apiFetch('/users/me');
-        if (!res || !res.ok) return;
-        const data  = await res.json();
-        currentUser = data.data || data;
-        const name = `${currentUser.first_name || ''} ${currentUser.last_name || ''}`.trim() || currentUser.email || 'User';
-        const email = currentUser.email || '';
-
-        document.getElementById('user-name-display').textContent = name;
-        document.getElementById('sidebar-name').textContent      = name;
-        setInitials(name);
-
-        document.getElementById('settings-name-display').value       = name;
-        document.getElementById('settings-email').value              = email;
-        document.getElementById('account-email-display').textContent = email;
-
-        if (currentUser.created_at) {
-          document.getElementById('account-joined').textContent =
-            new Date(currentUser.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
-        }
-      } catch (e) { console.error(e); }
-    }
-
-    // ===== OVERVIEW =====
-    async function loadOverview() {
-      document.getElementById('overview-loading').style.display = 'block';
-      document.getElementById('overview-table').style.display   = 'none';
-      document.getElementById('overview-empty').style.display   = 'none';
-      document.getElementById('overdue-banner').style.display   = 'none';
-
-      try {
-        const res = await apiFetch('/leads');
-        if (!res || !res.ok) return;
-        const data    = await res.json();
-        const payload = data.data || data;
-        allLeads      = payload.leads || payload;
-
-        document.getElementById('overview-loading').style.display = 'none';
-
-        const overdue = allLeads.filter(l => isOverdue(l.follow_up_date));
-        document.getElementById('stat-total').textContent         = allLeads.length;
-        document.getElementById('stat-new').textContent           = allLeads.filter(l => l.status === 'new').length;
-        document.getElementById('stat-contacted').textContent     = allLeads.filter(l => l.status === 'contacted').length;
-        document.getElementById('stat-closed').textContent        = allLeads.filter(l => l.status === 'closed').length;
-        document.getElementById('account-leads-count').textContent = allLeads.length;
-
-        if (overdue.length > 0) {
-          const pill = document.getElementById('overdue-pill');
-          pill.textContent   = `${overdue.length} overdue`;
-          pill.style.display = 'block';
-          const banner = document.getElementById('overdue-banner');
-          document.getElementById('overdue-banner-text').textContent =
-            `${overdue.length} lead${overdue.length > 1 ? 's' : ''} passed their follow-up date.`;
-          banner.style.display = 'flex';
-        }
-
-        if (allLeads.length === 0) {
-          document.getElementById('overview-empty').style.display = 'block';
-          return;
-        }
-
-        const tbody = document.getElementById('overview-tbody');
-        tbody.innerHTML = '';
-        allLeads.slice(0, 5).forEach(lead => {
-          const over = isOverdue(lead.follow_up_date);
-          const tr   = document.createElement('tr');
-          if (over) tr.classList.add('overdue-row');
-          tr.innerHTML = `
-            <td>${lead.name || '—'}</td>
-            <td>${statusBadge(lead.status)}</td>
-            <td class="${over ? 'date-overdue' : 'td-muted'}">${formatDate(lead.follow_up_date)}</td>
-            <td class="td-muted">${lead.notes || '—'}</td>
-          `;
-          tbody.appendChild(tr);
-        });
-        document.getElementById('overview-table').style.display = 'table';
-
-      } catch (e) {
-        console.error(e);
-        document.getElementById('overview-loading').textContent = 'Failed to load data.';
-      }
-    }
-
-    // ===== LEADS =====
-      function setFilter(filter) {
-      currentFilter = filter;
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('selected', btn.dataset.filter === filter);
-      });
-      loadLeads(1);
-    }
-
-    function getFilteredLeads() {
-      const query = (document.getElementById('leads-search')?.value || '').toLowerCase().trim();
-      let leads   = [...allLeads];
-
-      if (currentFilter === 'overdue') {
-        leads = leads.filter(l => isOverdue(l.follow_up_date));
-      } else if (currentFilter !== 'all') {
-        leads = leads.filter(l => l.status === currentFilter);
-      }
-
-      if (query) {
-        leads = leads.filter(l =>
-          (l.name  || '').toLowerCase().includes(query) ||
-          (l.notes || '').toLowerCase().includes(query)
-        );
-      }
-      return leads;
-    }
-
-    // Pagination + filter state
-    let leadsPage      = 1;
-    let leadsTotalPages = 1;
-    let leadsTotal     = 0;
-    let dateFrom       = '';
-    let dateTo         = '';
-    let sortBy         = 'created_at';
-    let sortOrder      = 'desc';
-
-      async function loadLeads(page = 1) {
-        leadsPage = page;
-
-        document.getElementById('leads-loading').style.display = 'block';
-        document.getElementById('leads-table').style.display   = 'none';
-        document.getElementById('leads-empty').style.display   = 'none';
-        document.getElementById('leads-pagination').style.display = 'none';
-
-        // Build query string from all active filters
-        const query  = (document.getElementById('leads-search')?.value || '').trim();
-        const params = new URLSearchParams();
-
-        if (currentFilter !== 'all' && currentFilter !== 'overdue') params.set('status', currentFilter);
-        if (query)    params.set('search',     query);
-        if (dateFrom) params.set('date_from',  dateFrom);
-        if (dateTo)   params.set('date_to',    dateTo);
-        params.set('sort_by',    sortBy);
-        params.set('sort_order', sortOrder);
-        params.set('page',       page);
-        params.set('page_size',  10);
-
-        try {
-          const res = await apiFetch(`/leads?${params.toString()}`);
-          if (!res || !res.ok) return;
-          const data = await res.json();
-
-          // New response shape: data.data.leads, data.data.total etc.
-          const payload     = data.data || data;
-          allLeads          = payload.leads        || payload;
-          leadsTotal        = payload.total        || allLeads.length;
-          leadsTotalPages   = payload.total_pages  || 1;
-          leadsPage         = payload.page         || 1;
-
-          document.getElementById('leads-loading').style.display = 'none';
-
-          // Handle overdue client-side since backend doesn't have that filter
-          let leads = currentFilter === 'overdue'
-            ? allLeads.filter(l => isOverdue(l.follow_up_date))
-            : allLeads;
-
-          if (leads.length === 0) {
-            document.getElementById('leads-empty').style.display = 'block';
-            document.getElementById('leads-empty-text').textContent =
-              currentFilter === 'overdue' ? 'No overdue leads.' : 'No leads match your search.';
-            return;
-          }
-
-          renderLeadsTable(leads);
-          renderPagination();
-
-        } catch (e) {
-          console.error(e);
-          document.getElementById('leads-loading').textContent = 'Failed to load leads.';
-        }
-      }
-
-    function renderLeadsTable(leads) {
-        const tbody = document.getElementById('leads-tbody');
-        tbody.innerHTML = '';
-
-        document.getElementById('leads-table').style.display = 'table';
-        document.getElementById('leads-empty').style.display = 'none';
-
-        leads.forEach(lead => {
-          const over = isOverdue(lead.follow_up_date);
-          const tr   = document.createElement('tr');
-          if (over) tr.classList.add('overdue-row');
-          tr.innerHTML = `
-            <td>${lead.name || '—'}</td>
-            <td>${statusBadge(lead.status)}</td>
-            <td class="${over ? 'date-overdue' : 'td-muted'}">${formatDate(lead.follow_up_date)}</td>
-            <td>${waLink(lead.whatsapp_number)}</td>
-            <td class="td-muted">${lead.notes || '—'}</td>
-            <td>
-              <button onclick='startEdit(${lead.id}, ${JSON.stringify(lead)})'
-                style="background:none;border:none;color:#e8c547;cursor:pointer;font-size:13px;margin-right:12px;">
-                Edit
-              </button>
-              <button onclick="deleteLead(${lead.id})"
-                style="background:none;border:none;color:#f09595;cursor:pointer;font-size:13px;">
-                Delete
-              </button>
-            </td>
-          `;
-          tbody.appendChild(tr);
-        });
-      }
-
-      // ===== FOLLOW-UPS =====
-      async function loadFollowups() {
-        document.getElementById('followups-loading').style.display = 'block';
-        document.getElementById('followups-table').style.display   = 'none';
-        document.getElementById('followups-empty').style.display   = 'none';
-
-        try {
-          const res = await apiFetch('/leads');
-          if (!res || !res.ok) return;
-          const data  = await res.json();
-          const leads = data.data || data;
-
-          document.getElementById('followups-loading').style.display = 'none';
-
-          const scheduled = leads
-            .filter(l => l.follow_up_date)
-            .sort((a, b) => {
-              const aOver = isOverdue(a.follow_up_date);
-              const bOver = isOverdue(b.follow_up_date);
-              if (aOver !== bOver) return aOver ? -1 : 1;
-              return new Date(a.follow_up_date) - new Date(b.follow_up_date);
-            });
-
-          if (scheduled.length === 0) {
-            document.getElementById('followups-empty').style.display = 'block';
-            return;
-          }
-
-          const tbody = document.getElementById('followups-tbody');
-          tbody.innerHTML = '';
-          scheduled.forEach(lead => {
-            const over = isOverdue(lead.follow_up_date);
-            const tr   = document.createElement('tr');
-            if (over) tr.classList.add('overdue-row');
-            tr.innerHTML = `
-              <td>${lead.name || '—'}</td>
-              <td>
-                <span class="${over ? 'date-overdue' : ''}">${formatDate(lead.follow_up_date)}</span>
-                ${over ? '<span class="badge badge-red" style="margin-left:8px;">Overdue</span>' : ''}
-              </td>
-              <td>${statusBadge(lead.status)}</td>
-              <td class="td-muted">${lead.notes || '—'}</td>
-              <td>
-                <button onclick='startEdit(${lead.id}, ${JSON.stringify(lead)})'
-                  style="background:none;border:none;color:#e8c547;cursor:pointer;font-size:13px;">
-                  Update
-                </button>
-              </td>
-            `;
-            tbody.appendChild(tr);
-          });
-          document.getElementById('followups-table').style.display = 'table';
-
-        } catch (e) {
-          console.error(e);
-          document.getElementById('followups-loading').textContent = 'Failed to load follow-ups.';
-        }
-    }
-
-    // ===== ADD / EDIT LEAD =====
-    let editingId = null;
-
-    function resetForm() {
-      editingId = null;
-      document.getElementById('form-heading').textContent = 'Add New Lead';
-      document.getElementById('form-btn').textContent     = 'Save Lead';
-      document.getElementById('lead-name').value          = '';
-      document.getElementById('lead-status').value        = 'new';
-      document.getElementById('lead-date').value          = '';
-      document.getElementById('lead-whatsapp').value      = '';
-      document.getElementById('lead-notes').value         = '';
-      document.getElementById('form-error').style.display   = 'none';
-      document.getElementById('form-success').style.display = 'none';
-    }
-
-    function startEdit(id, lead) {
-      editingId = id;
-      document.getElementById('form-heading').textContent = 'Edit Lead';
-      document.getElementById('form-btn').textContent     = 'Update Lead';
-      document.getElementById('lead-name').value          = lead.name           || '';
-      document.getElementById('lead-status').value        = lead.status         || 'new';
-      document.getElementById('lead-date').value          = lead.follow_up_date || '';
-     document.getElementById('lead-whatsapp').value      = lead.whatsapp_number || '';
-     document.getElementById('lead-notes').value         = lead.notes           || '';
-      document.getElementById('form-error').style.display   = 'none';
-      document.getElementById('form-success').style.display = 'none';
-
-      document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
-      document.getElementById('page-add-lead').classList.add('active');
-      document.getElementById('page-title').textContent    = 'Edit Lead';
-      document.getElementById('page-subtitle').textContent = 'Update this lead record';
-    }
-
-    async function handleLeadSubmit() {
-      document.getElementById('form-error').style.display   = 'none';
-      document.getElementById('form-success').style.display = 'none';
-
-      const name   = document.getElementById('lead-name').value.trim();
-      const status = document.getElementById('lead-status').value;
-      const date   = document.getElementById('lead-date').value   || null;
-      const notes  = document.getElementById('lead-notes').value.trim() || null;
-
-      if (!name) {
-        const box = document.getElementById('form-error');
-        box.textContent = 'Name is required.'; box.style.display = 'block';
-        return;
-      }
-
-      const btn = document.getElementById('form-btn');
-      btn.disabled = true; btn.textContent = 'Saving...';
-
-      const whatsapp = document.getElementById('lead-whatsapp').value.trim() || null;
-      const body = { name, status };
-      if (date)     body.follow_up_date  = date;
-      if (notes)    body.notes           = notes;
-      if (whatsapp) body.whatsapp_number = whatsapp;
-      try {
-        const res = editingId
-          ? await apiFetch(`/leads/${editingId}`, { method:'PATCH', body:JSON.stringify(body) })
-          : await apiFetch('/leads',               { method:'POST',  body:JSON.stringify(body) });
-
-        if (!res || !res.ok) {
-          const err = await res.json();
-          const box = document.getElementById('form-error');
-          box.textContent = err.detail || 'Something went wrong.'; box.style.display = 'block';
-          return;
-        }
-
-        const box = document.getElementById('form-success');
-        box.textContent   = editingId ? 'Lead updated.' : 'Lead created successfully.';
-        box.style.display = 'block';
-        setTimeout(() => { currentFilter = 'all'; showPage('leads'); }, 1500);
-
-      } catch (e) {
-        const box = document.getElementById('form-error');
-        box.textContent = 'Cannot reach the server. Is the backend running?';
-        box.style.display = 'block'; console.error(e);
-      } finally {
-        btn.disabled = false;
-        btn.textContent = editingId ? 'Update Lead' : 'Save Lead';
-      }
-    }
-
-    // ===== DELETE =====
-    async function deleteLead(id) {
-      if (!confirm('Delete this lead? This cannot be undone.')) return;
-      try {
-        const res = await apiFetch(`/leads/${id}`, { method:'DELETE' });
-        if (!res || !res.ok) { alert('Failed to delete.'); return; }
-        allLeads = allLeads.filter(l => l.id !== id);
-        renderLeadsTable();
-      } catch (e) { alert('Cannot reach the server.'); console.error(e); }
-    }
-
-    // ===== SETTINGS: LOAD =====
-    function loadSettings() {
-      if (!currentUser) return;
-      const name = `${currentUser.first_name || ''} ${currentUser.last_name || ''}`.trim() || currentUser.email || '';
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+<script>
+  const API_BASE = 'https://client-followup-backend-production.up.railway.app';
+  const token = localStorage.getItem('access_token');
+  if (!token) window.location.href = 'login.html';
+
+  async function apiFetch(path, options = {}) {
+    const res = await fetch(`${API_BASE}${path}`, {
+      ...options,
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`, ...(options.headers || {}) },
+    });
+    if (res.status === 401) { handleLogout(); return null; }
+    return res;
+  }
+
+  let allLeads = [], currentFilter = 'all', currentUser = null;
+  let leadsPage = 1, leadsTotalPages = 1, leadsTotal = 0, dateFrom = '', dateTo = '', sortBy = 'created_at', sortOrder = 'desc';
+
+  function togglePw(inputId, btn) {
+    const input = document.getElementById(inputId);
+    const isHidden = input.type === 'password';
+    input.type = isHidden ? 'text' : 'password';
+    btn.querySelector('svg').innerHTML = isHidden
+      ? `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>`
+      : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+  }
+
+  const pageMeta = { overview: { title: 'Overview', subtitle: 'Your dashboard summary' }, leads: { title: 'Leads', subtitle: 'Manage your leads' }, 'add-lead': { title: 'Add Lead', subtitle: 'Create a new lead record' }, followups: { title: 'Follow-Ups', subtitle: 'Leads with scheduled follow-ups' }, settings: { title: 'Settings', subtitle: 'Manage your account and security' } };
+  function showPage(name) {
+    document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+    const target = document.getElementById(`page-${name}`);
+    if (target) target.classList.add('active');
+    const meta = pageMeta[name] || { title: name, subtitle: '' };
+    document.getElementById('page-title').textContent = meta.title;
+    document.getElementById('page-subtitle').textContent = meta.subtitle;
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.page === name));
+    if (name === 'overview') loadOverview();
+    if (name === 'leads') loadLeads();
+    if (name === 'followups') loadFollowups();
+    if (name === 'add-lead') resetForm();
+    if (name === 'settings') loadSettings();
+  }
+  function filterAndGo(filter) { currentFilter = filter; showPage('leads'); }
+  function showSettingsTab(name, clickedTab) {
+    document.querySelectorAll('.settings-tab').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.settings-panel').forEach(el => el.classList.remove('active'));
+    clickedTab.classList.add('active');
+    document.getElementById(`tab-${name}`).classList.add('active');
+  }
+  function statusBadge(status) {
+    const map = { new: '<span class="badge badge-yellow">New</span>', contacted: '<span class="badge badge-blue">Contacted</span>', qualified: '<span class="badge badge-green">Qualified</span>', closed: '<span class="badge badge-red">Closed</span>' };
+    return map[status] || `<span class="badge badge-yellow">${status || '—'}</span>`;
+  }
+  function renderPagination() {
+    const wrap = document.getElementById('leads-pagination');
+    if (leadsTotalPages <= 1) { wrap.style.display = 'none'; return; }
+    wrap.style.display = 'flex';
+    document.getElementById('page-info').textContent = `Page ${leadsPage} of ${leadsTotalPages} — ${leadsTotal} leads`;
+    document.getElementById('btn-prev').disabled = leadsPage <= 1;
+    document.getElementById('btn-next').disabled = leadsPage >= leadsTotalPages;
+  }
+  function formatDate(str) { if (!str) return '—'; const d = new Date(str + 'T00:00:00'); return d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }); }
+  function isOverdue(dateStr) { if (!dateStr) return false; const today = new Date(); today.setHours(0,0,0,0); return new Date(dateStr + 'T00:00:00') < today; }
+  function setInitials(name) {
+    const parts = (name || '').trim().split(' ');
+    const initials = parts.length >= 2 ? (parts[0][0] + parts[1][0]).toUpperCase() : (name[0] || '?').toUpperCase();
+    ['user-avatar', 'sidebar-avatar', 'settings-avatar'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = initials; });
+  }
+  function waLink(number) {
+    if (!number) return '—';
+    const safeNum = DOMPurify.sanitize(number.replace(/[^0-9+]/g, ''));
+    return `<a href="https://wa.me/${safeNum}" target="_blank" style="color:#25D366;">WhatsApp</a>`;
+  }
+
+  async function loadUserInfo() {
+    try {
+      const res = await apiFetch('/users/me');
+      if (!res || !res.ok) return;
+      const data = await res.json();
+      currentUser = data.data || data;
+      const name = `${currentUser.first_name || ''} ${currentUser.last_name || ''}`.trim() || currentUser.email || 'User';
       const email = currentUser.email || '';
-      document.getElementById('settings-name-display').value       = name;
-      document.getElementById('settings-email').value              = email;
-      document.getElementById('account-email-display').textContent = email;
-      document.getElementById('account-leads-count').textContent   = allLeads.length || '—';
+      document.getElementById('user-name-display').textContent = name;
+      document.getElementById('sidebar-name').textContent = name;
       setInitials(name);
-    }
+      document.getElementById('settings-name-display').value = name;
+      document.getElementById('settings-email').value = email;
+      document.getElementById('account-email-display').textContent = email;
+      if (currentUser.created_at) document.getElementById('account-joined').textContent = new Date(currentUser.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+    } catch (e) { console.error(e); }
+  }
 
-    // ===== SETTINGS: UPDATE EMAIL =====
-    async function handleEmailUpdate() {
-      document.getElementById('email-error').style.display   = 'none';
-      document.getElementById('email-success').style.display = 'none';
+  async function loadOverview() {
+    document.getElementById('overview-loading').style.display = 'block';
+    document.getElementById('overview-table').style.display = 'none';
+    document.getElementById('overview-empty').style.display = 'none';
+    document.getElementById('overdue-banner').style.display = 'none';
+    try {
+      const res = await apiFetch('/leads');
+      if (!res || !res.ok) return;
+      const data = await res.json();
+      const payload = data.data || data;
+      allLeads = payload.leads || payload;
+      document.getElementById('overview-loading').style.display = 'none';
+      const overdue = allLeads.filter(l => isOverdue(l.follow_up_date));
+      document.getElementById('stat-total').textContent = allLeads.length;
+      document.getElementById('stat-new').textContent = allLeads.filter(l => l.status === 'new').length;
+      document.getElementById('stat-contacted').textContent = allLeads.filter(l => l.status === 'contacted').length;
+      document.getElementById('stat-closed').textContent = allLeads.filter(l => l.status === 'closed').length;
+      document.getElementById('account-leads-count').textContent = allLeads.length;
+      if (overdue.length > 0) {
+        document.getElementById('overdue-pill').textContent = `${overdue.length} overdue`;
+        document.getElementById('overdue-pill').style.display = 'block';
+        document.getElementById('overdue-banner-text').textContent = `${overdue.length} lead${overdue.length > 1 ? 's' : ''} passed their follow-up date.`;
+        document.getElementById('overdue-banner').style.display = 'flex';
+      }
+      if (allLeads.length === 0) { document.getElementById('overview-empty').style.display = 'block'; return; }
+      const tbody = document.getElementById('overview-tbody');
+      tbody.innerHTML = '';
+      allLeads.slice(0, 5).forEach(lead => {
+        const over = isOverdue(lead.follow_up_date);
+        const tr = document.createElement('tr');
+        if (over) tr.classList.add('overdue-row');
+        const safeName = DOMPurify.sanitize(lead.name || '—');
+        const safeNotes = DOMPurify.sanitize(lead.notes || '—');
+        tr.innerHTML = `<td>${safeName}</td><td>${statusBadge(lead.status)}</td><td class="${over ? 'date-overdue' : 'td-muted'}">${formatDate(lead.follow_up_date)}</td><td class="td-muted">${safeNotes}</td>`;
+        tbody.appendChild(tr);
+      });
+      document.getElementById('overview-table').style.display = 'table';
+    } catch (e) { console.error(e); document.getElementById('overview-loading').textContent = 'Failed to load data.'; }
+  }
 
-      const email = document.getElementById('settings-email').value.trim();
+  function setFilter(filter) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.toggle('selected', btn.dataset.filter === filter));
+    loadLeads(1);
+  }
 
-      if (!email || !email.includes('@')) {
-        const box = document.getElementById('email-error');
-        box.textContent = 'Please enter a valid email address.'; box.style.display = 'block';
+  async function loadLeads(page = 1) {
+    leadsPage = page;
+    document.getElementById('leads-loading').style.display = 'block';
+    document.getElementById('leads-table').style.display = 'none';
+    document.getElementById('leads-empty').style.display = 'none';
+    document.getElementById('leads-pagination').style.display = 'none';
+    const query = (document.getElementById('leads-search')?.value || '').trim();
+    const params = new URLSearchParams();
+    if (currentFilter !== 'all' && currentFilter !== 'overdue') params.set('status', currentFilter);
+    if (query) params.set('search', query);
+    if (dateFrom) params.set('date_from', dateFrom);
+    if (dateTo) params.set('date_to', dateTo);
+    params.set('sort_by', sortBy);
+    params.set('sort_order', sortOrder);
+    params.set('page', page);
+    params.set('page_size', 10);
+    try {
+      const res = await apiFetch(`/leads?${params.toString()}`);
+      if (!res || !res.ok) return;
+      const data = await res.json();
+      const payload = data.data || data;
+      allLeads = payload.leads || payload;
+      leadsTotal = payload.total || allLeads.length;
+      leadsTotalPages = payload.total_pages || 1;
+      leadsPage = payload.page || 1;
+      document.getElementById('leads-loading').style.display = 'none';
+      let leads = currentFilter === 'overdue' ? allLeads.filter(l => isOverdue(l.follow_up_date)) : allLeads;
+      if (leads.length === 0) {
+        document.getElementById('leads-empty').style.display = 'block';
+        document.getElementById('leads-empty-text').textContent = currentFilter === 'overdue' ? 'No overdue leads.' : 'No leads match your search.';
         return;
       }
+      renderLeadsTable(leads);
+      renderPagination();
+    } catch (e) { console.error(e); document.getElementById('leads-loading').textContent = 'Failed to load leads.'; }
+  }
 
-      const btn = document.getElementById('email-btn');
-      btn.disabled = true; btn.textContent = 'Updating...';
+  function renderLeadsTable(leads) {
+    const tbody = document.getElementById('leads-tbody');
+    tbody.innerHTML = '';
+    leads.forEach(lead => {
+      const over = isOverdue(lead.follow_up_date);
+      const tr = document.createElement('tr');
+      if (over) tr.classList.add('overdue-row');
+      const safeName = DOMPurify.sanitize(lead.name || '—');
+      const safeNotes = DOMPurify.sanitize(lead.notes || '—');
+      const safeWhats = DOMPurify.sanitize(lead.whatsapp_number || '');
+      tr.innerHTML = `
+        <td>${safeName}</td>
+        <td>${statusBadge(lead.status)}</td>
+        <td class="${over ? 'date-overdue' : 'td-muted'}">${formatDate(lead.follow_up_date)}</td>
+        <td>${waLink(safeWhats)}</td>
+        <td class="td-muted">${safeNotes}</td>
+        <td><button class="edit-lead-btn" data-id="${lead.id}" data-lead='${JSON.stringify(lead).replace(/'/g, "&#39;")}'>Edit</button> <button class="delete-lead-btn" data-id="${lead.id}">Delete</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+    document.querySelectorAll('.edit-lead-btn').forEach(btn => btn.addEventListener('click', (e) => { const id = parseInt(btn.dataset.id); const lead = JSON.parse(btn.dataset.lead); startEdit(id, lead); }));
+    document.querySelectorAll('.delete-lead-btn').forEach(btn => btn.addEventListener('click', (e) => { const id = parseInt(btn.dataset.id); deleteLead(id); }));
+  }
 
-      try {
-        const res = await apiFetch('/users/me', {
-          method: 'PATCH',
-          body: JSON.stringify({ email }),
-        });
+  async function loadFollowups() {
+    document.getElementById('followups-loading').style.display = 'block';
+    document.getElementById('followups-table').style.display = 'none';
+    document.getElementById('followups-empty').style.display = 'none';
+    try {
+      const res = await apiFetch('/leads');
+      if (!res || !res.ok) return;
+      const data = await res.json();
+      const leads = data.data || data;
+      document.getElementById('followups-loading').style.display = 'none';
+      const scheduled = leads.filter(l => l.follow_up_date).sort((a, b) => { const aOver = isOverdue(a.follow_up_date), bOver = isOverdue(b.follow_up_date); if (aOver !== bOver) return aOver ? -1 : 1; return new Date(a.follow_up_date) - new Date(b.follow_up_date); });
+      if (scheduled.length === 0) { document.getElementById('followups-empty').style.display = 'block'; return; }
+      const tbody = document.getElementById('followups-tbody');
+      tbody.innerHTML = '';
+      scheduled.forEach(lead => {
+        const over = isOverdue(lead.follow_up_date);
+        const tr = document.createElement('tr');
+        if (over) tr.classList.add('overdue-row');
+        const safeName = DOMPurify.sanitize(lead.name || '—');
+        const safeNotes = DOMPurify.sanitize(lead.notes || '—');
+        tr.innerHTML = `
+          <td>${safeName}</td>
+          <td><span class="${over ? 'date-overdue' : ''}">${formatDate(lead.follow_up_date)}</span>${over ? '<span class="badge badge-red" style="margin-left:8px;">Overdue</span>' : ''}</td>
+          <td>${statusBadge(lead.status)}</td>
+          <td class="td-muted">${safeNotes}</td>
+          <td><button class="edit-followup-btn" data-id="${lead.id}" data-lead='${JSON.stringify(lead).replace(/'/g, "&#39;")}'>Update</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      document.querySelectorAll('.edit-followup-btn').forEach(btn => btn.addEventListener('click', (e) => { const id = parseInt(btn.dataset.id); const lead = JSON.parse(btn.dataset.lead); startEdit(id, lead); }));
+      document.getElementById('followups-table').style.display = 'table';
+    } catch (e) { console.error(e); document.getElementById('followups-loading').textContent = 'Failed to load follow-ups.'; }
+  }
 
-        if (!res || !res.ok) {
-          const err = await res.json();
-          const box = document.getElementById('email-error');
-          box.textContent = err.detail || 'Failed to update email.'; box.style.display = 'block';
-          return;
-        }
+  let editingId = null;
+  function resetForm() {
+    editingId = null;
+    document.getElementById('form-heading').textContent = 'Add New Lead';
+    document.getElementById('form-btn').textContent = 'Save Lead';
+    document.getElementById('lead-name').value = '';
+    document.getElementById('lead-status').value = 'new';
+    document.getElementById('lead-date').value = '';
+    document.getElementById('lead-whatsapp').value = '';
+    document.getElementById('lead-notes').value = '';
+    document.getElementById('form-error').style.display = 'none';
+    document.getElementById('form-success').style.display = 'none';
+  }
+  function startEdit(id, lead) {
+    editingId = id;
+    document.getElementById('form-heading').textContent = 'Edit Lead';
+    document.getElementById('form-btn').textContent = 'Update Lead';
+    document.getElementById('lead-name').value = lead.name || '';
+    document.getElementById('lead-status').value = lead.status || 'new';
+    document.getElementById('lead-date').value = lead.follow_up_date || '';
+    document.getElementById('lead-whatsapp').value = lead.whatsapp_number || '';
+    document.getElementById('lead-notes').value = lead.notes || '';
+    document.getElementById('form-error').style.display = 'none';
+    document.getElementById('form-success').style.display = 'none';
+    document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+    document.getElementById('page-add-lead').classList.add('active');
+    document.getElementById('page-title').textContent = 'Edit Lead';
+    document.getElementById('page-subtitle').textContent = 'Update this lead record';
+  }
+  async function handleLeadSubmit() {
+    document.getElementById('form-error').style.display = 'none';
+    document.getElementById('form-success').style.display = 'none';
+    const name = document.getElementById('lead-name').value.trim();
+    const status = document.getElementById('lead-status').value;
+    const date = document.getElementById('lead-date').value || null;
+    const notes = document.getElementById('lead-notes').value.trim() || null;
+    if (!name) { const box = document.getElementById('form-error'); box.textContent = 'Name is required.'; box.style.display = 'block'; return; }
+    const btn = document.getElementById('form-btn');
+    btn.disabled = true; btn.textContent = 'Saving...';
+    const whatsapp = document.getElementById('lead-whatsapp').value.trim() || null;
+    const body = { name, status };
+    if (date) body.follow_up_date = date;
+    if (notes) body.notes = notes;
+    if (whatsapp) body.whatsapp_number = whatsapp;
+    try {
+      const res = editingId ? await apiFetch(`/leads/${editingId}`, { method: 'PATCH', body: JSON.stringify(body) }) : await apiFetch('/leads', { method: 'POST', body: JSON.stringify(body) });
+      if (!res || !res.ok) { const err = await res.json(); const box = document.getElementById('form-error'); box.textContent = err.detail || 'Something went wrong.'; box.style.display = 'block'; return; }
+      const box = document.getElementById('form-success');
+      box.textContent = editingId ? 'Lead updated.' : 'Lead created successfully.';
+      box.style.display = 'block';
+      setTimeout(() => { currentFilter = 'all'; showPage('leads'); }, 1500);
+    } catch (e) { const box = document.getElementById('form-error'); box.textContent = 'Cannot reach the server.'; box.style.display = 'block'; console.error(e); }
+    finally { btn.disabled = false; btn.textContent = editingId ? 'Update Lead' : 'Save Lead'; }
+  }
+  async function deleteLead(id) {
+    if (!confirm('Delete this lead? This cannot be undone.')) return;
+    try { const res = await apiFetch(`/leads/${id}`, { method: 'DELETE' }); if (!res || !res.ok) { alert('Failed to delete.'); return; } allLeads = allLeads.filter(l => l.id !== id); loadLeads(leadsPage); } catch (e) { alert('Cannot reach the server.'); console.error(e); }
+  }
+  function loadSettings() {
+    if (!currentUser) return;
+    const name = `${currentUser.first_name || ''} ${currentUser.last_name || ''}`.trim() || currentUser.email || '';
+    document.getElementById('settings-name-display').value = name;
+    document.getElementById('settings-email').value = currentUser.email || '';
+    document.getElementById('account-email-display').textContent = currentUser.email || '';
+    document.getElementById('account-leads-count').textContent = allLeads.length || '—';
+    setInitials(name);
+  }
+  async function handleEmailUpdate() {
+    document.getElementById('email-error').style.display = 'none';
+    document.getElementById('email-success').style.display = 'none';
+    const email = document.getElementById('settings-email').value.trim();
+    if (!email || !email.includes('@')) { const box = document.getElementById('email-error'); box.textContent = 'Please enter a valid email address.'; box.style.display = 'block'; return; }
+    const btn = document.getElementById('email-btn');
+    btn.disabled = true; btn.textContent = 'Updating...';
+    try {
+      const res = await apiFetch('/users/me', { method: 'PATCH', body: JSON.stringify({ email }) });
+      if (!res || !res.ok) { const err = await res.json(); const box = document.getElementById('email-error'); box.textContent = err.detail || 'Failed to update email.'; box.style.display = 'block'; return; }
+      if (currentUser) currentUser.email = email;
+      document.getElementById('account-email-display').textContent = email;
+      const box = document.getElementById('email-success'); box.textContent = 'Email updated successfully.'; box.style.display = 'block';
+    } catch (e) { const box = document.getElementById('email-error'); box.textContent = 'Cannot reach the server.'; box.style.display = 'block'; console.error(e); }
+    finally { btn.disabled = false; btn.textContent = 'Update Email'; }
+  }
+  function checkPwStrength(password) {
+    const fill = document.getElementById('pw-strength-fill');
+    const label = document.getElementById('pw-strength-label');
+    let score = 0;
+    if (password.length >= 8) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+    const levels = [{ width:'0%', color:'#2e2e3a', text:'Enter a new password' }, { width:'25%', color:'#e24b4a', text:'Weak' }, { width:'50%', color:'#ef9f27', text:'Fair' }, { width:'75%', color:'#e8c547', text:'Good' }, { width:'100%', color:'#639922', text:'Strong' }];
+    const level = password.length === 0 ? levels[0] : levels[score];
+    fill.style.width = level.width; fill.style.backgroundColor = level.color; label.textContent = level.text;
+  }
+  async function handlePasswordChange() {
+    document.getElementById('pw-error').style.display = 'none';
+    document.getElementById('pw-success').style.display = 'none';
+    const current = document.getElementById('pw-current').value;
+    const newPw = document.getElementById('pw-new').value;
+    const confirm = document.getElementById('pw-confirm').value;
+    if (!current) { const box = document.getElementById('pw-error'); box.textContent = 'Please enter your current password.'; box.style.display = 'block'; return; }
+    if (newPw.length < 8) { const box = document.getElementById('pw-error'); box.textContent = 'New password must be at least 8 characters.'; box.style.display = 'block'; return; }
+    if (newPw !== confirm) { const box = document.getElementById('pw-error'); box.textContent = 'Passwords do not match.'; box.style.display = 'block'; return; }
+    const btn = document.getElementById('pw-btn');
+    btn.disabled = true; btn.textContent = 'Changing...';
+    try {
+      const res = await apiFetch('/auth/change-password', { method: 'POST', body: JSON.stringify({ current_password: current, new_password: newPw }) });
+      if (!res || !res.ok) { const err = await res.json(); const box = document.getElementById('pw-error'); box.textContent = err.detail || 'Failed to change password.'; box.style.display = 'block'; return; }
+      const box = document.getElementById('pw-success'); box.textContent = 'Password changed. Logging you out...'; box.style.display = 'block';
+      document.getElementById('pw-current').value = ''; document.getElementById('pw-new').value = ''; document.getElementById('pw-confirm').value = '';
+      setTimeout(() => handleLogout(), 2000);
+    } catch (e) { const box = document.getElementById('pw-error'); box.textContent = 'Cannot reach the server.'; box.style.display = 'block'; console.error(e); }
+    finally { btn.disabled = false; btn.textContent = 'Change Password'; }
+  }
+  function handleLogout() { localStorage.removeItem('access_token'); window.location.href = 'login.html'; }
 
-        if (currentUser) currentUser.email = email;
-        document.getElementById('account-email-display').textContent = email;
-
-        const box = document.getElementById('email-success');
-        box.textContent = 'Email updated successfully.'; box.style.display = 'block';
-
-      } catch (e) {
-        const box = document.getElementById('email-error');
-        box.textContent = 'Cannot reach the server.'; box.style.display = 'block'; console.error(e);
-      } finally {
-        btn.disabled = false; btn.textContent = 'Update Email';
-      }
-    }
-
-    // ===== SETTINGS: CHANGE PASSWORD =====
-    function checkPwStrength(password) {
-      const fill  = document.getElementById('pw-strength-fill');
-      const label = document.getElementById('pw-strength-label');
-      let score   = 0;
-      if (password.length >= 8)          score++;
-      if (/[A-Z]/.test(password))        score++;
-      if (/[0-9]/.test(password))        score++;
-      if (/[^A-Za-z0-9]/.test(password)) score++;
-
-      const levels = [
-        { width:'0%',   color:'#2e2e3a', text:'Enter a new password' },
-        { width:'25%',  color:'#e24b4a', text:'Weak' },
-        { width:'50%',  color:'#ef9f27', text:'Fair' },
-        { width:'75%',  color:'#e8c547', text:'Good' },
-        { width:'100%', color:'#639922', text:'Strong' },
-      ];
-      const level = password.length === 0 ? levels[0] : levels[score];
-      fill.style.width           = level.width;
-      fill.style.backgroundColor = level.color;
-      label.textContent          = level.text;
-    }
-
-    async function handlePasswordChange() {
-      document.getElementById('pw-error').style.display   = 'none';
-      document.getElementById('pw-success').style.display = 'none';
-
-      const current = document.getElementById('pw-current').value;
-      const newPw   = document.getElementById('pw-new').value;
-      const confirm = document.getElementById('pw-confirm').value;
-
-      if (!current) {
-        const box = document.getElementById('pw-error');
-        box.textContent = 'Please enter your current password.'; box.style.display = 'block'; return;
-      }
-      if (newPw.length < 8) {
-        const box = document.getElementById('pw-error');
-        box.textContent = 'New password must be at least 8 characters.'; box.style.display = 'block'; return;
-      }
-      if (newPw !== confirm) {
-        const box = document.getElementById('pw-error');
-        box.textContent = 'Passwords do not match.'; box.style.display = 'block'; return;
-      }
-
-      const btn = document.getElementById('pw-btn');
-      btn.disabled = true; btn.textContent = 'Changing...';
-
-      try {
-        const res = await apiFetch('/auth/change-password', {
-          method: 'POST',
-          body: JSON.stringify({ current_password: current, new_password: newPw }),
-        });
-
-        if (!res || !res.ok) {
-          const err = await res.json();
-          const box = document.getElementById('pw-error');
-          box.textContent = err.detail || 'Failed to change password.'; box.style.display = 'block'; return;
-        }
-
-        const box = document.getElementById('pw-success');
-        box.textContent = 'Password changed. Logging you out...'; box.style.display = 'block';
-
-        document.getElementById('pw-current').value = '';
-        document.getElementById('pw-new').value     = '';
-        document.getElementById('pw-confirm').value = '';
-
-        setTimeout(() => handleLogout(), 2000);
-
-      } catch (e) {
-        const box = document.getElementById('pw-error');
-        box.textContent = 'Cannot reach the server.'; box.style.display = 'block'; console.error(e);
-      } finally {
-        btn.disabled = false; btn.textContent = 'Change Password';
-      }
-    }
-
-    // ===== LOGOUT =====
-    function handleLogout() {
-      localStorage.removeItem('access_token');
-      window.location.href = 'login.html';
-    }
-
-    // ===== INIT =====
-    loadUserInfo();
-    loadOverview();
-
-  </script>
-
+  loadUserInfo();
+  loadOverview();
+</script>
 </body>
 </html>

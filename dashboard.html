@@ -5,860 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Dashboard — FollowHQ</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background-color: #0f0f13;
-      color: #f5f0e8;
-      font-family: sans-serif;
-      min-height: 100vh;
-      position: relative;
-    }
-
-    /* ========== SIDEBAR (mobile overlay) ========== */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: -260px;
-      width: 260px;
-      height: 100%;
-      background-color: #1a1a22;
-      border-right: 0.5px solid #2e2e3a;
-      z-index: 1000;
-      transition: left 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-      padding: 1.5rem 0;
-    }
-
-    .sidebar.open {
-      left: 0;
-      box-shadow: 2px 0 12px rgba(0,0,0,0.5);
-    }
-
-    /* Desktop sidebar */
-    @media (min-width: 769px) {
-      body {
-        display: grid;
-        grid-template-columns: 240px 1fr;
-      }
-      .sidebar {
-        position: sticky;
-        left: 0;
-        width: 240px;
-        height: 100vh;
-        transition: none;
-      }
-      .menu-toggle {
-        display: none !important;
-      }
-      .sidebar-overlay {
-        display: none !important;
-      }
-    }
-
-    .sidebar-brand {
-      padding: 0 1.25rem 1.5rem;
-      border-bottom: 0.5px solid #2e2e3a;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .sidebar-brand .logo-icon {
-      width: 32px;
-      height: 32px;
-      background-color: #e8c547;
-      border-radius: 7px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .sidebar-brand span {
-      font-size: 14px;
-      font-weight: 600;
-      color: #f5f0e8;
-      line-height: 1.3;
-    }
-    .nav-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #4a4a5a;
-      padding: 0 1.25rem;
-      margin-bottom: 0.5rem;
-    }
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 1.25rem;
-      color: #8a8a9a;
-      text-decoration: none;
-      font-size: 14px;
-      border-left: 2px solid transparent;
-      transition: color 0.2s, background-color 0.2s;
-      cursor: pointer;
-      user-select: none;
-    }
-    .nav-item:hover {
-      color: #f5f0e8;
-      background-color: #222230;
-    }
-    .nav-item.active {
-      color: #e8c547;
-      background-color: #222230;
-      border-left-color: #e8c547;
-    }
-    .nav-item svg {
-      flex-shrink: 0;
-      opacity: 0.7;
-    }
-    .nav-item.active svg {
-      opacity: 1;
-    }
-    .sidebar-footer {
-      margin-top: auto;
-      padding: 1rem 1.25rem;
-      border-top: 0.5px solid #2e2e3a;
-    }
-    .sidebar-user {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 0.75rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 0.5px solid #2e2e3a;
-    }
-    .sidebar-user .mini-avatar {
-      width: 30px;
-      height: 30px;
-      background-color: #e8c547;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      color: #0f0f13;
-      flex-shrink: 0;
-    }
-    .sidebar-user .user-info {
-      overflow: hidden;
-    }
-    .sidebar-user .user-info .u-name {
-      font-size: 13px;
-      color: #f5f0e8;
-      font-weight: 500;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .logout-btn {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #8a8a9a;
-      font-size: 13px;
-      cursor: pointer;
-      padding: 6px 0;
-      background: none;
-      border: none;
-      width: 100%;
-      text-align: left;
-      transition: color 0.2s;
-    }
-    .logout-btn:hover {
-      color: #f09595;
-    }
-
-    /* overlay when sidebar open on mobile */
-    .sidebar-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 999;
-    }
-    .sidebar-overlay.active {
-      display: block;
-    }
-
-    /* ========== MAIN ========== */
-    .main {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      width: 100%;
-    }
-    .topbar {
-      background-color: #1a1a22;
-      border-bottom: 0.5px solid #2e2e3a;
-      padding: 0 1rem;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .menu-toggle {
-      background: none;
-      border: none;
-      color: #f5f0e8;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-    }
-    .menu-toggle:hover {
-      background-color: #222230;
-    }
-    .topbar-left h2 {
-      font-size: 16px;
-      font-weight: 500;
-      color: #f5f0e8;
-    }
-    .topbar-left p {
-      font-size: 12px;
-      color: #8a8a9a;
-      margin-top: 1px;
-    }
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .avatar {
-      width: 34px;
-      height: 34px;
-      background-color: #e8c547;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      color: #0f0f13;
-    }
-    .user-name {
-      font-size: 14px;
-      color: #f5f0e8;
-      display: none;
-    }
-    @media (min-width: 600px) {
-      .user-name {
-        display: inline;
-      }
-    }
-    .overdue-pill {
-      background-color: #2a1a1a;
-      border: 0.5px solid #7a2e2e;
-      color: #f09595;
-      font-size: 12px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      display: none;
-    }
-    .content {
-      padding: 1rem;
-      flex: 1;
-      max-width: 100%;
-    }
-    @media (min-width: 768px) {
-      .content {
-        padding: 2rem;
-      }
-    }
-
-    /* ========== STAT CARDS ========== */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .stat-card {
-      background-color: #1a1a22;
-      border: 0.5px solid #2e2e3a;
-      border-radius: 10px;
-      padding: 1rem;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-    .stat-card:hover {
-      background-color: #222230;
-    }
-    .stat-label {
-      font-size: 12px;
-      color: #8a8a9a;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.5rem;
-    }
-    .stat-value {
-      font-size: 28px;
-      font-weight: 600;
-      color: #f5f0e8;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .stat-sub {
-      font-size: 12px;
-      color: #8a8a9a;
-    }
-    .stat-card.gold {
-      border-left: 3px solid #e8c547;
-    }
-    .stat-card.green {
-      border-left: 3px solid #639922;
-    }
-    .stat-card.blue {
-      border-left: 3px solid #378add;
-    }
-    .stat-card.red {
-      border-left: 3px solid #e24b4a;
-    }
-
-    /* ========== TOOLBAR ========== */
-    .toolbar {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-    .search-wrap {
-      position: relative;
-      flex: 1;
-      min-width: 180px;
-    }
-    .search-wrap svg {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.4;
-      pointer-events: none;
-    }
-    .search-input {
-      width: 100%;
-      background-color: #1a1a22;
-      border: 0.5px solid #2e2e3a;
-      border-radius: 8px;
-      padding: 9px 14px 9px 36px;
-      color: #f5f0e8;
-      font-size: 14px;
-      font-family: sans-serif;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .search-input:focus {
-      border-color: #e8c547;
-    }
-    .filter-btn {
-      background-color: #1a1a22;
-      border: 0.5px solid #2e2e3a;
-      border-radius: 8px;
-      padding: 9px 14px;
-      color: #8a8a9a;
-      font-size: 13px;
-      cursor: pointer;
-      transition: color 0.2s, border-color 0.2s;
-      white-space: nowrap;
-    }
-    .filter-btn:hover {
-      color: #f5f0e8;
-      border-color: #4a4a5a;
-    }
-    .filter-btn.selected {
-      color: #e8c547;
-      border-color: #e8c547;
-      background-color: #222230;
-    }
-
-    /* ========== SECTION HEADER ========== */
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .section-header h3 {
-      font-size: 15px;
-      font-weight: 500;
-      color: #f5f0e8;
-    }
-    .btn-small {
-      background-color: #e8c547;
-      color: #0f0f13;
-      border: none;
-      border-radius: 7px;
-      padding: 7px 14px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .btn-small:hover {
-      opacity: 0.85;
-    }
-
-    /* ========== TABLE (horizontal scroll) ========== */
-    .table-wrap {
-      background-color: #1a1a22;
-      border: 0.5px solid #2e2e3a;
-      border-radius: 10px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      margin-bottom: 2rem;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 600px;
-    }
-    thead th {
-      background-color: #16161e;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #8a8a9a;
-      padding: 12px 1rem;
-      text-align: left;
-      font-weight: 500;
-    }
-    tbody tr {
-      border-top: 0.5px solid #2e2e3a;
-      transition: background-color 0.15s;
-    }
-    tbody tr:hover {
-      background-color: #222230;
-    }
-    tbody tr.overdue-row {
-      background-color: #1e1214;
-    }
-    tbody tr.overdue-row:hover {
-      background-color: #261618;
-    }
-    tbody td {
-      padding: 10px 1rem;
-      font-size: 14px;
-      color: #f5f0e8;
-    }
-    .td-muted {
-      color: #8a8a9a;
-      max-width: 180px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .date-overdue {
-      color: #f09595;
-      font-weight: 500;
-    }
-    .badge {
-      display: inline-block;
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-weight: 500;
-    }
-    .badge-yellow {
-      background-color: #2a2510;
-      color: #e8c547;
-      border: 0.5px solid #7a6a10;
-    }
-    .badge-blue {
-      background-color: #1a2030;
-      color: #85b7eb;
-      border: 0.5px solid #2e5a8a;
-    }
-    .badge-green {
-      background-color: #1a2a1a;
-      color: #97c459;
-      border: 0.5px solid #2e7a2e;
-    }
-    .badge-red {
-      background-color: #2a1a1a;
-      color: #f09595;
-      border: 0.5px solid #7a2e2e;
-    }
-
-    /* ========== FORMS & SETTINGS ========== */
-    .form-group {
-      margin-bottom: 1.25rem;
-    }
-    .form-group label {
-      display: block;
-      font-size: 12px;
-      color: #8a8a9a;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      background-color: #0f0f13;
-      border: 0.5px solid #2e2e3a;
-      border-radius: 8px;
-      padding: 10px 14px;
-      color: #f5f0e8;
-      font-size: 14px;
-      font-family: sans-serif;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: #e8c547;
-    }
-    .input-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    .input-wrap input {
-      padding-right: 44px;
-    }
-    .eye-btn {
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 42px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #8a8a9a;
-      transition: color 0.2s;
-    }
-    .eye-btn:hover {
-      color: #f5f0e8;
-    }
-    .form-hint {
-      font-size: 12px;
-      color: #4a4a5a;
-      margin-top: 5px;
-    }
-    .btn-primary {
-      background-color: #e8c547;
-      color: #0f0f13;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 20px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .btn-primary:hover {
-      opacity: 0.85;
-    }
-    .btn-primary:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    .btn-primary.full {
-      width: 100%;
-      padding: 11px;
-    }
-    .btn-danger {
-      background-color: transparent;
-      color: #f09595;
-      border: 0.5px solid #7a2e2e;
-      border-radius: 8px;
-      padding: 10px 20px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-    .btn-danger:hover {
-      background-color: #2a1a1a;
-    }
-    .alert {
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-size: 13px;
-      margin-bottom: 1.25rem;
-      display: none;
-    }
-    .alert-error {
-      background: #2a1a1a;
-      border: 0.5px solid #7a2e2e;
-      color: #f09595;
-    }
-    .alert-success {
-      background: #1a2a1a;
-      border: 0.5px solid #2e7a2e;
-      color: #97c459;
-    }
-    .settings-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-    @media (min-width: 768px) {
-      .settings-grid {
-        grid-template-columns: 200px 1fr;
-      }
-    }
-    .settings-tabs {
-      background-color: #1a1a22;
-      border: 0.5px solid #2e2e3a;
-      border-radius: 10px;
-      overflow-x: auto;
-      white-space: nowrap;
-      display: flex;
-    }
-    @media (min-width: 768px) {
-      .settings-tabs {
-        display: block;
-        overflow-x: visible;
-        white-space: normal;
-      }
-    }
-    .settings-tab {
-      display: inline-block;
-      padding: 11px 1.25rem;
-      font-size: 14px;
-      color: #8a8a9a;
-      cursor: pointer;
-      border-left: 2px solid transparent;
-      transition: color 0.2s, background-color 0.2s;
-      border-bottom: 0.5px solid #2e2e3a;
-    }
-    @media (min-width: 768px) {
-      .settings-tab {
-        display: block;
-        border-bottom: 0.5px solid #2e2e3a;
-      }
-    }
-    .settings-tab:last-child {
-      border-bottom: none;
-    }
-    .settings-tab:hover {
-      color: #f5f0e8;
-      background-color: #222230;
-    }
-    .settings-tab.active {
-      color: #e8c547;
-      background-color: #222230;
-      border-left-color: #e8c547;
-    }
-    .settings-panel {
-      display: none;
-    }
-    .settings-panel.active {
-      display: block;
-    }
-    .settings-card {
-      background-color: #1a1a22;
-      border: 0.5px solid #2e2e3a;
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-      max-width: 100%;
-    }
-    .danger-card {
-      background-color: #1a1010;
-      border: 0.5px solid #7a2e2e;
-      border-radius: 10px;
-      padding: 1.25rem 1.5rem;
-      max-width: 100%;
-    }
-    .profile-avatar-lg {
-      width: 64px;
-      height: 64px;
-      background-color: #e8c547;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      font-weight: 700;
-      color: #0f0f13;
-      margin-bottom: 1.25rem;
-    }
-    .empty-state {
-      text-align: center;
-      padding: 2rem 1rem;
-      color: #4a4a5a;
-      font-size: 14px;
-    }
-    .spinner {
-      text-align: center;
-      padding: 2rem;
-      color: #8a8a9a;
-      font-size: 13px;
-    }
-    .page-view {
-      display: none;
-    }
-    .page-view.active {
-      display: block;
-    }
+    /* (your existing CSS – unchanged, keep as is) */
+    *{margin:0;padding:0;box-sizing:border-box}body{background-color:#0f0f13;color:#f5f0e8;font-family:sans-serif;min-height:100vh;position:relative}.sidebar{position:fixed;top:0;left:-260px;width:260px;height:100%;background-color:#1a1a22;border-right:0.5px solid #2e2e3a;z-index:1000;transition:left 0.3s ease;display:flex;flex-direction:column;overflow-y:auto;padding:1.5rem 0}.sidebar.open{left:0;box-shadow:2px 0 12px rgba(0,0,0,0.5)}@media (min-width:769px){body{display:grid;grid-template-columns:240px 1fr}.sidebar{position:sticky;left:0;width:240px;height:100vh;transition:none}.menu-toggle{display:none !important}.sidebar-overlay{display:none !important}}.sidebar-brand{padding:0 1.25rem 1.5rem;border-bottom:0.5px solid #2e2e3a;margin-bottom:1rem;display:flex;align-items:center;gap:10px}.sidebar-brand .logo-icon{width:32px;height:32px;background-color:#e8c547;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}.sidebar-brand span{font-size:14px;font-weight:600;color:#f5f0e8;line-height:1.3}.nav-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#4a4a5a;padding:0 1.25rem;margin-bottom:0.5rem}.nav-item{display:flex;align-items:center;gap:10px;padding:10px 1.25rem;color:#8a8a9a;text-decoration:none;font-size:14px;border-left:2px solid transparent;transition:color 0.2s,background-color 0.2s;cursor:pointer;user-select:none}.nav-item:hover{color:#f5f0e8;background-color:#222230}.nav-item.active{color:#e8c547;background-color:#222230;border-left-color:#e8c547}.nav-item svg{flex-shrink:0;opacity:0.7}.nav-item.active svg{opacity:1}.sidebar-footer{margin-top:auto;padding:1rem 1.25rem;border-top:0.5px solid #2e2e3a}.sidebar-user{display:flex;align-items:center;gap:10px;margin-bottom:0.75rem;padding-bottom:0.75rem;border-bottom:0.5px solid #2e2e3a}.sidebar-user .mini-avatar{width:30px;height:30px;background-color:#e8c547;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#0f0f13;flex-shrink:0}.sidebar-user .user-info{overflow:hidden}.sidebar-user .user-info .u-name{font-size:13px;color:#f5f0e8;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.logout-btn{display:flex;align-items:center;gap:10px;color:#8a8a9a;font-size:13px;cursor:pointer;padding:6px 0;background:none;border:none;width:100%;text-align:left;transition:color 0.2s}.logout-btn:hover{color:#f09595}.sidebar-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999}.sidebar-overlay.active{display:block}.main{display:flex;flex-direction:column;min-height:100vh;width:100%}.topbar{background-color:#1a1a22;border-bottom:0.5px solid #2e2e3a;padding:0 1rem;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}.menu-toggle{background:none;border:none;color:#f5f0e8;cursor:pointer;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px}.menu-toggle:hover{background-color:#222230}.topbar-left h2{font-size:16px;font-weight:500;color:#f5f0e8}.topbar-left p{font-size:12px;color:#8a8a9a;margin-top:1px}.topbar-right{display:flex;align-items:center;gap:0.75rem}.avatar{width:34px;height:34px;background-color:#e8c547;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#0f0f13}.user-name{font-size:14px;color:#f5f0e8;display:none}@media (min-width:600px){.user-name{display:inline}}.overdue-pill{background-color:#2a1a1a;border:0.5px solid #7a2e2e;color:#f09595;font-size:12px;padding:4px 10px;border-radius:20px;display:none}.content{padding:1rem;flex:1;max-width:100%}@media (min-width:768px){.content{padding:2rem}}.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:2rem}.stat-card{background-color:#1a1a22;border:0.5px solid #2e2e3a;border-radius:10px;padding:1rem;cursor:pointer;transition:background-color 0.2s}.stat-card:hover{background-color:#222230}.stat-label{font-size:12px;color:#8a8a9a;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.5rem}.stat-value{font-size:28px;font-weight:600;color:#f5f0e8;line-height:1;margin-bottom:4px}.stat-sub{font-size:12px;color:#8a8a9a}.stat-card.gold{border-left:3px solid #e8c547}.stat-card.green{border-left:3px solid #639922}.stat-card.blue{border-left:3px solid #378add}.stat-card.red{border-left:3px solid #e24b4a}.toolbar{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;flex-wrap:wrap}.search-wrap{position:relative;flex:1;min-width:180px}.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:0.4;pointer-events:none}.search-input{width:100%;background-color:#1a1a22;border:0.5px solid #2e2e3a;border-radius:8px;padding:9px 14px 9px 36px;color:#f5f0e8;font-size:14px;font-family:sans-serif;outline:none;transition:border-color 0.2s}.search-input:focus{border-color:#e8c547}.filter-btn{background-color:#1a1a22;border:0.5px solid #2e2e3a;border-radius:8px;padding:9px 14px;color:#8a8a9a;font-size:13px;cursor:pointer;transition:color 0.2s,border-color 0.2s;white-space:nowrap}.filter-btn:hover{color:#f5f0e8;border-color:#4a4a5a}.filter-btn.selected{color:#e8c547;border-color:#e8c547;background-color:#222230}.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem}.section-header h3{font-size:15px;font-weight:500;color:#f5f0e8}.btn-small{background-color:#e8c547;color:#0f0f13;border:none;border-radius:7px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;transition:opacity 0.2s}.btn-small:hover{opacity:0.85}.table-wrap{background-color:#1a1a22;border:0.5px solid #2e2e3a;border-radius:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:2rem}table{width:100%;border-collapse:collapse;min-width:600px}thead th{background-color:#16161e;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:#8a8a9a;padding:12px 1rem;text-align:left;font-weight:500}tbody tr{border-top:0.5px solid #2e2e3a;transition:background-color 0.15s}tbody tr:hover{background-color:#222230}tbody tr.overdue-row{background-color:#1e1214}tbody tr.overdue-row:hover{background-color:#261618}tbody td{padding:10px 1rem;font-size:14px;color:#f5f0e8}.td-muted{color:#8a8a9a;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.date-overdue{color:#f09595;font-weight:500}.badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}.badge-yellow{background-color:#2a2510;color:#e8c547;border:0.5px solid #7a6a10}.badge-blue{background-color:#1a2030;color:#85b7eb;border:0.5px solid #2e5a8a}.badge-green{background-color:#1a2a1a;color:#97c459;border:0.5px solid #2e7a2e}.badge-red{background-color:#2a1a1a;color:#f09595;border:0.5px solid #7a2e2e}.form-group{margin-bottom:1.25rem}.form-group label{display:block;font-size:12px;color:#8a8a9a;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}.form-group input,.form-group select,.form-group textarea{width:100%;background-color:#0f0f13;border:0.5px solid #2e2e3a;border-radius:8px;padding:10px 14px;color:#f5f0e8;font-size:14px;font-family:sans-serif;outline:none;transition:border-color 0.2s}.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#e8c547}.input-wrap{position:relative;display:flex;align-items:center}.input-wrap input{padding-right:44px}.eye-btn{position:absolute;right:0;top:0;bottom:0;width:42px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#8a8a9a;transition:color 0.2s}.eye-btn:hover{color:#f5f0e8}.form-hint{font-size:12px;color:#4a4a5a;margin-top:5px}.btn-primary{background-color:#e8c547;color:#0f0f13;border:none;border-radius:8px;padding:10px 20px;font-size:14px;font-weight:600;cursor:pointer;transition:opacity 0.2s}.btn-primary:hover{opacity:0.85}.btn-primary:disabled{opacity:0.5;cursor:not-allowed}.btn-primary.full{width:100%;padding:11px}.btn-danger{background-color:transparent;color:#f09595;border:0.5px solid #7a2e2e;border-radius:8px;padding:10px 20px;font-size:14px;cursor:pointer;transition:background-color 0.2s}.btn-danger:hover{background-color:#2a1a1a}.alert{border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:1.25rem;display:none}.alert-error{background:#2a1a1a;border:0.5px solid #7a2e2e;color:#f09595}.alert-success{background:#1a2a1a;border:0.5px solid #2e7a2e;color:#97c459}.settings-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}@media (min-width:768px){.settings-grid{grid-template-columns:200px 1fr}}.settings-tabs{background-color:#1a1a22;border:0.5px solid #2e2e3a;border-radius:10px;overflow-x:auto;white-space:nowrap;display:flex}@media (min-width:768px){.settings-tabs{display:block;overflow-x:visible;white-space:normal}}.settings-tab{display:inline-block;padding:11px 1.25rem;font-size:14px;color:#8a8a9a;cursor:pointer;border-left:2px solid transparent;transition:color 0.2s,background-color 0.2s;border-bottom:0.5px solid #2e2e3a}@media (min-width:768px){.settings-tab{display:block;border-bottom:0.5px solid #2e2e3a}}.settings-tab:last-child{border-bottom:none}.settings-tab:hover{color:#f5f0e8;background-color:#222230}.settings-tab.active{color:#e8c547;background-color:#222230;border-left-color:#e8c547}.settings-panel{display:none}.settings-panel.active{display:block}.settings-card{background-color:#1a1a22;border:0.5px solid #2e2e3a;border-radius:10px;padding:1.5rem;margin-bottom:1.25rem;max-width:100%}.danger-card{background-color:#1a1010;border:0.5px solid #7a2e2e;border-radius:10px;padding:1.25rem 1.5rem;max-width:100%}.profile-avatar-lg{width:64px;height:64px;background-color:#e8c547;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#0f0f13;margin-bottom:1.25rem}.empty-state{text-align:center;padding:2rem 1rem;color:#4a4a5a;font-size:14px}.spinner{text-align:center;padding:2rem;color:#8a8a9a;font-size:13px}.page-view{display:none}.page-view.active{display:block}
   </style>
 </head>
 <body>
+
+<div id="trial-banner" style="display:none; background:#2a2510; border:0.5px solid #e8c547; border-radius:10px; padding:12px 1.25rem; margin-bottom:1.5rem;">
+  <span>✨ You're on a free trial – you can add leads but cannot edit or delete. <a href="#" id="upgradeLink" style="color:#e8c547; font-weight:bold;">Upgrade now (₦4,000)</a> to unlock full control.</span>
+</div>
 
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-brand">
-    <div class="logo-icon">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f0f13" stroke-width="2">
-        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-        <path d="M2 17l10 5 10-5"/>
-        <path d="M2 12l10 5 10-5"/>
-      </svg>
-    </div>
+    <div class="logo-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f0f13" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
     <span>Follow<br>HQ</span>
   </div>
   <p class="nav-label">Main Menu</p>
-  <a class="nav-item active" onclick="showPage('overview'); closeSidebarIfMobile()" data-page="overview">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-      <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-    </svg>
-    Overview
-  </a>
-  <a class="nav-item" onclick="showPage('leads'); closeSidebarIfMobile()" data-page="leads">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-      <circle cx="9" cy="7" r="4"/>
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-    </svg>
-    Leads
-  </a>
-  <a class="nav-item" onclick="showPage('followups'); closeSidebarIfMobile()" data-page="followups">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-      <line x1="16" y1="2" x2="16" y2="6"/>
-      <line x1="8" y1="2" x2="8" y2="6"/>
-      <line x1="3" y1="10" x2="21" y2="10"/>
-    </svg>
-    Follow-Ups
-  </a>
+  <a class="nav-item active" onclick="showPage('overview'); closeSidebarIfMobile()" data-page="overview"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Overview</a>
+  <a class="nav-item" onclick="showPage('leads'); closeSidebarIfMobile()" data-page="leads"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Leads</a>
+  <a class="nav-item" onclick="showPage('followups'); closeSidebarIfMobile()" data-page="followups"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Follow-Ups</a>
   <p class="nav-label" style="margin-top:1.5rem;">Account</p>
-  <a class="nav-item" onclick="showPage('settings'); closeSidebarIfMobile()" data-page="settings">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="12" cy="12" r="3"/>
-      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-    </svg>
-    Settings
-  </a>
-  <div class="sidebar-footer">
-    <div class="sidebar-user">
-      <div class="mini-avatar" id="sidebar-avatar">?</div>
-      <div class="user-info">
-        <p class="u-name" id="sidebar-name">Loading...</p>
-        <p class="u-role">Account Owner</p>
-      </div>
-    </div>
-    <button class="logout-btn" onclick="handleLogout()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-        <polyline points="16 17 21 12 16 7"/>
-        <line x1="21" y1="12" x2="9" y2="12"/>
-      </svg>
-      Sign Out
-    </button>
-  </div>
+  <a class="nav-item" onclick="showPage('settings'); closeSidebarIfMobile()" data-page="settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+  <div class="sidebar-footer"><div class="sidebar-user"><div class="mini-avatar" id="sidebar-avatar">?</div><div class="user-info"><p class="u-name" id="sidebar-name">Loading...</p><p class="u-role">Account Owner</p></div></div><button class="logout-btn" onclick="handleLogout()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign Out</button></div>
 </aside>
 
 <div class="main">
   <div class="topbar">
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="3" y1="12" x2="21" y2="12"/>
-        <line x1="3" y1="6" x2="21" y2="6"/>
-        <line x1="3" y1="18" x2="21" y2="18"/>
-      </svg>
-    </button>
-    <div class="topbar-left">
-      <h2 id="page-title">Overview</h2>
-      <p id="page-subtitle">Your dashboard summary</p>
-    </div>
-    <div class="topbar-right">
-      <span class="overdue-pill" id="overdue-pill"></span>
-      <span class="user-name" id="user-name-display">Loading...</span>
-      <div class="avatar" id="user-avatar">?</div>
-    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <div class="topbar-left"><h2 id="page-title">Overview</h2><p id="page-subtitle">Your dashboard summary</p></div>
+    <div class="topbar-right"><span class="overdue-pill" id="overdue-pill"></span><span class="user-name" id="user-name-display">Loading...</span><div class="avatar" id="user-avatar">?</div></div>
   </div>
 
   <div class="content">
     <!-- Overview page -->
     <div class="page-view active" id="page-overview">
-      <div class="stats-grid">
-        <div class="stat-card gold" onclick="showPage('leads')"><p class="stat-label">Total Leads</p><p class="stat-value" id="stat-total">—</p><p class="stat-sub">click to view all</p></div>
-        <div class="stat-card green" onclick="filterAndGo('new')"><p class="stat-label">New</p><p class="stat-value" id="stat-new">—</p><p class="stat-sub">not yet contacted</p></div>
-        <div class="stat-card blue" onclick="filterAndGo('contacted')"><p class="stat-label">Contacted</p><p class="stat-value" id="stat-contacted">—</p><p class="stat-sub">awaiting response</p></div>
-        <div class="stat-card red" onclick="filterAndGo('closed')"><p class="stat-label">Closed</p><p class="stat-value" id="stat-closed">—</p><p class="stat-sub">won or lost</p></div>
-      </div>
-      <div id="overdue-banner" style="display:none; background:#1e1214; border:0.5px solid #7a2e2e; border-radius:10px; padding:12px 1.25rem; margin-bottom:1.5rem; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
-        <span style="font-size:13px; color:#f09595;" id="overdue-banner-text"></span>
-        <button class="btn-small" onclick="filterAndGo('overdue')" style="background:#e24b4a; font-size:12px; padding:5px 12px;">View Overdue</button>
-      </div>
+      <div class="stats-grid"><div class="stat-card gold" onclick="showPage('leads')"><p class="stat-label">Total Leads</p><p class="stat-value" id="stat-total">—</p><p class="stat-sub">click to view all</p></div><div class="stat-card green" onclick="filterAndGo('new')"><p class="stat-label">New</p><p class="stat-value" id="stat-new">—</p><p class="stat-sub">not yet contacted</p></div><div class="stat-card blue" onclick="filterAndGo('contacted')"><p class="stat-label">Contacted</p><p class="stat-value" id="stat-contacted">—</p><p class="stat-sub">awaiting response</p></div><div class="stat-card red" onclick="filterAndGo('closed')"><p class="stat-label">Closed</p><p class="stat-value" id="stat-closed">—</p><p class="stat-sub">won or lost</p></div></div>
+      <div id="overdue-banner" style="display:none; background:#1e1214; border:0.5px solid #7a2e2e; border-radius:10px; padding:12px 1.25rem; margin-bottom:1.5rem; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;"><span style="font-size:13px; color:#f09595;" id="overdue-banner-text"></span><button class="btn-small" onclick="filterAndGo('overdue')" style="background:#e24b4a; font-size:12px; padding:5px 12px;">View Overdue</button></div>
       <div class="section-header"><h3>Recent Leads</h3><button class="btn-small" onclick="showPage('leads')">View All</button></div>
-      <div class="table-wrap">
-        <div class="spinner" id="overview-loading">Loading...</div>
-        <table id="overview-table" style="display:none;"><thead><tr><th>Name</th><th>Status</th><th>Follow-Up Date</th><th>Notes</th></tr></thead><tbody id="overview-tbody"></tbody></table>
-        <div class="empty-state" id="overview-empty" style="display:none;"><div class="empty-icon">📋</div><p>No leads yet.</p><p>Click <strong>Leads</strong> in the sidebar to add your first one.</p></div>
-      </div>
+      <div class="table-wrap"><div class="spinner" id="overview-loading">Loading...</div><table id="overview-table" style="display:none;"><thead><tr><th>Name</th><th>Status</th><th>Follow-Up Date</th><th>Notes</th></tr></thead><tbody id="overview-tbody"></tbody></table><div class="empty-state" id="overview-empty" style="display:none;"><div class="empty-icon">📋</div><p>No leads yet.</p><p>Click <strong>Leads</strong> in the sidebar to add your first one.</p></div></div>
     </div>
 
     <!-- Leads page -->
     <div class="page-view" id="page-leads">
       <div class="section-header"><h3>All Leads</h3><button class="btn-small" onclick="showPage('add-lead')">+ Add Lead</button></div>
-      <div class="toolbar">
-        <div class="search-wrap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input class="search-input" id="leads-search" type="text" placeholder="Search by name or notes..." oninput="loadLeads(1)" /></div>
-        <button class="filter-btn selected" data-filter="all" onclick="setFilter('all')">All</button>
-        <button class="filter-btn" data-filter="new" onclick="setFilter('new')">New</button>
-        <button class="filter-btn" data-filter="contacted" onclick="setFilter('contacted')">Contacted</button>
-        <button class="filter-btn" data-filter="qualified" onclick="setFilter('qualified')">Qualified</button>
-        <button class="filter-btn" data-filter="closed" onclick="setFilter('closed')">Closed</button>
-        <button class="filter-btn" data-filter="overdue" onclick="setFilter('overdue')">Overdue</button>
-      </div>
-      <div class="toolbar" style="margin-top:-0.25rem; flex-wrap:wrap;">
-        <input type="date" id="date-from" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#f5f0e8; font-size:13px; color-scheme:dark;" onchange="dateFrom=this.value; loadLeads(1);" />
-        <span style="color:#4a4a5a; font-size:13px;">to</span>
-        <input type="date" id="date-to" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#f5f0e8; font-size:13px; color-scheme:dark;" onchange="dateTo=this.value; loadLeads(1);" />
-        <select id="sort-by" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px;" onchange="sortBy=this.value; loadLeads(1);"><option value="created_at">Sort: Date Added</option><option value="name">Sort: Name</option><option value="follow_up_date">Sort: Follow-Up Date</option><option value="status">Sort: Status</option></select>
-        <button onclick="sortOrder = sortOrder==='asc' ? 'desc' : 'asc'; loadLeads(1);" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px; cursor:pointer;">↕ Order</button>
-        <button onclick="dateFrom=''; dateTo=''; document.getElementById('date-from').value=''; document.getElementById('date-to').value=''; loadLeads(1);" style="background:none; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px; cursor:pointer;">Clear</button>
-      </div>
-      <div class="table-wrap">
-        <div class="spinner" id="leads-loading">Loading...</div>
-        <table id="leads-table" style="display:none;"><thead><tr><th>Name</th><th>Status</th><th>Follow-Up Date</th><th>WhatsApp</th><th>Notes</th><th>Actions</th></tr></thead><tbody id="leads-tbody"></tbody></table>
-        <div class="empty-state" id="leads-empty" style="display:none;"><div class="empty-icon">🔍</div><p id="leads-empty-text">No leads found.</p><p>Try a different search or filter.</p></div>
-      </div>
-      <div id="leads-pagination" style="display:none; align-items:center; justify-content:space-between; margin-top:-1rem; margin-bottom:2rem; flex-wrap:wrap; gap:0.5rem;">
-        <span id="page-info" style="font-size:13px; color:#8a8a9a;"></span>
-        <div style="display:flex; gap:0.5rem;"><button id="btn-prev" onclick="loadLeads(leadsPage - 1)" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:7px; padding:7px 14px; color:#f5f0e8; font-size:13px; cursor:pointer;">← Prev</button><button id="btn-next" onclick="loadLeads(leadsPage + 1)" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:7px; padding:7px 14px; color:#f5f0e8; font-size:13px; cursor:pointer;">Next →</button></div>
-      </div>
+      <div class="toolbar"><div class="search-wrap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input class="search-input" id="leads-search" type="text" placeholder="Search by name or notes..." oninput="loadLeads(1)" /></div><button class="filter-btn selected" data-filter="all" onclick="setFilter('all')">All</button><button class="filter-btn" data-filter="new" onclick="setFilter('new')">New</button><button class="filter-btn" data-filter="contacted" onclick="setFilter('contacted')">Contacted</button><button class="filter-btn" data-filter="qualified" onclick="setFilter('qualified')">Qualified</button><button class="filter-btn" data-filter="closed" onclick="setFilter('closed')">Closed</button><button class="filter-btn" data-filter="overdue" onclick="setFilter('overdue')">Overdue</button></div>
+      <div class="toolbar" style="margin-top:-0.25rem; flex-wrap:wrap;"><input type="date" id="date-from" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#f5f0e8; font-size:13px; color-scheme:dark;" onchange="dateFrom=this.value; loadLeads(1);" /><span style="color:#4a4a5a; font-size:13px;">to</span><input type="date" id="date-to" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#f5f0e8; font-size:13px; color-scheme:dark;" onchange="dateTo=this.value; loadLeads(1);" /><select id="sort-by" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px;" onchange="sortBy=this.value; loadLeads(1);"><option value="created_at">Sort: Date Added</option><option value="name">Sort: Name</option><option value="follow_up_date">Sort: Follow-Up Date</option><option value="status">Sort: Status</option></select><button onclick="sortOrder = sortOrder==='asc' ? 'desc' : 'asc'; loadLeads(1);" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px; cursor:pointer;">↕ Order</button><button onclick="dateFrom=''; dateTo=''; document.getElementById('date-from').value=''; document.getElementById('date-to').value=''; loadLeads(1);" style="background:none; border:0.5px solid #2e2e3a; border-radius:8px; padding:8px 12px; color:#8a8a9a; font-size:13px; cursor:pointer;">Clear</button></div>
+      <div class="table-wrap"><div class="spinner" id="leads-loading">Loading...</div><table id="leads-table" style="display:none;"><thead><tr><th>Name</th><th>Status</th><th>Follow-Up Date</th><th>WhatsApp</th><th>Notes</th><th>Actions</th></tr></thead><tbody id="leads-tbody"></tbody></td><div class="empty-state" id="leads-empty" style="display:none;"><div class="empty-icon">🔍</div><p id="leads-empty-text">No leads found.</p><p>Try a different search or filter.</p></div></div>
+      <div id="leads-pagination" style="display:none; align-items:center; justify-content:space-between; margin-top:-1rem; margin-bottom:2rem; flex-wrap:wrap; gap:0.5rem;"><span id="page-info" style="font-size:13px; color:#8a8a9a;"></span><div style="display:flex; gap:0.5rem;"><button id="btn-prev" onclick="loadLeads(leadsPage - 1)" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:7px; padding:7px 14px; color:#f5f0e8; font-size:13px; cursor:pointer;">← Prev</button><button id="btn-next" onclick="loadLeads(leadsPage + 1)" style="background:#1a1a22; border:0.5px solid #2e2e3a; border-radius:7px; padding:7px 14px; color:#f5f0e8; font-size:13px; cursor:pointer;">Next →</button></div></div>
     </div>
 
     <!-- Add/Edit lead -->
@@ -876,39 +71,12 @@
     <!-- Follow-ups page -->
     <div class="page-view" id="page-followups">
       <div class="section-header"><h3>Follow-Ups</h3><button class="btn-small" onclick="showPage('add-lead')">+ Add Lead</button></div>
-      <div class="table-wrap">
-        <div class="spinner" id="followups-loading">Loading...</div>
-        <table id="followups-table" style="display:none;"><thead><tr><th>Lead Name</th><th>Follow-Up Date</th><th>Status</th><th>Notes</th><th>Action</th></tr></thead><tbody id="followups-tbody"></tbody></table>
-        <div class="empty-state" id="followups-empty" style="display:none;"><div class="empty-icon">📅</div><p>No follow-ups scheduled.</p><p>Add a <strong>Follow-Up Date</strong> when creating a lead.</p></div>
-      </div>
+      <div class="table-wrap"><div class="spinner" id="followups-loading">Loading...</div><table id="followups-table" style="display:none;"><thead><tr><th>Lead Name</th><th>Follow-Up Date</th><th>Status</th><th>Notes</th><th>Action</th></tr></thead><tbody id="followups-tbody"></tbody></table><div class="empty-state" id="followups-empty" style="display:none;"><div class="empty-icon">📅</div><p>No follow-ups scheduled.</p><p>Add a <strong>Follow-Up Date</strong> when creating a lead.</p></div></div>
     </div>
 
     <!-- Settings page -->
     <div class="page-view" id="page-settings">
-      <div class="settings-grid">
-        <div class="settings-tabs"><div class="settings-tab active" onclick="showSettingsTab('profile', this)">Profile</div><div class="settings-tab" onclick="showSettingsTab('security', this)">Security</div><div class="settings-tab" onclick="showSettingsTab('account', this)">Account</div></div>
-        <div>
-          <div class="settings-panel active" id="tab-profile">
-            <div class="settings-card"><h4>Your Profile</h4><p class="card-desc">Your name and email address on this account.</p><div class="profile-avatar-lg" id="settings-avatar">?</div>
-            <div class="form-group"><label>Full Name</label><input type="text" id="settings-name-display" readonly style="opacity:0.5; cursor:default;" /><p class="form-hint">Name cannot be changed from the dashboard.</p></div>
-            <div class="alert alert-error" id="email-error"></div><div class="alert alert-success" id="email-success"></div>
-            <div class="form-group"><label for="settings-email">Email Address</label><input type="email" id="settings-email" placeholder="you@company.com" /></div>
-            <button class="btn-primary" id="email-btn" onclick="handleEmailUpdate()">Update Email</button></div>
-          </div>
-          <div class="settings-panel" id="tab-security">
-            <div class="settings-card"><h4>Change Password</h4><p class="card-desc">Choose a strong password. You'll be logged out after changing it.</p>
-            <div class="alert alert-error" id="pw-error"></div><div class="alert alert-success" id="pw-success"></div>
-            <div class="form-group"><label for="pw-current">Current Password</label><div class="input-wrap"><input type="password" id="pw-current" placeholder="Your current password" /><button class="eye-btn" type="button" onclick="togglePw('pw-current', this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
-            <div class="form-group"><label for="pw-new">New Password</label><div class="input-wrap"><input type="password" id="pw-new" placeholder="Min. 8 characters" oninput="checkPwStrength(this.value)" /><button class="eye-btn" type="button" onclick="togglePw('pw-new', this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div><div style="margin-top:8px; height:4px; background:#2e2e3a; border-radius:4px; overflow:hidden;"><div id="pw-strength-fill" style="height:100%; width:0%; border-radius:4px;"></div></div><p class="form-hint" id="pw-strength-label">Enter a new password</p></div>
-            <div class="form-group"><label for="pw-confirm">Confirm New Password</label><div class="input-wrap"><input type="password" id="pw-confirm" placeholder="Repeat new password" /><button class="eye-btn" type="button" onclick="togglePw('pw-confirm', this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
-            <button class="btn-primary" id="pw-btn" onclick="handlePasswordChange()">Change Password</button></div>
-          </div>
-          <div class="settings-panel" id="tab-account">
-            <div class="settings-card"><h4>Account Information</h4><p class="card-desc">Details about your current plan and usage.</p><table style="width:100%; font-size:14px;"><tr><td style="color:#8a8a9a; padding:8px 0; width:40%;">Account type</td><td style="color:#f5f0e8;">Standard</td></tr><tr><td style="color:#8a8a9a; padding:8px 0;">Email</td><td style="color:#f5f0e8;" id="account-email-display">—</td></tr><tr><td style="color:#8a8a9a; padding:8px 0;">Member since</td><td style="color:#f5f0e8;" id="account-joined">—</td></tr><tr><td style="color:#8a8a9a; padding:8px 0;">Total leads</td><td style="color:#f5f0e8;" id="account-leads-count">—</td></tr></table></div>
-            <div class="danger-card"><h4>Sign Out Everywhere</h4><p>This will remove your session token from this browser. You'll need to log in again.</p><button class="btn-danger" onclick="handleLogout()">Sign Out</button></div>
-          </div>
-        </div>
-      </div>
+      <div class="settings-grid"><div class="settings-tabs"><div class="settings-tab active" onclick="showSettingsTab('profile', this)">Profile</div><div class="settings-tab" onclick="showSettingsTab('security', this)">Security</div><div class="settings-tab" onclick="showSettingsTab('account', this)">Account</div></div><div><div class="settings-panel active" id="tab-profile"><div class="settings-card"><h4>Your Profile</h4><p class="card-desc">Your name and email address on this account.</p><div class="profile-avatar-lg" id="settings-avatar">?</div><div class="form-group"><label>Full Name</label><input type="text" id="settings-name-display" readonly style="opacity:0.5; cursor:default;" /><p class="form-hint">Name cannot be changed from the dashboard.</p></div><div class="alert alert-error" id="email-error"></div><div class="alert alert-success" id="email-success"></div><div class="form-group"><label for="settings-email">Email Address</label><input type="email" id="settings-email" placeholder="you@company.com" /></div><button class="btn-primary" id="email-btn" onclick="handleEmailUpdate()">Update Email</button></div></div><div class="settings-panel" id="tab-security"><div class="settings-card"><h4>Change Password</h4><p class="card-desc">Choose a strong password. You'll be logged out after changing it.</p><div class="alert alert-error" id="pw-error"></div><div class="alert alert-success" id="pw-success"></div><div class="form-group"><label for="pw-current">Current Password</label><div class="input-wrap"><input type="password" id="pw-current" placeholder="Your current password" /><button class="eye-btn" type="button" onclick="togglePw('pw-current', this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div><div class="form-group"><label for="pw-new">New Password</label><div class="input-wrap"><input type="password" id="pw-new" placeholder="Min. 8 characters" oninput="checkPwStrength(this.value)" /><button class="eye-btn" type="button" onclick="togglePw('pw-new', this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div><div style="margin-top:8px; height:4px; background:#2e2e3a; border-radius:4px; overflow:hidden;"><div id="pw-strength-fill" style="height:100%; width:0%; border-radius:4px;"></div></div><p class="form-hint" id="pw-strength-label">Enter a new password</p></div><div class="form-group"><label for="pw-confirm">Confirm New Password</label><div class="input-wrap"><input type="password" id="pw-confirm" placeholder="Repeat new password" /><button class="eye-btn" type="button" onclick="togglePw('pw-confirm', this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div><button class="btn-primary" id="pw-btn" onclick="handlePasswordChange()">Change Password</button></div></div><div class="settings-panel" id="tab-account"><div class="settings-card"><h4>Account Information</h4><p class="card-desc">Details about your current plan and usage.</p><table style="width:100%; font-size:14px;"><tr><td style="color:#8a8a9a; padding:8px 0; width:40%;">Account type</td><td style="color:#f5f0e8;">Standard</td></tr><tr><td style="color:#8a8a9a; padding:8px 0;">Email</td><td style="color:#f5f0e8;" id="account-email-display">—</td></tr><tr><td style="color:#8a8a9a; padding:8px 0;">Member since</td><td style="color:#f5f0e8;" id="account-joined">—</td></tr><tr><td style="color:#8a8a9a; padding:8px 0;">Total leads</td><td style="color:#f5f0e8;" id="account-leads-count">—</td></tr></table></div><div class="danger-card"><h4>Sign Out Everywhere</h4><p>This will remove your session token from this browser. You'll need to log in again.</p><button class="btn-danger" onclick="handleLogout()">Sign Out</button></div></div></div></div>
     </div>
   </div>
 </div>
@@ -920,22 +88,12 @@
   if (!token) window.location.href = 'login.html';
 
   // Mobile sidebar functions
-  function openSidebar() {
-    document.getElementById('sidebar').classList.add('open');
-    document.getElementById('sidebarOverlay').classList.add('active');
-  }
-  function closeSidebar() {
-    document.getElementById('sidebar').classList.remove('open');
-    document.getElementById('sidebarOverlay').classList.remove('active');
-  }
-  function closeSidebarIfMobile() {
-    if (window.innerWidth <= 768) closeSidebar();
-  }
+  function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebarOverlay').classList.add('active'); }
+  function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('active'); }
+  function closeSidebarIfMobile() { if (window.innerWidth <= 768) closeSidebar(); }
   document.getElementById('menuToggle').addEventListener('click', openSidebar);
   document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
-  window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) closeSidebar();
-  });
+  window.addEventListener('resize', function() { if (window.innerWidth > 768) closeSidebar(); });
 
   async function apiFetch(path, options = {}) {
     const res = await fetch(`${API_BASE}${path}`, {
@@ -1020,10 +178,23 @@
       document.getElementById('settings-email').value = email;
       document.getElementById('account-email-display').textContent = email;
       if (currentUser.created_at) document.getElementById('account-joined').textContent = new Date(currentUser.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+
+      // Show trial banner if user is not paid
+      const trialBanner = document.getElementById('trial-banner');
+      if (currentUser && !currentUser.is_paid) {
+        trialBanner.style.display = 'block';
+        document.getElementById('upgradeLink').addEventListener('click', (e) => {
+          e.preventDefault();
+          // Replace with your Selar link
+          window.open('https://selar.com/j1g1k2315j', '_blank');
+        });
+      } else {
+        trialBanner.style.display = 'none';
+      }
     } catch (e) { console.error(e); }
   }
 
-  async function loadOverview() {
+  async function loadOverview() { /* same as your existing loadOverview – unchanged */ 
     document.getElementById('overview-loading').style.display = 'block';
     document.getElementById('overview-table').style.display = 'none';
     document.getElementById('overview-empty').style.display = 'none';
@@ -1143,16 +314,23 @@
       notesCell.textContent = lead.notes || '—';
       tr.appendChild(notesCell);
       const actionsCell = document.createElement('td');
-      const editBtn = document.createElement('button');
-      editBtn.textContent = 'Edit';
-      editBtn.style.cssText = 'background:none;border:none;color:#e8c547;cursor:pointer;margin-right:12px;';
-      editBtn.addEventListener('click', () => startEdit(lead.id, lead));
-      const deleteBtn = document.createElement('button');
-      deleteBtn.textContent = 'Delete';
-      deleteBtn.style.cssText = 'background:none;border:none;color:#f09595;cursor:pointer;';
-      deleteBtn.addEventListener('click', () => deleteLead(lead.id));
-      actionsCell.appendChild(editBtn);
-      actionsCell.appendChild(deleteBtn);
+      if (currentUser && currentUser.is_paid) {
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit';
+        editBtn.style.cssText = 'background:none;border:none;color:#e8c547;cursor:pointer;margin-right:12px;';
+        editBtn.addEventListener('click', () => startEdit(lead.id, lead));
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.style.cssText = 'background:none;border:none;color:#f09595;cursor:pointer;';
+        deleteBtn.addEventListener('click', () => deleteLead(lead.id));
+        actionsCell.appendChild(editBtn);
+        actionsCell.appendChild(deleteBtn);
+      } else {
+        const upgradeMsg = document.createElement('span');
+        upgradeMsg.textContent = 'Upgrade to edit/delete';
+        upgradeMsg.style.cssText = 'color:#e8c547; font-size:12px;';
+        actionsCell.appendChild(upgradeMsg);
+      }
       tr.appendChild(actionsCell);
       tbody.appendChild(tr);
     });
@@ -1160,6 +338,7 @@
   }
 
   async function loadFollowups() {
+    // same as your existing loadFollowups – ensure it uses currentUser for conditional buttons if needed
     document.getElementById('followups-loading').style.display = 'block';
     document.getElementById('followups-table').style.display = 'none';
     document.getElementById('followups-empty').style.display = 'none';

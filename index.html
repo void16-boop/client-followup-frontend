@@ -377,9 +377,10 @@
   document.getElementById('payNowBtn').addEventListener('click', function(e) {
     e.preventDefault();
     if (SELAR_PRODUCT_URL === "https://selar.com/j1g1k2315j") {
-      alert("Payment link will be added soon. For now, please contact us directly.");
-    } else {
       window.open(SELAR_PRODUCT_URL, '_blank');
+    } else {
+      alert("Payment link will be added soon. For now, please contact us directly.");
+      
     }
   });
 </script>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>FollowHQ – Never Miss a Client Follow‑Up</title>
+  <title>FollowHQ – Pay once, never miss a follow‑up</title>
   <style>
     * {
       margin: 0;
@@ -18,7 +18,6 @@
       line-height: 1.5;
     }
 
-    /* Smooth scroll for anchor links */
     html {
       scroll-behavior: smooth;
     }
@@ -29,7 +28,7 @@
       padding: 0 1.5rem;
     }
 
-    /* Header / Navbar */
+    /* Navbar */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -99,7 +98,7 @@
       transform: scale(0.98);
     }
 
-    /* Hero Section */
+    /* Hero */
     .hero {
       padding: 3rem 0 4rem;
       text-align: center;
@@ -131,7 +130,7 @@
       flex-wrap: wrap;
     }
 
-    /* Features Section */
+    /* Features */
     .features {
       padding: 4rem 0;
       border-top: 1px solid #1f1f2a;
@@ -180,7 +179,7 @@
       font-size: 0.95rem;
     }
 
-    /* Pricing Section */
+    /* Pricing */
     .pricing {
       padding: 4rem 0;
     }
@@ -288,17 +287,17 @@
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
       <a href="login.html">Log in</a>
-      <a href="register.html" class="btn-outline">Sign up free</a>
+      <a href="signup.html" class="btn-outline">Sign up</a>
     </div>
   </div>
 
   <!-- Hero -->
   <div class="hero">
     <h1>Never miss a client follow‑up again</h1>
-    <p>Track leads, set reminders, and close more deals – from any device. Built for freelancers, agents, and small teams.</p>
+    <p>Track leads, set reminders, and close more deals – from any device. Pay once, access forever.</p>
     <div class="hero-buttons">
-      <a href="register.html" class="btn-primary">Start free trial →</a>
-      <a href="#features" class="btn-outline" style="border-color:#a1a1aa; color:#a1a1aa;">See how it works</a>
+      <a href="#" id="payNowBtn" class="btn-primary">Subscribe – ₦4,000 →</a>
+      <a href="#features" class="btn-outline" style="border-color:#a1a1aa; color:#a1a1aa;">See features</a>
     </div>
   </div>
 
@@ -341,22 +340,22 @@
 
   <!-- Pricing -->
   <div class="pricing" id="pricing">
-    <h2 class="section-title">Simple, transparent pricing</h2>
+    <h2 class="section-title">Simple, one‑time payment</h2>
     <div class="pricing-card">
-      <div class="plan-name">Pro Plan</div>
+      <div class="plan-name">Full Access</div>
       <div class="price">
-        $8 <small>/month</small>
+        ₦4,000 <small>/once</small>
       </div>
-      <div class="price-sub">or ₦4,000/month for Nigerian customers</div>
+      <div class="price-sub">or $8 USD for international customers</div>
       <ul class="pricing-features">
         <li>Unlimited leads</li>
         <li>Follow-up reminders & overdue alerts</li>
         <li>WhatsApp integration</li>
         <li>Mobile responsive dashboard</li>
-        <li>Data export & priority support</li>
+        <li>Priority support</li>
       </ul>
-      <a href="#" class="btn-primary" id="payNowBtn" style="display: inline-block;">Get started →</a>
-      <p class="payment-note">Secure payment via Selar – accepts international cards, PayPal, and bank transfer.</p>
+      <a href="#" id="payNowBtn2" class="btn-primary">Subscribe now →</a>
+      <p class="payment-note">Secure payment via Selar – accepts cards, PayPal, and bank transfer.</p>
     </div>
   </div>
 
@@ -366,22 +365,29 @@
       <a href="#">Privacy Policy</a>
       <a href="#">Terms of Service</a>
     </div>
-    <p>© 2025 FollowHQ – Built for freelancers and small teams.</p>
+    <p>© 2025 FollowHQ – Pay once, track forever.</p>
   </div>
 </div>
 
 <script>
-  // Replace this with your actual Selar payment link when ready
+  // 🔁 Replace this with your actual Selar product link
   const SELAR_PRODUCT_URL = "https://selar.com/j1g1k2315j";
 
-  document.getElementById('payNowBtn').addEventListener('click', function(e) {
-    e.preventDefault();
-    if (SELAR_PRODUCT_URL === "https://selar.com/j1g1k2315j") {
-      window.open(SELAR_PRODUCT_URL, '_blank');
+  function openSelar() {
+    if (SELAR_PRODUCT_URL === "YOUR_SELAR_LINK") {
+      alert("Payment link will be added soon. For now, please contact support@followhq.com");
     } else {
-      alert("Payment link will be added soon. For now, please contact us directly.");
-      
+      window.open(SELAR_PRODUCT_URL, '_blank');
     }
+  }
+
+  document.getElementById('payNowBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    openSelar();
+  });
+  document.getElementById('payNowBtn2').addEventListener('click', (e) => {
+    e.preventDefault();
+    openSelar();
   });
 </script>
 

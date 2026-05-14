@@ -1,91 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>FollowHQ – Start Free, Pay Only When You Need More</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}body{background-color:#0a0a0f;color:#ecedee;font-family:'Inter',system-ui,sans-serif;line-height:1.5}html{scroll-behavior:smooth}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.navbar{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0;flex-wrap:wrap;gap:1rem}.logo{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,#e8c547,#f5e6a3);-webkit-background-clip:text;background-clip:text;color:transparent}.nav-links{display:flex;gap:2rem;align-items:center;flex-wrap:wrap}.nav-links a{color:#a1a1aa;text-decoration:none;font-weight:500;transition:color 0.2s}.nav-links a:hover{color:#e8c547}.btn-outline{border:1px solid #e8c547;background:transparent;padding:0.5rem 1.2rem;border-radius:30px;color:#e8c547;font-weight:600;transition:all 0.2s}.btn-outline:hover{background:#e8c54720}.btn-primary{background:#e8c547;color:#0a0a0f;border:none;padding:0.7rem 1.8rem;border-radius:40px;font-weight:700;cursor:pointer;transition:transform 0.1s,opacity 0.2s;text-decoration:none;display:inline-block}.btn-primary:hover{opacity:0.9;transform:scale(0.98)}.hero{padding:3rem 0 4rem;text-align:center}.hero h1{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#ffffff,#e8c547);-webkit-background-clip:text;background-clip:text;color:transparent;max-width:800px;margin:0 auto 1rem;line-height:1.2}.hero p{font-size:1.2rem;color:#a1a1aa;max-width:600px;margin:0 auto 2rem}.hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}.features{padding:4rem 0;border-top:1px solid #1f1f2a;border-bottom:1px solid #1f1f2a}.section-title{text-align:center;font-size:2rem;font-weight:700;margin-bottom:2.5rem;color:#f5f0e8}.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}.feature-card{background:#14141c;border:1px solid #2a2a35;border-radius:20px;padding:1.8rem;transition:transform 0.2s,border-color 0.2s}.feature-card:hover{transform:translateY(-4px);border-color:#e8c547}.feature-icon{font-size:2.2rem;margin-bottom:1rem}.feature-card h3{font-size:1.3rem;margin-bottom:0.5rem}.feature-card p{color:#a1a1aa;font-size:0.95rem}.pricing{padding:4rem 0}.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:900px;margin:0 auto}.pricing-card{background:#14141c;border-radius:28px;padding:2rem;text-align:center}.pricing-card.free{border:1px solid #2a2a35}.pricing-card.paid{border:1px solid #e8c547}.plan-name{font-size:1.6rem;font-weight:700}.price{font-size:2.5rem;font-weight:800;margin:1rem 0}.price small{font-size:1rem;font-weight:400;color:#a1a1aa}.price-sub{color:#e8c547;font-size:0.9rem;margin-bottom:1.5rem}.pricing-features{list-style:none;text-align:left;margin:1.5rem 0}.pricing-features li{margin:0.8rem 0;display:flex;align-items:center;gap:0.5rem}.pricing-features li::before{content:"✓";color:#e8c547;font-weight:bold}.payment-note{font-size:0.8rem;color:#6b6b7a;margin-top:1rem}.footer{border-top:1px solid #1f1f2a;padding:2rem 0;text-align:center;color:#6b6b7a;font-size:0.85rem}.footer a{color:#e8c547;text-decoration:none}.footer-links{display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem}@media (max-width:640px){.navbar{flex-direction:column;text-align:center}.hero h1{font-size:2rem}.hero p{font-size:1rem}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>FollowHQ – Never lose a client to forgotten follow‑ups</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #000000;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border-bottom: 1px solid rgba(255,215,0,0.2);
+        }
+        .gold-text {
+            color: #FFD700;
+        }
+        .gold-border {
+            border-color: #FFD700;
+        }
+        .gold-bg {
+            background-color: #FFD700;
+            color: #000000;
+        }
+        .gold-bg:hover {
+            background-color: #e6c200;
+        }
+        .gold-outline {
+            border: 1px solid #FFD700;
+            color: #FFD700;
+        }
+        .gold-outline:hover {
+            background-color: #FFD700;
+            color: #000000;
+        }
+        .card-black {
+            background-color: #111111;
+            border: 1px solid #222222;
+            transition: all 0.2s ease;
+        }
+        .card-black:hover {
+            border-color: #FFD700;
+            transform: translateY(-2px);
+        }
+        .hover-gold {
+            transition: color 0.2s ease;
+        }
+        .hover-gold:hover {
+            color: #FFD700;
+        }
+        .calculator-card {
+            background-color: #111111;
+            border: 1px solid #222222;
+        }
+        input, select {
+            background-color: #1a1a1a;
+            border: 1px solid #333333;
+            color: white;
+        }
+        input:focus, select:focus {
+            border-color: #FFD700;
+            outline: none;
+            ring: 2px solid #FFD700;
+        }
+        .feature-icon {
+            filter: drop-shadow(0 0 4px rgba(255,215,0,0.3));
+        }
+    </style>
 </head>
-<body>
+<body class="bg-black text-white">
 
-<div class="container">
-  <div class="navbar">
-    <div class="logo">FollowHQ</div>
-    <div class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-      <a href="login.html">Log in</a>
-      <a href="register.html" class="btn-outline">Sign up free</a>
-    </div>
-  </div>
+    <!-- Navigation -->
+    <nav class="gold-gradient sticky top-0 z-50 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="text-2xl font-bold gold-text">FollowHQ</div>
+            <div class="space-x-6">
+                <a href="#features" class="text-gray-300 hover-gold transition">Features</a>
+                <a href="#calculator" class="text-gray-300 hover-gold transition">Calculate loss</a>
+                <a href="#pricing" class="text-gray-300 hover-gold transition">Pricing</a>
+                <a href="https://your-dashboard.netlify.app/login" class="text-gray-300 hover-gold transition">Log in</a>
+                <a href="#signup" class="gold-bg px-4 py-2 rounded-lg font-semibold transition">Start Free →</a>
+            </div>
+        </div>
+    </nav>
 
-  <div class="hero">
-    <h1>Never miss a client follow‑up again</h1>
-    <p>Start for free. Create leads, set reminders – only pay when you need to edit or delete.</p>
-    <div class="hero-buttons">
-      <a href="register.html" class="btn-primary">Start free trial →</a>
-      <a href="#pricing" class="btn-outline" style="border-color:#a1a1aa; color:#a1a1aa;">See pricing</a>
-    </div>
-  </div>
+    <!-- Hero Section -->
+    <section class="py-20 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6">
+                The average freelancer loses <span class="gold-text">₦2.4M/year</span><br>
+                to forgotten follow‑ups.
+            </h1>
+            <p class="text-xl text-gray-300 mb-8">WhatsApp chats get buried. Spreadsheets get messy. FollowHQ makes sure every lead gets a reply – automatically.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#calculator" class="gold-outline px-8 py-3 rounded-lg font-semibold text-lg transition">See what you're losing →</a>
+                <a href="#signup" class="gold-bg px-8 py-3 rounded-lg font-semibold text-lg transition">Start free trial</a>
+            </div>
+        </div>
+    </section>
 
-  <div class="features" id="features">
-    <h2 class="section-title">Everything you need to stay on top of leads</h2>
-    <div class="features-grid">
-      <div class="feature-card"><div class="feature-icon">📋</div><h3>Centralised client list</h3><p>All your leads in one place – name, status, notes, and follow-up date.</p></div>
-      <div class="feature-card"><div class="feature-icon">⏰</div><h3>Smart follow-up reminders</h3><p>Set a date and never forget to call or message again. Overdue alerts keep you accountable.</p></div>
-      <div class="feature-card"><div class="feature-icon">📱</div><h3>Mobile‑friendly dashboard</h3><p>Responsive design that works on your phone. Swipe tables, tap WhatsApp links – perfect for field work.</p></div>
-      <div class="feature-card"><div class="feature-icon">🔒</div><h3>Secure & isolated</h3><p>Your data is private – each account sees only its own leads. XSS protection and JWT auth built in.</p></div>
-      <div class="feature-card"><div class="feature-icon">💬</div><h3>WhatsApp integration</h3><p>One‑click chat with leads via WhatsApp link. Saves time and keeps conversations flowing.</p></div>
-      <div class="feature-card"><div class="feature-icon">🔍</div><h3>Filter, sort & search</h3><p>Find leads by status, date range, or name. Pagination keeps it fast even with hundreds of clients.</p></div>
-    </div>
-  </div>
+    <!-- Lost Revenue Calculator -->
+    <section id="calculator" class="py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 gold-text">How much is poor follow‑up costing you?</h2>
+            <p class="text-gray-300 mb-8">Answer two questions – see your real annual loss.</p>
 
-  <div class="pricing" id="pricing">
-    <h2 class="section-title">Simple, fair pricing</h2>
-    <div class="pricing-grid">
-      <div class="pricing-card free">
-        <div class="plan-name">Free Trial</div>
-        <div class="price">₦0</div>
-        <ul class="pricing-features">
-          <li>Unlimited leads (create & view)</li>
-          <li>Follow-up reminders & overdue alerts</li>
-          <li>WhatsApp integration</li>
-          <li>Mobile responsive dashboard</li>
-          <li>No time limit</li>
-        </ul>
-        <a href="signup.html" class="btn-outline" style="display:inline-block;">Start free →</a>
-        <p class="payment-note">No credit card required</p>
-      </div>
-      <div class="pricing-card paid">
-        <div class="plan-name">Full Access</div>
-        <div class="price">₦4,000 <small>/once</small></div>
-        <div class="price-sub">or $8 USD</div>
-        <ul class="pricing-features">
-          <li>Everything in Free Trial</li>
-          <li>Edit & delete leads</li>
-          <li>Priority support</li>
-          <li>Lifetime access (one payment)</li>
-        </ul>
-        <a href="#" id="payNowBtn" class="btn-primary">Upgrade now →</a>
-        <p class="payment-note">Secure via Selar – cards, PayPal, bank transfer</p>
-      </div>
-    </div>
-  </div>
+            <div class="calculator-card p-6 rounded-xl max-w-md mx-auto">
+                <div class="mb-6 text-left">
+                    <label class="block text-gray-300 font-medium mb-2">Average deal value (₦ or $)</label>
+                    <input type="number" id="dealValue" placeholder="e.g. 100000" class="w-full p-3 rounded-lg">
+                    <p class="text-xs text-gray-400 mt-1">Real estate: ₦500k–₦5M | Freelance: ₦50k–₦200k</p>
+                </div>
+                <div class="mb-6 text-left">
+                    <label class="block text-gray-300 font-medium mb-2">Leads you lose per month because you forgot to follow up?</label>
+                    <input type="number" id="lostLeads" placeholder="e.g. 2" class="w-full p-3 rounded-lg">
+                </div>
+                <div class="bg-black border border-gold-border rounded-lg p-4 text-left">
+                    <p class="text-gray-300">Your estimated annual loss:</p>
+                    <p class="text-2xl font-bold gold-text" id="lossDisplay">₦0</p>
+                    <p class="text-xs text-gray-400 mt-1">*Calculation: deal value × lost leads × 12 months</p>
+                </div>
+                <button id="calcBtn" class="gold-bg font-semibold px-6 py-2 rounded-lg w-full mt-4 transition">Calculate</button>
+            </div>
+        </div>
+    </section>
 
-  <div class="footer">
-    <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
-    <p>© 2025 FollowHQ – Start free, pay only when you need more.</p>
-  </div>
-</div>
+    <!-- Features Section -->
+    <section id="features" class="py-16 px-4 bg-black">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 gold-text">Stop guessing. Start closing.</h2>
+            <div class="grid md:grid-cols-3 gap-8 mt-8">
+                <div class="card-black p-6 rounded-xl">
+                    <div class="text-4xl mb-3 feature-icon">📱</div>
+                    <h3 class="text-xl font-semibold gold-text">WhatsApp‑ready</h3>
+                    <p class="text-gray-300 mt-2">Save numbers, click to chat instantly. No more copy‑paste.</p>
+                </div>
+                <div class="card-black p-6 rounded-xl">
+                    <div class="text-4xl mb-3 feature-icon">⏰</div>
+                    <h3 class="text-xl font-semibold gold-text">Smart reminders</h3>
+                    <p class="text-gray-300 mt-2">Due today? Overdue? We surface who needs attention right now.</p>
+                </div>
+                <div class="card-black p-6 rounded-xl">
+                    <div class="text-4xl mb-3 feature-icon">📊</div>
+                    <h3 class="text-xl font-semibold gold-text">Filter & sort</h3>
+                    <p class="text-gray-300 mt-2">Date range, status, search – find any lead in seconds.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script>
-  const SELAR_PRODUCT_URL = "https://selar.com/j1g1k2315j"; // replace with your actual Selar link
-  document.getElementById('payNowBtn').addEventListener('click', (e) => {
-    e.preventDefault();
-    window.open(SELAR_PRODUCT_URL, '_blank');
-  });
-</script>
+    <!-- Pre‑signup Question + Trial -->
+    <section id="signup" class="py-16 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-4 gold-text">Start your 7‑day free trial</h2>
+            <p class="text-gray-300 mb-6">One quick question – it helps us show you what you're missing.</p>
+            <div class="calculator-card p-6 rounded-xl max-w-lg mx-auto">
+                <label class="block text-left font-medium text-gray-300 mb-2">How do you currently track follow‑ups?</label>
+                <select id="followupMethod" class="w-full p-3 rounded-lg mb-4">
+                    <option value="">Select one</option>
+                    <option value="whatsapp">WhatsApp saved chats (buried)</option>
+                    <option value="spreadsheet">Spreadsheet / Google Sheets</option>
+                    <option value="memory">I try to remember</option>
+                    <option value="sticky">Sticky notes / notebook</option>
+                    <option value="other">Other / nothing</option>
+                </select>
+                <a href="https://your-dashboard.netlify.app/signup" class="block w-full gold-bg font-semibold py-3 rounded-lg transition text-center">
+                    Continue to free trial →
+                </a>
+                <p class="text-xs text-gray-400 mt-4">We'll show you how much time/money your current method wastes – before you even set up your dashboard.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16 px-4 bg-black">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 gold-text">Simple pricing – pay only if you win deals</h2>
+            <p class="text-gray-300 mb-8">No hidden fees. Cancel anytime.</p>
+            <div class="card-black rounded-2xl p-8 max-w-md mx-auto border border-gray-800">
+                <h3 class="text-2xl font-bold gold-text mb-2">Pro Plan</h3>
+                <div class="text-4xl font-bold gold-text mb-3">$8 <span class="text-base text-gray-400">/month</span></div>
+                <div class="text-gray-300 mb-6">or ₦4,000 / month for Nigerian customers</div>
+                <ul class="text-left space-y-2 mb-8 text-gray-300">
+                    <li class="flex items-start gap-2">✅ Unlimited leads</li>
+                    <li class="flex items-start gap-2">✅ WhatsApp click‑to‑chat</li>
+                    <li class="flex items-start gap-2">✅ Automatic overdue reminders</li>
+                    <li class="flex items-start gap-2">✅ Filters, sorting & pagination</li>
+                </ul>
+                <a href="https://selar.co/YOUR_SELAR_PRODUCT_LINK" target="_blank" class="block w-full gold-bg font-semibold py-3 rounded-lg transition text-center">
+                    Start trial → pay later
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-800 py-8 px-4">
+        <div class="max-w-7xl mx-auto text-center text-gray-400">
+            <p>© 2026 FollowHQ. Built with ❤️ in Nigeria.</p>
+            <div class="flex justify-center space-x-4 mt-2 text-sm">
+                <a href="#" class="hover-gold transition">Privacy Policy</a>
+                <a href="#" class="hover-gold transition">Terms of Service</a>
+                <a href="mailto:support@followhq.com" class="hover-gold transition">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Revenue calculator logic
+        const dealInput = document.getElementById('dealValue');
+        const lostInput = document.getElementById('lostLeads');
+        const lossDisplay = document.getElementById('lossDisplay');
+        const calcBtn = document.getElementById('calcBtn');
+
+        function updateLoss() {
+            let deal = parseFloat(dealInput.value);
+            let lost = parseFloat(lostInput.value);
+            if (isNaN(deal)) deal = 0;
+            if (isNaN(lost)) lost = 0;
+            const annualLoss = deal * lost * 12;
+            lossDisplay.innerText = new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', minimumFractionDigits: 0 }).format(annualLoss).replace('NGN', '₦');
+        }
+
+        calcBtn.addEventListener('click', updateLoss);
+        dealInput.addEventListener('input', updateLoss);
+        lostInput.addEventListener('input', updateLoss);
+
+        // Store pre‑signup selection
+        const methodSelect = document.getElementById('followupMethod');
+        if (methodSelect) {
+            methodSelect.addEventListener('change', function() {
+                localStorage.setItem('followupMethod', this.value);
+                console.log('Selected method:', this.value);
+            });
+        }
+    </script>
 </body>
 </html>
